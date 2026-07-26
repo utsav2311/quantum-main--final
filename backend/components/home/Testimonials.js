@@ -53,15 +53,7 @@ export default function Testimonials() {
           </div>
         </Reveal>
 
-        {/* Stats Bar */}
-        <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-          {CLINICAL_STATS.map((s) => (
-            <div key={s.label} className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-center backdrop-blur-md transition-colors hover:border-[#FF6B4A]/40">
-              <p className="font-display text-2xl font-extrabold text-[#FF6B4A] sm:text-3xl">{s.val}</p>
-              <p className="mt-1 font-mono text-[10px] uppercase tracking-wider text-white/60 sm:text-xs">{s.label}</p>
-            </div>
-          ))}
-        </div>
+
 
         {/* Testimonial Spotlight Showcase */}
         <div className="relative mt-12 overflow-hidden rounded-3xl border border-white/15 bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-6 shadow-2xl backdrop-blur-xl sm:p-10 lg:p-12">
