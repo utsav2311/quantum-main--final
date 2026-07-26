@@ -24,21 +24,19 @@ export const COMPANY = {
 };
 
 export const IMAGES = {
-  hero: "/hero-bg.png",
+  hero: "/hero-bg.webp",
   heroVideo: "/video.mp4",
   heroVideoMobile: "/video1.mp4",
-  lab: "https://images.pexels.com/photos/11288657/pexels-photo-11288657.jpeg",
-  tools: "https://images.unsplash.com/photo-1581090122087-bdc8968e525f",
-
-
-  team: "https://images.pexels.com/photos/29807423/pexels-photo-29807423.jpeg",
-  pediatric: "https://images.unsplash.com/photo-1770219287080-9c73532fa878",
-  printing: "https://images.unsplash.com/photo-1772566022500-353de883e9e4",
-  spineBackBraces: "/spine-back-braces.png",
-  customInsoles: "/custom-insoles.png",
-  lowerLimbProsthetics: "/lower-limb-prosthetics.png",
-  upperLimbProsthetics: "/upper-limb-prosthetics.png",
-  socketsLiners: "/sockets-liners.png",
+  lab: "https://images.pexels.com/photos/11288657/pexels-photo-11288657.jpeg?auto=format&fit=crop&w=1200&q=80",
+  tools: "https://images.unsplash.com/photo-1581090122087-bdc8968e525f?auto=format&fit=crop&w=1200&q=80",
+  team: "https://images.pexels.com/photos/29807423/pexels-photo-29807423.jpeg?auto=format&fit=crop&w=1200&q=80",
+  pediatric: "https://images.unsplash.com/photo-1770219287080-9c73532fa878?auto=format&fit=crop&w=1200&q=80",
+  printing: "https://images.unsplash.com/photo-1772566022500-353de883e9e4?auto=format&fit=crop&w=1200&q=80",
+  spineBackBraces: "/spine-back-braces.webp",
+  customInsoles: "/custom-insoles.webp",
+  lowerLimbProsthetics: "/lower-limb-prosthetics.webp",
+  upperLimbProsthetics: "/upper-limb-prosthetics.webp",
+  socketsLiners: "/sockets-liners.webp",
 };
 
 export const waLink = (text = "Hello, I'd like to know more about your P&O solutions.") =>
