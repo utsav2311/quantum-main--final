@@ -148,10 +148,46 @@ export const PROCESS = [
 ];
 
 export const TESTIMONIALS = [
-  { name: "Dr. A. Rivera", role: "Chief of Rehabilitation", quote: "Turnaround times dropped dramatically and fit accuracy is remarkable. Our patients notice the difference immediately.", img: IMAGES.doctor1 },
-  { name: "Dr. M. Chen", role: "Orthopedic Surgeon", quote: "The digital workflow integrates seamlessly with our clinic. A genuine engineering partner, not just a supplier.", img: IMAGES.doctor2 },
-  { name: "S. Okoro, CPO", role: "Head of Prosthetics", quote: "Silicone restorations and sockets are the best fit-quality we've sourced. Consistent, every time.", img: IMAGES.cpo },
-  { name: "Dr. L. Fernandes", role: "Pediatric Rehab Lead", quote: "Their pediatric bracing program has been transformative for our young patients and their families.", img: IMAGES.pediatricDoc },
+  {
+    name: "Dr. A. Rivera",
+    role: "Chief of Rehabilitation",
+    facility: "Cleveland Clinic Partner Facility, Abu Dhabi",
+    discipline: "Rehabilitation Medicine",
+    metric: "72% Faster Device Delivery",
+    quote: "Turnaround times dropped dramatically from weeks to days, and fit accuracy is remarkable. Our post-op patients notice the comfort difference immediately.",
+    img: IMAGES.doctor1,
+    rating: 5,
+  },
+  {
+    name: "Dr. M. Chen",
+    role: "Senior Orthopedic Surgeon",
+    facility: "Mediclinic City Hospital",
+    discipline: "Orthopedic Surgery",
+    metric: "100% Fit Compliance",
+    quote: "The 3D scanning and CAD/CAM digital workflow integrates seamlessly with our surgical team. Quantum Medical is a genuine clinical engineering partner.",
+    img: IMAGES.doctor2,
+    rating: 5,
+  },
+  {
+    name: "S. Okoro, CPO",
+    role: "Head of Prosthetic Care",
+    facility: "Emirates Rehabilitation Center",
+    discipline: "Prosthetics & Biomechanics",
+    metric: "Zero Repeat Fittings",
+    quote: "Silicone restorations and lightweight bionic sockets are the finest fit-quality we've sourced across the region. Consistent, precision work every single time.",
+    img: IMAGES.cpo,
+    rating: 5,
+  },
+  {
+    name: "Dr. L. Fernandes",
+    role: "Pediatric Rehabilitation Lead",
+    facility: "Sheikh Khalifa Medical City",
+    discipline: "Pediatric Orthotics",
+    metric: "98% Patient Compliance",
+    quote: "Their pediatric cranial orthoses and scoliosis bracing program has been transformative for our young patients and their families. Gentle, lightweight, and incredibly precise.",
+    img: IMAGES.pediatricDoc,
+    rating: 5,
+  },
 ];
 
 export const FAQS = [
