@@ -117,17 +117,17 @@ export default function AdultsGrid() {
   );
 
   return (
-    <section className="relative overflow-hidden bg-[#0B121C] py-20 text-white" data-testid="adults-section">
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#0B121C] via-[#0D1B2D] to-[#0B121C] py-24 text-white" data-testid="adults-section">
       {/* Background Glows */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(11,77,149,0.25),rgba(255,255,255,0))]" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-80 w-80 rounded-full bg-[#FF6B4A]/10 blur-3xl" />
-      <div className="pointer-events-none absolute top-1/2 left-0 h-80 w-80 rounded-full bg-[#0B4D95]/15 blur-3xl" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(11,77,149,0.35),rgba(255,255,255,0))]" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#FF6B4A]/15 blur-3xl" />
+      <div className="pointer-events-none absolute top-1/2 left-0 h-96 w-96 rounded-full bg-[#0B4D95]/20 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         {/* Section Header */}
         <Reveal>
           <div className="flex flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#FF6B4A]/30 bg-[#FF6B4A]/10 px-3.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FF6B4A]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#FF6B4A]/40 bg-[#FF6B4A]/15 px-3.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FF6B4A] backdrop-blur-md">
               <Activity size={13} /> Comprehensive Portfolio
             </span>
             <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-5xl">
@@ -149,10 +149,10 @@ export default function AdultsGrid() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveFilter(tab.id)}
-                  className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-300 ${
+                  className={`rounded-full px-4.5 py-2 text-xs font-semibold transition-all duration-300 ${
                     activeFilter === tab.id
-                      ? "bg-[#FF6B4A] text-white shadow-md shadow-[#FF6B4A]/30"
-                      : "border border-white/10 bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                      ? "btn-gradient-coral text-white shadow-lg shadow-[#FF6B4A]/30 scale-105"
+                      : "border border-white/15 bg-white/10 text-white/80 hover:bg-white/20 hover:text-white backdrop-blur-md"
                   }`}
                 >
                   {tab.label}

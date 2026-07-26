@@ -107,22 +107,22 @@ export default function KidsGrid() {
   );
 
   return (
-    <section className="relative overflow-hidden bg-[#0B4D95] py-20 text-white" data-testid="kids-section">
+    <section className="relative overflow-hidden bg-gradient-to-br from-[#0B4D95] via-[#083A72] to-[#0B121C] py-24 text-white" data-testid="kids-section">
       {/* Background Glows */}
-      <div className="pointer-events-none absolute -right-20 top-0 h-80 w-80 rounded-full bg-[#FF6B4A]/20 blur-[140px]" />
-      <div className="pointer-events-none absolute left-0 bottom-0 h-80 w-80 rounded-full bg-cyan-400/10 blur-[140px]" />
+      <div className="pointer-events-none absolute -right-20 top-0 h-96 w-96 rounded-full bg-[#FF6B4A]/25 blur-[140px]" />
+      <div className="pointer-events-none absolute left-0 bottom-0 h-96 w-96 rounded-full bg-cyan-400/20 blur-[140px]" />
 
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         {/* Section Header */}
         <Reveal>
           <div className="flex flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FF6B4A]">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 px-3.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FF6B4A] backdrop-blur-md">
               <Baby size={14} /> Pediatric Excellence
             </span>
             <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-5xl">
               For <span className="text-[#FF6B4A]">Kids</span>
             </h2>
-            <p className="mt-1 font-display text-xl font-light text-white/80 sm:text-2xl">
+            <p className="mt-1 font-display text-xl font-light text-white/90 sm:text-2xl">
               Care That Grows With Every Child
             </p>
             <p className="mt-2 text-xs font-mono text-white/60">Hover over any card to flip — Click to view device details</p>
@@ -138,10 +138,10 @@ export default function KidsGrid() {
                 <button
                   key={tab.id}
                   onClick={() => setActiveFilter(tab.id)}
-                  className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all duration-300 ${
+                  className={`rounded-full px-4.5 py-2 text-xs font-semibold transition-all duration-300 ${
                     activeFilter === tab.id
-                      ? "bg-[#FF6B4A] text-white shadow-md shadow-[#FF6B4A]/40"
-                      : "border border-white/15 bg-white/5 text-white/80 hover:bg-white/15 hover:text-white"
+                      ? "btn-gradient-coral text-white shadow-lg shadow-[#FF6B4A]/40 scale-105"
+                      : "border border-white/20 bg-white/10 text-white/80 hover:bg-white/20 hover:text-white backdrop-blur-md"
                   }`}
                 >
                   {tab.label}

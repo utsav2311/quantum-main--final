@@ -43,11 +43,10 @@ export default function FAQ() {
               <motion.div
                 initial={false}
                 animate={{
-                  borderColor: isOpen ? "#0B4D95" : "#E2E8F0",
-                  backgroundColor: isOpen ? "#FFFFFF" : "#FFFFFF",
+                  borderColor: isOpen ? "#FF6B4A" : "rgba(226, 232, 240, 0.9)",
                 }}
-                className={`group overflow-hidden rounded-2xl border bg-white transition-all duration-300 ${
-                  isOpen ? "shadow-lg shadow-[#0B4D95]/5 border-l-4 border-l-[#0B4D95]" : "hover:border-[#0B4D95]/40 hover:shadow-md"
+                className={`group overflow-hidden rounded-2xl border bg-white/80 backdrop-blur-xl transition-all duration-300 ${
+                  isOpen ? "shadow-xl shadow-[#FF6B4A]/10 border-l-4 border-l-[#FF6B4A]" : "hover:border-[#FF6B4A]/40 hover:shadow-md"
                 }`}
               >
                 <button
@@ -60,15 +59,15 @@ export default function FAQ() {
                     <span
                       className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-bold transition-colors duration-300 ${
                         isOpen
-                          ? "bg-[#0B4D95] text-white"
-                          : "bg-[#F8F9FA] text-[#0B4D95] group-hover:bg-[#0B4D95]/10"
+                          ? "bg-gradient-to-br from-[#FF6B4A] to-[#e8532f] text-white shadow-sm"
+                          : "bg-slate-100 text-[#0B121C] group-hover:bg-[#FF6B4A]/10 group-hover:text-[#FF6B4A]"
                       }`}
                     >
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span
                       className={`font-display text-lg font-bold transition-colors duration-300 ${
-                        isOpen ? "text-[#0B4D95]" : "text-[#0B121C] group-hover:text-[#0B4D95]"
+                        isOpen ? "text-[#FF6B4A]" : "text-[#0B121C] group-hover:text-[#FF6B4A]"
                       }`}
                     >
                       {f.q}
@@ -80,8 +79,8 @@ export default function FAQ() {
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                     className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors ${
                       isOpen
-                        ? "bg-[#FF6B4A] text-white"
-                        : "bg-[#F8F9FA] text-[#4A5568] group-hover:bg-[#0B4D95]/10 group-hover:text-[#0B4D95]"
+                        ? "bg-gradient-to-br from-[#FF6B4A] to-[#e8532f] text-white"
+                        : "bg-slate-100 text-[#4A5568] group-hover:bg-[#FF6B4A]/10 group-hover:text-[#FF6B4A]"
                     }`}
                   >
                     {isOpen ? <Minus size={18} /> : <Plus size={18} />}
@@ -97,7 +96,7 @@ export default function FAQ() {
                       exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
                     >
-                      <div className="border-t border-[#E2E8F0]/60 px-6 pb-6 pt-4">
+                      <div className="border-t border-slate-100 px-6 pb-6 pt-4">
                         <p className="text-[15px] leading-relaxed text-[#4A5568]">{f.a}</p>
                       </div>
                     </motion.div>
@@ -109,18 +108,18 @@ export default function FAQ() {
         })}
       </div>
 
-      {/* CTA Box with Hover Pulse */}
+      {/* CTA Box with Glassmorphism & Gradient Button */}
       <Reveal delay={0.3}>
-        <div className="relative mt-14 overflow-hidden rounded-3xl bg-[#0B121C] p-8 text-center sm:p-12">
-          <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[#FF6B4A]/20 blur-2xl" />
-          <div className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-[#0B4D95]/30 blur-2xl" />
+        <div className="relative mt-16 overflow-hidden rounded-3xl bg-gradient-to-br from-[#0B121C] via-[#0D1929] to-[#0B121C] p-8 text-center sm:p-12 border border-white/15 shadow-2xl">
+          <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-[#FF6B4A]/25 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-10 -left-10 h-48 w-48 rounded-full bg-[#0B4D95]/35 blur-3xl" />
 
           <div className="relative z-10 flex flex-col items-center">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1 font-mono text-xs font-medium text-[#FF6B4A]">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1 font-mono text-xs font-medium text-[#FF6B4A] border border-white/15 backdrop-blur-md">
               <Sparkles size={13} /> Direct Support
             </span>
             <h3 className="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">Still have questions?</h3>
-            <p className="mt-2 max-w-md text-sm text-white/70 sm:text-base">
+            <p className="mt-2 max-w-md text-sm text-white/80 sm:text-base">
               Book a consultation call with our clinical team and we'll guide you through custom specifications.
             </p>
             <motion.button
@@ -128,7 +127,7 @@ export default function FAQ() {
               whileTap={{ scale: 0.96 }}
               onClick={() => open("consultation")}
               data-testid="faq-schedule-btn"
-              className="mt-6 flex items-center gap-2 rounded-full bg-[#FF6B4A] px-8 py-4 font-display text-sm font-semibold text-white shadow-lg shadow-[#FF6B4A]/25 transition-all hover:bg-[#e8532f]"
+              className="btn-gradient-coral mt-6 flex items-center gap-2 rounded-full px-8 py-4 font-display text-sm font-semibold text-white shadow-xl shadow-[#FF6B4A]/30"
             >
               <PhoneCall size={17} /> Schedule a Call
             </motion.button>

@@ -31,10 +31,10 @@ export default function Testimonials() {
   const current = TESTIMONIALS[index];
 
   return (
-    <section className="relative overflow-hidden bg-[#0B121C] py-20 sm:py-28" data-testid="testimonials">
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#0B121C] via-[#0D1929] to-[#0B121C] py-20 sm:py-28" data-testid="testimonials">
       {/* Background Ambient Glow Effects */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#0B4D95]/30 via-[#FF6B4A]/10 to-transparent blur-3xl opacity-50" />
-      <div className="pointer-events-none absolute -bottom-40 right-10 h-[400px] w-[400px] rounded-full bg-[#FF6B4A]/15 blur-3xl" />
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[550px] w-[850px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#0B4D95]/35 via-[#FF6B4A]/15 to-transparent blur-3xl opacity-60" />
+      <div className="pointer-events-none absolute -bottom-40 right-10 h-[450px] w-[450px] rounded-full bg-[#FF6B4A]/20 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         

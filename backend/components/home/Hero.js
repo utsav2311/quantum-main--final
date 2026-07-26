@@ -117,7 +117,7 @@ export default function Hero() {
           <button
             onClick={() => router.push("/b2b-innovation-hub")}
             data-testid="hero-b2b-btn"
-            className="group flex w-full items-center justify-center gap-2 rounded-full bg-[#FF6B4A] px-6 py-3.5 font-display text-xs font-semibold text-white transition-all hover:bg-[#e8532f] active:scale-[0.98] shadow-lg shadow-[#FF6B4A]/30 sm:w-auto sm:px-7 sm:py-4 sm:text-sm"
+            className="btn-gradient-coral group flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 font-display text-xs font-semibold text-white active:scale-[0.98] shadow-xl shadow-[#FF6B4A]/35 sm:w-auto sm:px-7 sm:py-4 sm:text-sm"
           >
             Discover B2B Innovation Hub
             <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -125,7 +125,7 @@ export default function Hero() {
           <button
             onClick={() => router.push("/products")}
             data-testid="hero-products-btn"
-            className="flex w-full items-center justify-center rounded-full border border-white/30 bg-white/10 px-6 py-3.5 font-display text-xs font-semibold text-white transition-all hover:bg-white/20 active:scale-[0.98] backdrop-blur-md sm:w-auto sm:px-7 sm:py-4 sm:text-sm"
+            className="flex w-full items-center justify-center rounded-full border border-white/30 bg-white/10 px-6 py-3.5 font-display text-xs font-semibold text-white transition-all hover:bg-white/20 active:scale-[0.98] backdrop-blur-xl sm:w-auto sm:px-7 sm:py-4 sm:text-sm shadow-md"
           >
             Explore Devices
           </button>
