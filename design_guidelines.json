@@ -1,0 +1,100 @@
+{
+  "theme_preference": "light",
+  "art_direction": {
+    "concept": "Swiss Precision meets Clinical Warmth. An Awwwards-level execution for medical B2B manufacturing. The design relies on high-contrast clinical spaces (stark whites and deep midnight slates), layered with warm coral accents to evoke human motion and vitality.",
+    "colors": {
+      "primary": "#0B4D95",
+      "accent": "#FF6B4A",
+      "background": "#F8F9FA",
+      "surface": "#FFFFFF",
+      "text_primary": "#0B121C",
+      "text_secondary": "#4A5568",
+      "dark_slate": "#0B121C",
+      "border": "#E2E8F0"
+    },
+    "typography": {
+      "headings": "Outfit, sans-serif",
+      "body": "IBM Plex Sans, sans-serif",
+      "mono": "JetBrains Mono, monospace"
+    },
+    "spacing": {
+      "strategy": "Generous Spacing Philosophy. Use p-12, p-16, p-24 for section paddings. Ensure containers with borders have internal p-6 or p-8 padding."
+    },
+    "grids": {
+      "strategy": "The Bento Grid Protocol for feature showcases (High Density Grid for Dashboards). Use asymmetrical layouts for Marketing pages. Overlapping elements to break generic blocky structures."
+    },
+    "motion": {
+      "scroll": "Lenis smooth scrolling (momentum-based) is MANDATORY for the premium feel.",
+      "hero_reveal": "Framer Motion line-by-line masked reveal for the Kinetic Hero headline.",
+      "interactions": "Micro-interactions on all cards (scale-105 on image hover, button magnetic effect), staggered entrance animations for grid items.",
+      "parallax": "Subtle parallax on the '3D Studio' section and Hero image."
+    },
+    "component_treatments": {
+      "buttons": "Pill-shaped (rounded-full). Primary buttons use Accent (Coral), Secondary buttons use outline with Clinical Sapphire.",
+      "cards": "Subtle roundness (rounded-2xl). Flat background, 1px subtle border (border-border/60), no harsh drop shadows. On hover, slight lift (-translate-y-1) and shadow-lg.",
+      "glassmorphism": "Used selectively in sticky header and floating WhatsApp CTA (backdrop-blur-xl bg-white/70, 1px white/40 border). DO NOT use complete transparent backgrounds in headers or overlays."
+    }
+  },
+  "image_urls": {
+    "hero_background": {
+      "url": "https://images.pexels.com/photos/11288657/pexels-photo-11288657.jpeg",
+      "description": "Modern medical equipment setup in a laboratory for precise treatments.",
+      "category": "Hero Background / 3D Studio"
+    },
+    "features_1": {
+      "url": "https://images.unsplash.com/photo-1581090122087-bdc8968e525f",
+      "description": "person holding black and silver flashlight (Precision tools)",
+      "category": "Manufacturing / 3D Printed Solutions"
+    },
+    "clinical_team": {
+      "url": "https://images.pexels.com/photos/29807423/pexels-photo-29807423.jpeg",
+      "description": "Two physiotherapists providing treatment at a modern clinic with specialized equipment.",
+      "category": "Clinical Pathway / Medical Team"
+    },
+    "pediatric_care": {
+      "url": "https://images.unsplash.com/photo-1770219287080-9c73532fa878",
+      "description": "A physical therapist measures a patient's leg.",
+      "category": "Pediatric Care / Patient Interaction"
+    },
+    "3d_printing": {
+      "url": "https://images.unsplash.com/photo-1772566022500-353de883e9e4",
+      "description": "Man in protective gear operates 3D printer",
+      "category": "3D Studio Showcase"
+    }
+  },
+  "3d_libraries_and_effects": {
+    "recommendation": "Use framer-motion for UI choreography (scroll reveals, masking). Use Spline or a high-quality looping video for the 3D Studio showcase to maintain performance while delivering Awwwards-level immersion.",
+    "marquee": "Use react-fast-marquee for a slow, editorial ribbon (e.g., repeating 'Moves You Forward — Clinical Precision — Tailored P&O Solutions')."
+  },
+  "accessibility": {
+    "contrast": "Ensure text over images uses a gradient overlay (e.g., bg-gradient-to-t from-black/70 to-transparent) to pass APCA/WCAG standards.",
+    "testing": "All interactive elements MUST include a `data-testid` attribute."
+  },
+  "instructions_to_main_agent": [
+    "IMPORTANT: Use .js extensions for your React components, not .tsx files.",
+    "Build out the routing for Home, /about, /products, /b2b-innovation-hub, and /contact-us.",
+    "Implement the Sticky navbar with Glassmorphism and the Partner With Us lead modal.",
+    "Build the Kinetic Hero with a masked line-by-line reveal using Framer Motion.",
+    "Implement the 'For Adults' and 'For Kids' pill/tag grids. Ensure high-density but clear typography.",
+    "Create the 3-step 'How We Work' horizontal timeline.",
+    "Create an admin dashboard (auth-protected) using Shadcn components (Tables, Cards) to view/filter leads. DO NOT use teal/blue for the dashboard accent.",
+    "Include a floating WhatsApp button.",
+    "Ensure generous padding throughout. Never center-align paragraphs; prioritize left alignment for readability.",
+    "All interactive and key informational elements MUST include a `data-testid` attribute."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "You tend to converge toward generic, 'on distribution' outputs. Avoid this: make creative, distinctive frontends that surprise and delight.",
+    "Don't make generic centered layouts, simplistic gradients, and uniform styling.",
+    "Create depth through layered design elements with z-index hierarchy.",
+    "Use glass-morphism effects with backdrop filters (12-24px blur).",
+    "You MUST NOT apply universal transition. Eg: `transition: all`.",
+    "You MUST NOT center align the app container, ie do not add `.App { text-align: center; }` in the css file.",
+    "Always use modern button styles like pill-shaped, or sharp button with interaction animations & color relevant to the app style.",
+    "NEVER use AI assistant Emoji characters for icons.",
+    "Every interaction needs micro-animations - hover states, transitions, parallax effects, and entrance animations.",
+    "Use 2-3x more spacing than feels comfortable.",
+    "Prioritize using pre-existing components from src/components/ui when applicable.",
+    "Use `sonner` for toasts.",
+    "All interactive and key informational elements MUST include a `data-testid` attribute."
+  ]
+}
