@@ -5,7 +5,6 @@ import Welcome from "@/components/home/Welcome";
 import AdultsGrid from "@/components/home/AdultsGrid";
 import KidsGrid from "@/components/home/KidsGrid";
 import Studio3D from "@/components/home/Studio3D";
-import PatientJourney from "@/components/home/PatientJourney";
 import HowWeWork from "@/components/home/HowWeWork";
 import Testimonials from "@/components/home/Testimonials";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
@@ -26,7 +25,6 @@ export default function HomePage() {
       <Welcome />
       <AdultsGrid />
       <KidsGrid />
-      <PatientJourney />
       <Studio3D />
       <HowWeWork />
       <Testimonials />
