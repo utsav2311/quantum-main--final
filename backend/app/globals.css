@@ -15,8 +15,12 @@
   --border: #E2E8F0;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
   font-family: 'IBM Plex Sans', sans-serif;
   background-color: var(--paper);
   color: var(--ink);

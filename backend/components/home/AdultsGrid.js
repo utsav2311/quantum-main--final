@@ -163,7 +163,7 @@ export default function AdultsGrid() {
         </Reveal>
 
         {/* 3D Flip Card Grid */}
-        <motion.div layout className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+        <motion.div layout className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           <AnimatePresence>
             {filteredSolutions.map((item, index) => (
               <motion.div
