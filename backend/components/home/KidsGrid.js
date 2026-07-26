@@ -169,16 +169,23 @@ export default function KidsGrid() {
                   data-testid={`kid-card-${item.id}`}
                   className="group block [perspective:1000px] relative h-64 w-full cursor-pointer"
                 >
-                  <div className="relative h-full w-full rounded-2xl transition-transform duration-1000 ease-in-out [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] shadow-md group-hover:shadow-xl group-hover:shadow-[#FF6B4A]/30">
+                  <div
+                    className="relative h-full w-full rounded-2xl transition-transform duration-700 ease-in-out transform-3d group-hover:[transform:rotateY(180deg)] group-hover:[--webkit-transform:rotateY(180deg)] shadow-md group-hover:shadow-xl group-hover:shadow-[#FF6B4A]/30"
+                    style={{ transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" }}
+                  >
                     
                     {/* FRONT SIDE */}
-                    <div className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-white/15 bg-[#083a72] p-4 [backface-visibility:hidden]">
+                    <div
+                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-white/15 bg-[#083a72] p-4 backface-hidden"
+                      style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" }}
+                    >
                       {/* Background Image */}
                       <div className="absolute inset-0 overflow-hidden">
                         <img
                           src={item.img}
                           alt={item.title}
                           loading="lazy"
+                          decoding="async"
                           className="h-full w-full object-cover transition-transform duration-500"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0B121C] via-[#0B121C]/50 to-transparent" />
@@ -209,7 +216,15 @@ export default function KidsGrid() {
                     </div>
 
                     {/* BACK SIDE (Flipped) */}
-                    <div className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#FF6B4A]/60 bg-[#083a72] p-4 [backface-visibility:hidden] [transform:rotateY(180deg)] shadow-xl shadow-[#FF6B4A]/20">
+                    <div
+                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#FF6B4A]/60 bg-[#083a72] p-4 backface-hidden shadow-xl shadow-[#FF6B4A]/20"
+                      style={{
+                        WebkitBackfaceVisibility: "hidden",
+                        backfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                        WebkitTransform: "rotateY(180deg)",
+                      }}
+                    >
                       <div>
                         <div className="flex items-center justify-between border-b border-white/15 pb-2">
                           <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-[#FF6B4A]">

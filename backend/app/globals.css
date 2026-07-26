@@ -28,6 +28,17 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Cross-Browser 3D Card Flip & WebKit Fixes */
+.backface-hidden {
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+}
+
+.transform-3d {
+  -webkit-transform-style: preserve-3d !important;
+  transform-style: preserve-3d !important;
+}
+
 /* Global Smooth Interactive Physics */
 a, button, input, select, textarea {
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform;
