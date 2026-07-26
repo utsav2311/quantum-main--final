@@ -79,22 +79,11 @@ export default function Testimonials() {
             >
               {/* Left Column: Clinician Profile & Verified Badges */}
               <div className="flex flex-col items-center text-center lg:col-span-4 lg:items-start lg:text-left">
-                <div className="relative">
-                  <div className="h-24 w-24 overflow-hidden rounded-full border-2 border-[#FF6B4A] shadow-xl sm:h-28 sm:w-28">
-                    <img
-                      src={current.img}
-                      alt={current.name}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <span className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-[#25D366] text-white shadow-md">
-                    <CheckCircle2 size={16} />
-                  </span>
+                <div className="flex items-center gap-2 rounded-full border border-[#25D366]/30 bg-[#25D366]/10 px-3.5 py-1 text-xs font-mono font-semibold text-[#25D366]">
+                  <CheckCircle2 size={14} /> Verified Partner
                 </div>
 
-                <h3 className="mt-4 font-display text-xl font-bold text-white sm:text-2xl">{current.name}</h3>
+                <h3 className="mt-3 font-display text-xl font-bold text-white sm:text-2xl">{current.name}</h3>
                 <p className="text-sm font-semibold text-[#FF6B4A]">{current.role}</p>
 
                 <div className="mt-3 flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-white/80">
