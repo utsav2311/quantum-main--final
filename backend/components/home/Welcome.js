@@ -5,7 +5,6 @@ import { IMAGES, waLink } from "@/lib/site";
 import { useLeadModal } from "@/context/LeadModalContext";
 import { ArrowUpRight } from "lucide-react";
 
-
 const STATS = [
   { v: "5–10", l: "Day turnaround" },
   { v: "100%", l: "In-house fabrication" },
@@ -16,52 +15,62 @@ const STATS = [
 export default function Welcome() {
   const { open } = useLeadModal();
   return (
-    <section className="relative overflow-hidden bg-white py-24" data-testid="welcome">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-16 px-5 lg:grid-cols-2 lg:px-8">
-        <Reveal>
-          <div className="relative">
-            <div className="absolute -left-4 -top-4 h-24 w-24 rounded-2xl border border-[#FF6B4A]/30" />
-            <div className="relative overflow-hidden rounded-3xl">
-              <img src={IMAGES.team} alt="Clinical team at work" loading="lazy" className="aspect-[4/5] w-full object-cover sm:aspect-[5/4]" />
-            </div>
-
-            <div className="absolute -bottom-6 -right-4 rounded-2xl border border-[#E2E8F0] bg-white p-5 shadow-xl">
-              <p className="font-mono text-xs uppercase tracking-widest text-[#FF6B4A]">Since day one</p>
-              <p className="mt-1 font-display text-2xl font-extrabold text-[#0B121C]">Precision, in-house.</p>
-            </div>
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.1}>
+    <section className="relative overflow-hidden bg-white py-16 sm:py-24" data-testid="welcome">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-16 lg:px-8">
+        
+        {/* Content (Text First on Mobile, Right Column on Desktop) */}
+        <Reveal delay={0.05} className="order-1 lg:order-2">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0B4D95]">Welcome</p>
-          <h2 className="mt-4 font-display text-4xl font-extrabold leading-tight text-[#0B121C] sm:text-5xl">
+          <h2 className="mt-3 font-display text-3xl font-extrabold leading-tight text-[#0B121C] sm:text-4xl lg:text-5xl">
             A B2B partner built for hospitals, clinics &amp; rehab teams.
           </h2>
-          <p className="mt-6 leading-relaxed text-[#4A5568]">
+          <p className="mt-5 text-sm leading-relaxed text-[#4A5568] sm:text-base">
             We supply the healthcare ecosystem with truly custom prosthetic and orthotic devices — designed for both children and adults. Every device begins with gait analysis and a 3D scan, is engineered with CAD/CAM, and is fabricated in-house using advanced 3D printing.
           </p>
-          <p className="mt-4 leading-relaxed text-[#4A5568]">
+          <p className="mt-3 text-sm leading-relaxed text-[#4A5568] sm:text-base">
             The result: faster turnarounds, repeatable fit quality, and a single accountable partner for your clinical supply chain.
           </p>
 
-          <div className="mt-8 grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <div className="mt-7 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
             {STATS.map((s) => (
               <div key={s.l}>
-                <p className="font-display text-3xl font-extrabold text-[#0B4D95]">{s.v}</p>
-                <p className="mt-1 text-xs text-[#4A5568]">{s.l}</p>
+                <p className="font-display text-2xl font-extrabold text-[#0B4D95] sm:text-3xl">{s.v}</p>
+                <p className="mt-0.5 text-xs text-[#4A5568]">{s.l}</p>
               </div>
             ))}
           </div>
 
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <button onClick={() => open("partner")} data-testid="welcome-connect-btn" className="group flex items-center gap-2 rounded-full bg-[#0B4D95] px-6 py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#083a72]">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <button onClick={() => open("partner")} data-testid="welcome-connect-btn" className="group flex items-center justify-center gap-2 rounded-full bg-[#0B4D95] px-6 py-3.5 font-display text-xs font-semibold text-white transition-colors hover:bg-[#083a72] sm:text-sm">
               Connect with Us <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
-            <a href={waLink()} target="_blank" rel="noopener noreferrer" data-testid="welcome-whatsapp-btn" className="rounded-full border border-[#E2E8F0] px-6 py-3.5 font-display text-sm font-semibold text-[#0B121C] transition-colors hover:border-[#25D366] hover:text-[#25D366]">
-              WhatsApp Us
+            <a href={waLink()} target="_blank" rel="noopener noreferrer" data-testid="welcome-whatsapp-btn" className="flex items-center justify-center rounded-full border border-[#E2E8F0] px-6 py-3.5 font-display text-xs font-semibold text-[#0B121C] transition-colors hover:border-[#25D366] hover:text-[#25D366] sm:text-sm">
+              Chat on WhatsApp
             </a>
           </div>
         </Reveal>
+
+        {/* Image (After Content on Mobile, Left Column on Desktop) */}
+        <Reveal delay={0.1} className="order-2 lg:order-1">
+          <div className="relative">
+            <div className="absolute -left-3 -top-3 h-20 w-20 rounded-2xl border border-[#FF6B4A]/30 sm:-left-4 sm:-top-4 sm:h-24 sm:w-24" />
+            <div className="relative overflow-hidden rounded-3xl">
+              <img
+                src={IMAGES.team}
+                alt="Clinical team at work"
+                loading="lazy"
+                decoding="async"
+                className="aspect-[4/3] w-full object-cover sm:aspect-[5/4]"
+              />
+            </div>
+
+            <div className="absolute -bottom-4 -right-2 rounded-2xl border border-[#E2E8F0] bg-white p-4 shadow-xl sm:-bottom-6 sm:-right-4 sm:p-5">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-[#FF6B4A] sm:text-xs">Since day one</p>
+              <p className="mt-0.5 font-display text-lg font-extrabold text-[#0B121C] sm:text-2xl">Precision, in-house.</p>
+            </div>
+          </div>
+        </Reveal>
+
       </div>
     </section>
   );

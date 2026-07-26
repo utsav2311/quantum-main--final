@@ -35,7 +35,7 @@ export default function Hero() {
   return (
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-[#0B121C]" data-testid="hero">
       <motion.div className="absolute inset-0" style={{ y: imgY, scale: imgScale }}>
-        <img src={IMAGES.lab} alt="Clinical manufacturing laboratory" className="h-full w-full object-cover" />
+        <img src={IMAGES.lab} alt="Clinical manufacturing laboratory" decoding="async" fetchpriority="high" className="h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B121C] via-[#0B121C]/85 to-[#0B121C]/30" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0B121C] via-transparent to-[#0B121C]/40" />
       </motion.div>
