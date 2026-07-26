@@ -176,7 +176,7 @@ export default function KidsGrid() {
                     
                     {/* FRONT SIDE */}
                     <div
-                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-white/15 bg-[#083a72] p-4 backface-hidden"
+                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-white/15 bg-[#083a72] p-4 backface-hidden transition-opacity duration-300 group-hover:opacity-0 group-hover:pointer-events-none"
                       style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" }}
                     >
                       {/* Background Image */}
@@ -217,7 +217,7 @@ export default function KidsGrid() {
 
                     {/* BACK SIDE (Flipped) */}
                     <div
-                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#FF6B4A]/60 bg-[#083a72] p-4 backface-hidden shadow-xl shadow-[#FF6B4A]/20"
+                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#FF6B4A]/60 bg-[#083a72] p-4 backface-hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 shadow-xl shadow-[#FF6B4A]/20"
                       style={{
                         WebkitBackfaceVisibility: "hidden",
                         backfaceVisibility: "hidden",

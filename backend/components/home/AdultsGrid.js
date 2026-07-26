@@ -187,7 +187,7 @@ export default function AdultsGrid() {
                     
                     {/* FRONT SIDE */}
                     <div
-                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121B28] p-4 backface-hidden"
+                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121B28] p-4 backface-hidden transition-opacity duration-300 group-hover:opacity-0 group-hover:pointer-events-none"
                       style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" }}
                     >
                       {/* Background Image */}
@@ -228,7 +228,7 @@ export default function AdultsGrid() {
 
                     {/* BACK SIDE (Flipped) */}
                     <div
-                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#FF6B4A]/50 bg-[#0B121C] p-4 backface-hidden shadow-xl shadow-[#FF6B4A]/10"
+                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#FF6B4A]/50 bg-[#0B121C] p-4 backface-hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 shadow-xl shadow-[#FF6B4A]/10"
                       style={{
                         WebkitBackfaceVisibility: "hidden",
                         backfaceVisibility: "hidden",
