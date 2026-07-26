@@ -1,15 +1,16 @@
 "use client";
 
-import { Reveal } from "@/components/Reveal";
+import { Reveal, FloatingElement, TiltCard, TextReveal } from "@/components/Reveal";
+import AnimatedCounter from "@/components/AnimatedCounter";
 import { IMAGES, waLink } from "@/lib/site";
 import { useLeadModal } from "@/context/LeadModalContext";
 import { ArrowUpRight } from "lucide-react";
 
 const STATS = [
-  { v: "5–10", l: "Day turnaround" },
-  { v: "100%", l: "In-house fabrication" },
-  { v: "3D", l: "Scanned & printed" },
-  { v: "All ages", l: "Kids & adults" },
+  { v: "5–10", l: "Day turnaround", isNum: false },
+  { v: "100%", l: "In-house fabrication", isNum: true },
+  { v: "3D", l: "Scanned & printed", isNum: false },
+  { v: "100%", l: "Fit guarantee", isNum: true },
 ];
 
 export default function Welcome() {
@@ -22,7 +23,7 @@ export default function Welcome() {
         <Reveal delay={0.05} className="order-1 lg:order-2">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#FF6B4A] font-semibold">Welcome</p>
           <h2 className="mt-3 font-display text-3xl font-extrabold leading-tight text-[#0B121C] sm:text-4xl lg:text-5xl">
-            A B2B partner built for hospitals, clinics &amp; rehab teams.
+            <TextReveal text="A B2B partner built for hospitals, clinics & rehab teams." />
           </h2>
           <p className="mt-5 text-sm leading-relaxed text-[#4A5568] sm:text-base">
             We supply the healthcare ecosystem with truly custom prosthetic and orthotic devices — designed for both children and adults. Every device begins with gait analysis and a 3D scan, is engineered with CAD/CAM, and is fabricated in-house using advanced 3D printing.
@@ -33,8 +34,10 @@ export default function Welcome() {
 
           <div className="mt-7 grid grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
             {STATS.map((s) => (
-              <div key={s.l} className="rounded-2xl border border-white/80 bg-white/70 p-3.5 backdrop-blur-md shadow-2xs">
-                <p className="font-display text-2xl font-extrabold text-[#0B4D95] sm:text-3xl">{s.v}</p>
+              <div key={s.l} className="rounded-2xl border border-white/80 bg-white/75 p-3.5 backdrop-blur-md shadow-sm transition-transform duration-300 hover:scale-105">
+                <p className="font-display text-2xl font-extrabold text-[#0B4D95] sm:text-3xl">
+                  {s.isNum ? <AnimatedCounter value={s.v} /> : s.v}
+                </p>
                 <p className="mt-0.5 text-xs text-[#4A5568] font-medium">{s.l}</p>
               </div>
             ))}
@@ -50,9 +53,9 @@ export default function Welcome() {
           </div>
         </Reveal>
 
-        {/* Image (After Content on Mobile, Left Column on Desktop) */}
+        {/* Image with 3D Tilt & Floating Badge */}
         <Reveal delay={0.1} className="order-2 lg:order-1">
-          <div className="relative">
+          <TiltCard className="relative">
             <div className="absolute -left-3 -top-3 h-20 w-20 rounded-2xl border border-[#FF6B4A]/30 sm:-left-4 sm:-top-4 sm:h-24 sm:w-24" />
             <div className="relative overflow-hidden rounded-3xl shadow-xl">
               <img
@@ -64,11 +67,11 @@ export default function Welcome() {
               />
             </div>
 
-            <div className="absolute -bottom-4 -right-2 rounded-2xl border border-white/90 bg-white/85 p-4 backdrop-blur-xl shadow-2xl sm:-bottom-6 sm:-right-4 sm:p-5">
+            <FloatingElement distance={8} className="absolute -bottom-4 -right-2 rounded-2xl border border-white/90 bg-white/85 p-4 backdrop-blur-xl shadow-2xl sm:-bottom-6 sm:-right-4 sm:p-5">
               <p className="font-mono text-[10px] uppercase tracking-widest text-[#FF6B4A] sm:text-xs font-bold">Since day one</p>
               <p className="mt-0.5 font-display text-lg font-extrabold text-[#0B121C] sm:text-2xl">Precision, in-house.</p>
-            </div>
-          </div>
+            </FloatingElement>
+          </TiltCard>
         </Reveal>
 
       </div>
