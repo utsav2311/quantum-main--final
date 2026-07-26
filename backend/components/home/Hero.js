@@ -44,13 +44,17 @@ export default function Hero() {
             playsInline
             webkit-playsinline="true"
             poster={IMAGES.hero}
-            className="h-full w-full object-cover object-center brightness-90 contrast-[1.05] pointer-events-none select-none"
+            className="h-full w-full object-cover object-[center_35%] sm:object-center brightness-90 contrast-[1.05] pointer-events-none select-none"
           >
+            {IMAGES.heroVideoMobile && (
+              <source src={IMAGES.heroVideoMobile} media="(max-width: 767px)" type="video/mp4" />
+            )}
+            <source src={IMAGES.heroVideo} media="(min-width: 768px)" type="video/mp4" />
             <source src={IMAGES.heroVideo} type="video/mp4" />
             <img
               src={IMAGES.hero}
               alt="Prosthetics and Orthotics"
-              className="h-full w-full object-cover object-center brightness-90 contrast-[1.05]"
+              className="h-full w-full object-cover object-[center_35%] sm:object-center brightness-90 contrast-[1.05]"
             />
           </video>
         ) : (
