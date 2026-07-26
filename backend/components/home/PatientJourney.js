@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from "framer-motion";
 import {
   CalendarCheck,
   Stethoscope,
@@ -9,8 +9,10 @@ import {
   Printer,
   SlidersHorizontal,
   HeartPulse,
-  ArrowDown,
   Sparkles,
+  ArrowRight,
+  ChevronRight,
+  CheckCircle2,
 } from "lucide-react";
 import { useLeadModal } from "@/context/LeadModalContext";
 
@@ -19,259 +21,324 @@ const STEPS = [
     num: "01",
     title: "Book Consultation",
     icon: CalendarCheck,
-    desc: "Schedule your initial clinical consultation with our Prosthetics & Orthotics specialists online, via WhatsApp, or phone.",
-    tag: "Getting Started",
-    highlight: "Book in under 2 minutes",
+    tagline: "Getting Started",
+    desc: "Schedule your initial clinical consultation with our Prosthetics & Orthotics specialists online, via WhatsApp, or by calling our clinical hub.",
+    highlight: "Fast booking in under 2 minutes",
+    gradient: "from-orange-500/20 via-rose-500/10 to-transparent",
+    accentColor: "#FF6B4A",
     cta: true,
+    details: ["Flexible appointment slots", "Virtual or in-clinic options", "Direct specialist review"],
   },
   {
     num: "02",
     title: "Assessment",
     icon: Stethoscope,
-    desc: "In-depth physical evaluation, computerized GAIT analysis, posture alignment, and clinical prescription tailored to your lifestyle.",
-    tag: "Clinical Evaluation",
-    highlight: "GAIT & posture analysis",
+    tagline: "Clinical Evaluation",
+    desc: "In-depth clinical evaluation including computerized GAIT analysis, posture alignment, muscle testing, and joint mobility diagnostics.",
+    highlight: "Computerized GAIT & posture analysis",
+    gradient: "from-blue-500/20 via-indigo-500/10 to-transparent",
+    accentColor: "#0B4D95",
+    details: ["Biomechanics mapping", "Pathology identification", "Custom treatment strategy"],
   },
   {
     num: "03",
     title: "3D Scanning",
     icon: Scan,
-    desc: "Fast, non-contact sub-millimeter 3D volumetric scanning of your anatomy — replacing uncomfortable traditional plaster casting.",
-    tag: "Digital Capture",
-    highlight: "Sub-millimeter accuracy",
+    tagline: "Digital Capture",
+    desc: "Fast, non-contact sub-millimeter 3D volumetric scanning of your anatomy — eliminating the discomfort of traditional plaster casting.",
+    highlight: "Sub-millimeter 3D scanning accuracy",
+    gradient: "from-cyan-500/20 via-teal-500/10 to-transparent",
+    accentColor: "#06B6D4",
+    details: ["100% plaster-free capture", "Sub-millimeter accuracy", "Instant 3D digital model"],
   },
   {
     num: "04",
     title: "Manufacturing",
     icon: Printer,
-    desc: "In-house CAD/CAM engineering and industrial 3D printing using carbon composites and biocompatible medical-grade polymers.",
+    tagline: "Precision C-Fab",
+    desc: "In-house CAD/CAM digital engineering and industrial 3D printing using carbon composites and biocompatible medical-grade polymers.",
     tag: "Precision C-Fab",
-    highlight: "In-house 3D printing",
+    highlight: "Industrial 3D printing & CAD/CAM",
+    gradient: "from-violet-500/20 via-purple-500/10 to-transparent",
+    accentColor: "#8B5CF6",
+    details: ["Additive 3D manufacturing", "Carbon fiber reinforcement", "Medical-grade polymers"],
   },
   {
     num: "05",
     title: "Fitting",
     icon: SlidersHorizontal,
-    desc: "Precision trial fitting session with real-time pressure distribution tuning and anatomical alignment verification for total comfort.",
-    tag: "Fit Verification",
-    highlight: "Pressure-mapped tuning",
+    tagline: "Fit Verification",
+    desc: "Precision trial fitting session with real-time pressure distribution tuning, dynamic alignment checks, and anatomical verification for optimal comfort.",
+    highlight: "Pressure-mapped dynamic alignment",
+    gradient: "from-emerald-500/20 via-teal-500/10 to-transparent",
+    accentColor: "#10B981",
+    details: ["Real-time pressure mapping", "Dynamic gait tuning", "Anatomical comfort check"],
   },
   {
     num: "06",
     title: "Rehabilitation",
     icon: HeartPulse,
-    desc: "Comprehensive gait retraining, milestone tracking, fit guarantee, and continuous long-term clinical care.",
-    tag: "Long-Term Mobility",
-    highlight: "Continuous care & adjustments",
+    tagline: "Long-Term Care",
+    desc: "Comprehensive gait retraining, mobility milestone tracking, digital file retention for instant adjustments, and continuous long-term care.",
+    highlight: "Continuous care & lifetime file retention",
+    gradient: "from-amber-500/20 via-orange-500/10 to-transparent",
+    accentColor: "#F59E0B",
+    details: ["Gait retraining guidance", "Lifetime digital file saving", "Same-week fit adjustments"],
   },
 ];
 
 export default function PatientJourney() {
   const containerRef = useRef(null);
   const { open } = useLeadModal();
+  const [activeStep, setActiveStep] = useState(0);
 
-  // Active scroll height progress for the connector line
+  // Scroll Progress across 350vh sticky track
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 65%", "end 75%"],
+    offset: ["start start", "end end"],
   });
 
-  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 120, damping: 25 });
+
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on("change", (v) => {
+      const stepIndex = Math.min(STEPS.length - 1, Math.floor(v * STEPS.length));
+      if (stepIndex !== activeStep) {
+        setActiveStep(stepIndex);
+      }
+    });
+    return () => unsubscribe();
+  }, [scrollYProgress, activeStep]);
+
+  const currentStep = STEPS[activeStep];
+  const StepIcon = currentStep.icon;
 
   return (
     <section
       ref={containerRef}
-      className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8 overflow-hidden"
+      className="relative h-[380vh] w-full bg-[#0B121C] text-white"
       data-testid="patient-journey"
     >
-      {/* Section Header */}
-      <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-24">
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ margin: "-50px" }}
-          transition={{ duration: 0.5 }}
-          className="font-mono text-xs uppercase tracking-[0.3em] text-[#FF6B4A] font-semibold"
-        >
-          End-to-End Care Pathway
-        </motion.p>
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mt-3 font-display text-3xl font-extrabold text-[#0B121C] sm:text-5xl lg:text-6xl tracking-tight"
-        >
-          Your Clinical <span className="text-[#FF6B4A]">Patient Journey</span>
-        </motion.h2>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ margin: "-50px" }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed"
-        >
-          From initial consultation to full mobility restoration — scroll down to explore each step of your personalized pathway.
-        </motion.p>
-      </div>
-
-      {/* Vertical Timeline Wrapper */}
-      <div className="relative">
-        {/* Desktop Central Vertical Progress Line */}
-        <div className="absolute left-1/2 top-6 bottom-6 hidden -translate-x-1/2 w-1.5 bg-slate-200 lg:block rounded-full overflow-hidden">
-          <motion.div
-            style={{ height: lineHeight }}
-            className="w-full bg-gradient-to-b from-[#FF6B4A] via-[#0B4D95] to-[#FF6B4A] rounded-full shadow-[0_0_16px_rgba(255,107,74,0.8)]"
-          />
+      {/* Sticky Fullscreen 3D Stage */}
+      <div className="sticky top-0 flex h-screen w-full flex-col justify-between overflow-hidden px-4 py-8 sm:px-8 sm:py-12">
+        {/* Background Ambient Glow */}
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <div className="h-[450px] w-[450px] rounded-full bg-[#FF6B4A]/15 blur-[140px] transition-all duration-700 sm:h-[600px] sm:w-[600px]" />
+          <div className="h-[350px] w-[350px] rounded-full bg-[#0B4D95]/20 blur-[130px] transition-all duration-700" />
         </div>
 
-        {/* Mobile/Tablet Left Vertical Progress Line */}
-        <div className="absolute left-6 top-6 bottom-6 block w-1.5 bg-slate-200 lg:hidden rounded-full overflow-hidden">
-          <motion.div
-            style={{ height: lineHeight }}
-            className="w-full bg-gradient-to-b from-[#FF6B4A] via-[#0B4D95] to-[#FF6B4A] rounded-full shadow-[0_0_16px_rgba(255,107,74,0.8)]"
-          />
+        {/* Top Header Bar */}
+        <div className="relative z-10 mx-auto w-full max-w-7xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#FF6B4A] font-semibold">
+              Interactive Patient Care Pathway
+            </p>
+            <h2 className="mt-1 font-display text-2xl font-extrabold text-white sm:text-4xl">
+              Your Clinical <span className="text-[#FF6B4A]">Patient Journey</span>
+            </h2>
+          </div>
+
+          {/* Overall Scroll Step Indicator */}
+          <div className="flex items-center gap-2 self-start sm:self-auto rounded-full border border-white/15 bg-white/10 px-4 py-2 backdrop-blur-md">
+            <span className="font-mono text-xs font-bold text-[#FF6B4A]">
+              STEP {currentStep.num}
+            </span>
+            <span className="text-white/40">/</span>
+            <span className="font-mono text-xs text-white/70">06</span>
+            <div className="ml-2 h-1.5 w-20 overflow-hidden rounded-full bg-white/20">
+              <motion.div
+                className="h-full bg-[#FF6B4A] rounded-full"
+                style={{ width: `${((activeStep + 1) / STEPS.length) * 100}%` }}
+              />
+            </div>
+          </div>
         </div>
 
-        {/* Timeline Steps */}
-        <div className="space-y-16 sm:space-y-20 lg:space-y-28">
-          {STEPS.map((step, idx) => {
-            const Icon = step.icon;
-            const isEven = idx % 2 === 0;
+        {/* Main 3D Card Stage Area */}
+        <div className="relative z-10 mx-auto my-auto grid w-full max-w-7xl grid-cols-1 gap-8 lg:grid-cols-12 items-center">
+          {/* Left Side: Step Navigation Progress Rail */}
+          <div className="hidden lg:col-span-5 lg:flex flex-col space-y-3">
+            {STEPS.map((s, idx) => {
+              const isActive = idx === activeStep;
+              const Icon = s.icon;
 
-            return (
-              <div key={step.num} className="relative">
-                {/* Step Item Grid */}
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-16 items-center">
-                  {/* Step Card Content Column */}
-                  <div
-                    className={`pl-14 lg:pl-0 ${
-                      isEven ? "lg:text-right lg:pr-12" : "lg:order-2 lg:text-left lg:pl-12"
-                    }`}
-                  >
-                    <motion.div
-                      initial={{ opacity: 0.2, y: 50, scale: 0.94 }}
-                      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                      viewport={{ margin: "-100px", amount: 0.35 }}
-                      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                      className="group relative rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8 shadow-md transition-all duration-500 hover:border-[#FF6B4A] hover:shadow-2xl hover:shadow-[#FF6B4A]/15"
+              return (
+                <button
+                  key={s.num}
+                  onClick={() => {
+                    if (containerRef.current) {
+                      const containerTop = containerRef.current.offsetTop;
+                      const containerHeight = containerRef.current.offsetHeight - window.innerHeight;
+                      const targetScroll = containerTop + (idx / (STEPS.length - 1)) * containerHeight;
+                      window.scrollTo({ top: targetScroll, behavior: "smooth" });
+                    }
+                  }}
+                  className={`group relative flex items-center justify-between rounded-2xl p-4 text-left transition-all duration-300 ${
+                    isActive
+                      ? "border border-[#FF6B4A]/50 bg-white/15 shadow-lg shadow-[#FF6B4A]/10 backdrop-blur-xl translate-x-2"
+                      : "border border-white/10 bg-white/5 hover:bg-white/10 hover:border-white/20 opacity-60 hover:opacity-100"
+                  }`}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-bold transition-all ${
+                        isActive
+                          ? "bg-[#FF6B4A] text-white shadow-md shadow-[#FF6B4A]/30"
+                          : "bg-white/10 text-white/70 group-hover:text-white"
+                      }`}
                     >
-                      {/* Step Header Tag & Number */}
-                      <div
-                        className={`flex items-center gap-3 mb-4 ${
-                          isEven ? "lg:justify-end" : "justify-start"
-                        }`}
-                      >
-                        <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#FF6B4A] bg-[#FF6B4A]/10 px-3 py-1 rounded-full">
-                          {step.tag}
-                        </span>
-                        <span className="font-mono text-xs font-extrabold text-slate-400">
-                          STEP {step.num}
-                        </span>
-                      </div>
-
-                      {/* Title & Icon Header */}
-                      <div
-                        className={`flex items-center gap-3 ${
-                          isEven ? "lg:flex-row-reverse" : "flex-row"
-                        }`}
-                      >
-                        <motion.div
-                          whileInView={{ rotate: [0, -10, 10, 0], scale: [1, 1.15, 1] }}
-                          viewport={{ margin: "-100px" }}
-                          transition={{ duration: 0.6, delay: 0.1 }}
-                          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#0B121C] text-white shadow-md transition-colors duration-300 group-hover:bg-[#FF6B4A]"
-                        >
-                          <Icon size={22} />
-                        </motion.div>
-                        <h3 className="font-display text-2xl font-bold text-[#0B121C] sm:text-3xl">
-                          {step.title}
-                        </h3>
-                      </div>
-
-                      {/* Description */}
-                      <p className="mt-4 text-sm sm:text-base text-slate-600 leading-relaxed">
-                        {step.desc}
+                      {s.num}
+                    </div>
+                    <div>
+                      <p className="font-mono text-[10px] uppercase tracking-wider text-[#FF6B4A]">
+                        {s.tagline}
                       </p>
-
-                      {/* Highlight Badge */}
-                      <div
-                        className={`mt-5 flex items-center gap-2 text-xs font-semibold text-slate-700 ${
-                          isEven ? "lg:justify-end" : "justify-start"
-                        }`}
-                      >
-                        <Sparkles size={14} className="text-[#FF6B4A]" />
-                        <span>{step.highlight}</span>
-                      </div>
-
-                      {/* Consultation Button */}
-                      {step.cta && (
-                        <div
-                          className={`mt-6 flex ${
-                            isEven ? "lg:justify-end" : "justify-start"
-                          }`}
-                        >
-                          <button
-                            onClick={() => open("general")}
-                            data-testid="journey-book-btn"
-                            className="inline-flex items-center justify-center gap-2 rounded-full bg-[#FF6B4A] px-6 py-3.5 font-display text-xs font-semibold text-white transition-all hover:bg-[#e8532f] active:scale-95 shadow-lg shadow-[#FF6B4A]/30"
-                          >
-                            Book Your Consultation Now
-                          </button>
-                        </div>
-                      )}
-                    </motion.div>
+                      <h4 className="font-display text-sm font-bold text-white">
+                        {s.title}
+                      </h4>
+                    </div>
                   </div>
 
-                  {/* Desktop Opposite Column Spacer */}
-                  <div
-                    className={`hidden lg:block ${
-                      isEven ? "lg:order-2" : "lg:order-1"
+                  <ChevronRight
+                    size={16}
+                    className={`transition-transform ${
+                      isActive ? "translate-x-1 text-[#FF6B4A]" : "text-white/30 group-hover:text-white/70"
                     }`}
                   />
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Right Side: 3D Interactive Card Deck */}
+          <div className="col-span-1 lg:col-span-7 flex justify-center [perspective:1200px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeStep}
+                initial={{
+                  rotateY: 65,
+                  rotateX: 12,
+                  z: -180,
+                  opacity: 0,
+                  scale: 0.88,
+                }}
+                animate={{
+                  rotateY: 0,
+                  rotateX: 0,
+                  z: 0,
+                  opacity: 1,
+                  scale: 1,
+                }}
+                exit={{
+                  rotateY: -65,
+                  rotateX: -12,
+                  z: -180,
+                  opacity: 0,
+                  scale: 0.88,
+                }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.23, 1, 0.32, 1],
+                }}
+                style={{ transformStyle: "preserve-3d" }}
+                className="group relative w-full max-w-xl rounded-[32px] border border-white/20 bg-gradient-to-br from-white/15 via-white/10 to-white/5 p-6 sm:p-10 shadow-2xl backdrop-blur-2xl"
+              >
+                {/* 3D Giant Watermark Number */}
+                <div className="pointer-events-none absolute right-6 top-4 select-none font-display text-7xl font-black text-white/10 sm:text-9xl">
+                  {currentStep.num}
                 </div>
 
-                {/* Desktop Central Circle Node with Scroll Reaction */}
-                <motion.div
-                  initial={{ scale: 0.6, opacity: 0.3 }}
-                  whileInView={{ scale: 1.2, opacity: 1 }}
-                  viewport={{ margin: "-100px", amount: 0.4 }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 lg:flex items-center justify-center"
-                >
-                  <div className="flex h-13 w-13 items-center justify-center rounded-full border-4 border-white bg-[#0B121C] text-white font-mono text-sm font-extrabold shadow-xl transition-all duration-300 group-hover:bg-[#FF6B4A]">
-                    {step.num}
-                  </div>
-                </motion.div>
+                {/* Card Top Tag */}
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 rounded-full border border-[#FF6B4A]/40 bg-[#FF6B4A]/15 px-3.5 py-1.5 font-mono text-xs font-bold uppercase tracking-wider text-[#FF6B4A]">
+                    <Sparkles size={13} />
+                    {currentStep.tagline}
+                  </span>
+                  <span className="font-mono text-xs text-white/50">
+                    PHASE {currentStep.num} OF 06
+                  </span>
+                </div>
 
-                {/* Mobile Circle Node with Scroll Reaction */}
-                <motion.div
-                  initial={{ scale: 0.7, opacity: 0.4 }}
-                  whileInView={{ scale: 1.25, opacity: 1 }}
-                  viewport={{ margin: "-80px" }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute left-6 top-8 -translate-x-1/2 lg:hidden flex items-center justify-center"
-                >
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-white bg-[#FF6B4A] text-white font-mono text-xs font-bold shadow-lg">
-                    {step.num}
+                {/* 3D Icon Box & Title */}
+                <div className="relative z-10 mt-6 flex items-center gap-4">
+                  <motion.div
+                    animate={{ y: [0, -6, 0] }}
+                    transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#FF6B4A] text-white shadow-lg shadow-[#FF6B4A]/40 sm:h-16 sm:w-16"
+                  >
+                    <StepIcon size={28} />
+                  </motion.div>
+                  <div>
+                    <h3 className="font-display text-2xl font-extrabold text-white sm:text-3xl lg:text-4xl">
+                      {currentStep.title}
+                    </h3>
+                    <p className="mt-1 text-xs text-white/70 font-mono">
+                      {currentStep.highlight}
+                    </p>
                   </div>
-                </motion.div>
+                </div>
 
-                {/* Animated Down Arrow Connector between steps */}
-                {idx < STEPS.length - 1 && (
-                  <div className="relative my-6 flex justify-center lg:justify-center">
-                    <motion.div
-                      animate={{ y: [0, 8, 0] }}
-                      transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-                      className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-100 text-[#FF6B4A] shadow-inner border border-slate-200"
+                {/* Description */}
+                <p className="relative z-10 mt-6 text-sm sm:text-base leading-relaxed text-white/85">
+                  {currentStep.desc}
+                </p>
+
+                {/* Detailed Clinical Bullet Points */}
+                <div className="relative z-10 mt-6 space-y-2.5 rounded-2xl border border-white/10 bg-black/20 p-4 backdrop-blur-md">
+                  {currentStep.details.map((item) => (
+                    <div key={item} className="flex items-center gap-2.5 text-xs sm:text-sm text-white/90">
+                      <CheckCircle2 size={16} className="text-[#FF6B4A] shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Card Action Area */}
+                <div className="relative z-10 mt-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
+                  {currentStep.cta ? (
+                    <button
+                      onClick={() => open("general")}
+                      data-testid="3d-journey-book-btn"
+                      className="group flex items-center justify-center gap-2 rounded-full bg-[#FF6B4A] px-6 py-3.5 font-display text-xs font-semibold text-white transition-all hover:bg-[#e8532f] active:scale-95 shadow-lg shadow-[#FF6B4A]/30 w-full sm:w-auto"
                     >
-                      <ArrowDown size={17} />
-                    </motion.div>
+                      Book Your Consultation Now
+                      <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                    </button>
+                  ) : (
+                    <div className="flex items-center gap-2 text-xs text-white/60 font-mono">
+                      <span>Scroll to proceed to Step {STEPS[Math.min(5, activeStep + 1)].num}</span>
+                    </div>
+                  )}
+
+                  {/* Scroll Down Cue */}
+                  <div className="flex items-center gap-1.5 text-xs text-white/40 font-mono self-end sm:self-auto">
+                    <span>SCROLL TO FLIP</span>
+                    <span className="inline-block animate-bounce">↓</span>
                   </div>
-                )}
-              </div>
-            );
-          })}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Mobile Navigation Dots */}
+        <div className="relative z-10 mx-auto flex items-center gap-2 lg:hidden">
+          {STEPS.map((s, idx) => (
+            <button
+              key={s.num}
+              onClick={() => {
+                if (containerRef.current) {
+                  const containerTop = containerRef.current.offsetTop;
+                  const containerHeight = containerRef.current.offsetHeight - window.innerHeight;
+                  const targetScroll = containerTop + (idx / (STEPS.length - 1)) * containerHeight;
+                  window.scrollTo({ top: targetScroll, behavior: "smooth" });
+                }
+              }}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                idx === activeStep ? "w-8 bg-[#FF6B4A]" : "w-2.5 bg-white/30"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
