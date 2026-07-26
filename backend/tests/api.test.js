@@ -55,7 +55,7 @@ describe("Public Lead Creation", () => {
 
   it("should enforce rate limiting after rapid requests", async () => {
     const codes = [];
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 35; i++) {
       const res = await fetch(`${API}/leads`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

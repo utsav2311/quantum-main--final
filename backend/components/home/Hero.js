@@ -35,9 +35,24 @@ export default function Hero() {
   return (
     <section className="relative min-h-[100svh] w-full overflow-hidden bg-[#0B121C]" data-testid="hero">
       <motion.div className="absolute inset-0" style={{ y: imgY, scale: imgScale }}>
-        <img src={IMAGES.lab} alt="Clinical manufacturing laboratory" decoding="async" fetchpriority="high" className="h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0B121C] via-[#0B121C]/85 to-[#0B121C]/30" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B121C] via-transparent to-[#0B121C]/40" />
+        {IMAGES.heroVideo ? (
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            poster={IMAGES.hero}
+            className="h-full w-full object-cover object-center brightness-90 contrast-[1.05]"
+          >
+            <source src={IMAGES.heroVideo} type="video/mp4" />
+            <img src={IMAGES.hero} alt="Prosthetics and Orthotics" className="h-full w-full object-cover object-center brightness-90 contrast-[1.05]" />
+          </video>
+        ) : (
+          <img src={IMAGES.hero} alt="Prosthetics and Orthotics" decoding="async" fetchpriority="high" className="h-full w-full object-cover object-center brightness-90 contrast-[1.05]" />
+        )}
+        {/* Balanced gradients: Top vignette keeps Navbar clear, side gradient ensures high text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0B121C]/85 via-[#0B121C]/60 to-[#0B121C]/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0B121C]/80 via-transparent to-[#0B121C]/50" />
       </motion.div>
 
       <div className="relative mx-auto flex min-h-[100svh] w-full max-w-7xl flex-col justify-center px-4 pb-16 pt-28 sm:px-6 lg:px-8">
@@ -48,7 +63,7 @@ export default function Hero() {
           <span className="h-px w-6 bg-[#FF6B4A] sm:w-8" /> Prosthetics &amp; Orthotics · B2B
         </motion.p>
 
-        <h1 className="max-w-4xl font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <h1 className="max-w-4xl font-display text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl drop-shadow-sm">
           {lines.map((line, i) => (
             <span key={i} className="line-mask">
               <motion.span custom={i} variants={lineReveal} initial="hidden" animate="show" className="block">
@@ -62,7 +77,7 @@ export default function Hero() {
 
         <motion.p
           initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }}
-          className="mt-5 max-w-xl text-sm leading-relaxed text-white/70 sm:mt-7 sm:text-lg"
+          className="mt-5 max-w-xl text-sm leading-relaxed text-white/80 sm:mt-7 sm:text-lg"
         >
           Tailored prosthetic &amp; orthotic solutions for hospitals and clinics — engineered with GAIT analysis, CAD/CAM design and in-house 3D printing.
         </motion.p>
@@ -74,7 +89,7 @@ export default function Hero() {
           <button
             onClick={() => router.push("/b2b-innovation-hub")}
             data-testid="hero-b2b-btn"
-            className="group flex w-full items-center justify-center gap-2 rounded-full bg-[#FF6B4A] px-6 py-3.5 font-display text-xs font-semibold text-white transition-colors hover:bg-[#e8532f] sm:w-auto sm:px-7 sm:py-4 sm:text-sm"
+            className="group flex w-full items-center justify-center gap-2 rounded-full bg-[#FF6B4A] px-6 py-3.5 font-display text-xs font-semibold text-white transition-all hover:bg-[#e8532f] shadow-lg shadow-[#FF6B4A]/30 sm:w-auto sm:px-7 sm:py-4 sm:text-sm"
           >
             Discover B2B Innovation Hub
             <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -82,7 +97,7 @@ export default function Hero() {
           <button
             onClick={() => router.push("/products")}
             data-testid="hero-products-btn"
-            className="flex w-full items-center justify-center rounded-full border border-white/25 px-6 py-3.5 font-display text-xs font-semibold text-white transition-colors hover:bg-white/10 sm:w-auto sm:px-7 sm:py-4 sm:text-sm"
+            className="flex w-full items-center justify-center rounded-full border border-white/30 bg-white/10 px-6 py-3.5 font-display text-xs font-semibold text-white transition-all hover:bg-white/20 backdrop-blur-md sm:w-auto sm:px-7 sm:py-4 sm:text-sm"
           >
             Explore Devices
           </button>
@@ -92,7 +107,7 @@ export default function Hero() {
         <div className="mt-10 max-w-2xl sm:mt-14">
           <div className="flex gap-2">
             {HERO_CALLOUTS.map((_, i) => (
-              <span key={i} className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-8 bg-[#FF6B4A] sm:w-10" : "w-4 bg-white/25 sm:w-5"}`} />
+              <span key={i} className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-8 bg-[#FF6B4A] sm:w-10" : "w-4 bg-white/30 sm:w-5"}`} />
             ))}
           </div>
           <div className="relative mt-4 h-16 sm:h-14">
@@ -106,10 +121,10 @@ export default function Hero() {
                   animate={{ opacity: i === active ? 1 : 0, y: i === active ? 0 : -8 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/10 text-[#FF6B4A] backdrop-blur">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-[#FF6B4A] backdrop-blur-md shadow-sm">
                     <Icon size={18} />
                   </span>
-                  <span className="font-display text-xs font-semibold text-white/90 sm:text-sm">{c}</span>
+                  <span className="font-display text-xs font-semibold text-white/95 sm:text-sm">{c}</span>
                 </motion.div>
               );
             })}

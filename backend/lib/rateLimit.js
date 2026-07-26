@@ -1,5 +1,5 @@
 const rateStore = new Map();
-const RATE_LIMIT = 6;
+const RATE_LIMIT = Number(process.env.RATE_LIMIT) || 30;
 const RATE_WINDOW = 60 * 1000; // 60 seconds in ms
 
 export function checkRateLimit(ip) {

@@ -24,6 +24,8 @@ export const COMPANY = {
 };
 
 export const IMAGES = {
+  hero: "/hero-bg.png",
+  heroVideo: "/video.mp4",
   lab: "https://images.pexels.com/photos/11288657/pexels-photo-11288657.jpeg",
   tools: "https://images.unsplash.com/photo-1581090122087-bdc8968e525f",
 
