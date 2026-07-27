@@ -61,7 +61,7 @@ export default function B2BHubContent() {
             <h2 className="mt-3 font-display text-4xl font-extrabold leading-tight text-[#0B121C]">Let's build your supply partnership.</h2>
             <p className="mt-5 leading-relaxed text-[#4A5568]">Tell us about your organization and clinical needs. Our partnerships team will design a tailored engagement — from device supply to on-site clinical support.</p>
             <div className="mt-8 flex items-center gap-3 rounded-2xl border border-[#E2E8F0] bg-[#F8F9FA] p-5">
-              <Building2 size={24} className="text-[#FF6B4A]" />
+              <Building2 size={24} className="text-[#0284C7]" />
               <p className="text-sm text-[#4A5568]">Serving hospitals, clinics & rehabilitation partners across regions.</p>
             </div>
           </Reveal>

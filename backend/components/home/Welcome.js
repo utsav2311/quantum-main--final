@@ -21,7 +21,7 @@ export default function Welcome() {
         
         {/* Content (Text First on Mobile, Right Column on Desktop) */}
         <Reveal delay={0.05} className="order-1 lg:order-2">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#FF6B4A] font-semibold">Welcome</p>
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0284C7] font-semibold">Welcome</p>
           <h2 className="mt-3 font-display text-3xl font-extrabold leading-tight text-[#0B121C] sm:text-4xl lg:text-5xl">
             <TextReveal text="A B2B partner built for hospitals, clinics & rehab teams." />
           </h2>
@@ -44,7 +44,7 @@ export default function Welcome() {
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-            <button onClick={() => open("partner")} data-testid="welcome-connect-btn" className="btn-gradient-coral group flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-display text-xs font-semibold text-white shadow-lg shadow-[#FF6B4A]/30 sm:text-sm">
+            <button onClick={() => open("partner")} data-testid="welcome-connect-btn" className="btn-gradient-coral group flex items-center justify-center gap-2 rounded-full px-6 py-3.5 font-display text-xs font-semibold text-white shadow-lg shadow-[#0284C7]/30 sm:text-sm">
               Connect with Us <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </button>
             <a href={waLink()} target="_blank" rel="noopener noreferrer" data-testid="welcome-whatsapp-btn" className="btn-gradient-glass flex items-center justify-center rounded-full px-6 py-3.5 font-display text-xs font-semibold text-[#0B121C] transition-colors hover:border-[#25D366] hover:text-[#25D366] sm:text-sm">
@@ -56,7 +56,7 @@ export default function Welcome() {
         {/* Image with 3D Tilt & Floating Badge */}
         <Reveal delay={0.1} className="order-2 lg:order-1">
           <TiltCard className="relative">
-            <div className="absolute -left-3 -top-3 h-20 w-20 rounded-2xl border border-[#FF6B4A]/30 sm:-left-4 sm:-top-4 sm:h-24 sm:w-24" />
+            <div className="absolute -left-3 -top-3 h-20 w-20 rounded-2xl border border-[#0284C7]/30 sm:-left-4 sm:-top-4 sm:h-24 sm:w-24" />
             <div className="relative overflow-hidden rounded-3xl shadow-xl">
               <img
                 src={IMAGES.team}
@@ -68,7 +68,7 @@ export default function Welcome() {
             </div>
 
             <FloatingElement distance={8} className="absolute -bottom-4 -right-2 rounded-2xl border border-white/90 bg-white/85 p-4 backdrop-blur-xl shadow-2xl sm:-bottom-6 sm:-right-4 sm:p-5">
-              <p className="font-mono text-[10px] uppercase tracking-widest text-[#FF6B4A] sm:text-xs font-bold">Since day one</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-[#0284C7] sm:text-xs font-bold">Since day one</p>
               <p className="mt-0.5 font-display text-lg font-extrabold text-[#0B121C] sm:text-2xl">Precision, in-house.</p>
             </FloatingElement>
           </TiltCard>

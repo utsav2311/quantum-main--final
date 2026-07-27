@@ -59,7 +59,7 @@ export default function AboutContent() {
       <section className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 lg:px-8 lg:pb-24">
         <div className="flex flex-col items-start justify-between gap-6 rounded-3xl bg-[#0B121C] p-7 sm:p-10 sm:flex-row sm:items-center">
           <h3 className="max-w-lg font-display text-xl font-bold text-white sm:text-2xl">Interested in partnering with our team?</h3>
-          <button onClick={() => open("partner")} data-testid="about-partner-btn" className="w-full shrink-0 rounded-full bg-[#FF6B4A] px-7 py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#e8532f] sm:w-auto">Partner With Us</button>
+          <button onClick={() => open("partner")} data-testid="about-partner-btn" className="w-full shrink-0 rounded-full bg-[#0284C7] px-7 py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] sm:w-auto">Partner With Us</button>
         </div>
       </section>
     </>

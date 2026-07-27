@@ -60,8 +60,8 @@ export default function ContactUsContent() {
 
           <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
             {COMPANY.addresses.map((a) => (
-              <a key={a.label} href={a.maps} target="_blank" rel="noopener noreferrer" data-testid={`contact-address-${a.label}`} className="group rounded-2xl border border-[#E2E8F0] bg-white p-5 transition-all hover:border-[#FF6B4A] hover:shadow-md">
-                <div className="flex items-center gap-2 text-[#FF6B4A]"><MapPin size={16} /><span className="font-display text-xs font-semibold uppercase tracking-wide">{a.label}</span></div>
+              <a key={a.label} href={a.maps} target="_blank" rel="noopener noreferrer" data-testid={`contact-address-${a.label}`} className="group rounded-2xl border border-[#E2E8F0] bg-white p-5 transition-all hover:border-[#0284C7] hover:shadow-md">
+                <div className="flex items-center gap-2 text-[#0284C7]"><MapPin size={16} /><span className="font-display text-xs font-semibold uppercase tracking-wide">{a.label}</span></div>
                 <p className="mt-2 text-sm leading-relaxed text-[#4A5568]">{a.value}</p>
               </a>
             ))}
@@ -89,7 +89,7 @@ export default function ContactUsContent() {
               <Label className="text-xs font-medium text-[#4A5568]">Message</Label>
               <Textarea data-testid="contact-message" value={form.message} onChange={set("message")} rows={4} placeholder="How can we assist you?" className="rounded-xl border-[#E2E8F0] focus-visible:ring-[#0B4D95]" />
             </div>
-            <button type="submit" disabled={loading} data-testid="contact-submit" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#FF6B4A] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#e8532f] disabled:opacity-60">
+            <button type="submit" disabled={loading} data-testid="contact-submit" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#0284C7] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] disabled:opacity-60">
               {loading ? <Loader2 size={17} className="animate-spin" /> : <Send size={16} />}
               {loading ? "Sending…" : "Send Message"}
             </button>
@@ -103,7 +103,7 @@ export default function ContactUsContent() {
           <div className="border-b border-[#E2E8F0] p-6 sm:p-8">
             <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
               <div>
-                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[#FF6B4A]">Facility Location</span>
+                <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[#0284C7]">Facility Location</span>
                 <h3 className="mt-1 font-display text-2xl font-bold text-[#0B121C]">Visit Our Clinical Center</h3>
                 <p className="mt-1 text-sm text-[#4A5568]">{primaryAddress.value}</p>
               </div>

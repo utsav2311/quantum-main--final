@@ -62,7 +62,7 @@ export default function LeadModal() {
         className="h-11 rounded-xl border-[#E2E8F0] focus-visible:ring-[#0B4D95]"
         {...props}
       />
-      {errors[id] && <p className="text-xs text-[#e8532f]" data-testid={`lead-${id}-error`}>{errors[id]}</p>}
+      {errors[id] && <p className="text-xs text-[#0052CC]" data-testid={`lead-${id}-error`}>{errors[id]}</p>}
     </div>
   );
 
@@ -83,7 +83,7 @@ export default function LeadModal() {
             transition={{ type: "spring", damping: 26, stiffness: 320 }}
           >
             <div className="relative bg-[#0B4D95] px-8 py-7 text-white">
-              <div className="absolute right-0 top-0 h-24 w-24 -translate-y-6 translate-x-6 rounded-full bg-[#FF6B4A]/40 blur-2xl" />
+              <div className="absolute right-0 top-0 h-24 w-24 -translate-y-6 translate-x-6 rounded-full bg-[#0284C7]/40 blur-2xl" />
               <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-white/60">P&amp;O Solutions</p>
               <h3 className="mt-1 font-display text-2xl font-bold">{config.title}</h3>
               <p className="mt-1 max-w-sm text-sm text-white/70">{config.subtitle}</p>
@@ -112,7 +112,7 @@ export default function LeadModal() {
                 type="submit"
                 disabled={loading}
                 data-testid="lead-submit-btn"
-                className="group flex w-full items-center justify-center gap-2 rounded-full bg-[#FF6B4A] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#e8532f] disabled:opacity-60"
+                className="group flex w-full items-center justify-center gap-2 rounded-full bg-[#0284C7] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] disabled:opacity-60"
               >
                 {loading ? <Loader2 size={17} className="animate-spin" /> : <Send size={16} className="transition-transform group-hover:translate-x-0.5" />}
                 {loading ? "Sending…" : "Submit Request"}

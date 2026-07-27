@@ -34,19 +34,19 @@ export default function FAQ() {
       {/* Layered Background Spheres with Parallax Motion */}
       <motion.div
         style={{ y: parallaxGlow1 }}
-        className="pointer-events-none absolute -left-20 top-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-[#0B4D95]/15 via-[#FF6B4A]/10 to-transparent blur-3xl opacity-70"
+        className="pointer-events-none absolute -left-20 top-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-[#0B4D95]/15 via-[#0284C7]/10 to-transparent blur-3xl opacity-70"
       />
       <motion.div
         style={{ y: parallaxGlow2 }}
-        className="pointer-events-none absolute -right-20 bottom-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#FF6B4A]/15 via-[#0B4D95]/10 to-transparent blur-3xl opacity-70"
+        className="pointer-events-none absolute -right-20 bottom-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#0284C7]/15 via-[#0B4D95]/10 to-transparent blur-3xl opacity-70"
       />
 
       <div className="relative mx-auto max-w-4xl px-5 lg:px-8">
         {/* Section Header */}
         <Reveal>
           <div className="flex flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#FF6B4A]/30 bg-[#FF6B4A]/10 px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[#FF6B4A] backdrop-blur-md">
-              <HelpCircle size={14} className="text-[#FF6B4A]" /> Questions & Answers
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#0284C7]/30 bg-[#0284C7]/10 px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[#0284C7] backdrop-blur-md">
+              <HelpCircle size={14} className="text-[#0284C7]" /> Questions & Answers
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold text-[#0B121C] sm:text-5xl lg:text-6xl tracking-tight">
               <TextReveal text="Questions, answered." />
@@ -67,12 +67,12 @@ export default function FAQ() {
                   <motion.div
                     initial={false}
                     animate={{
-                      borderColor: isOpen ? "#FF6B4A" : "rgba(255, 255, 255, 0.8)",
+                      borderColor: isOpen ? "#0284C7" : "rgba(255, 255, 255, 0.8)",
                     }}
                     className={`group overflow-hidden rounded-2xl border bg-white/75 backdrop-blur-xl transition-all duration-300 ${
                       isOpen
-                        ? "shadow-xl shadow-[#FF6B4A]/10 border-l-4 border-l-[#FF6B4A] bg-white/90"
-                        : "hover:border-[#FF6B4A]/40 hover:bg-white/85 hover:shadow-lg"
+                        ? "shadow-xl shadow-[#0284C7]/10 border-l-4 border-l-[#0284C7] bg-white/90"
+                        : "hover:border-[#0284C7]/40 hover:bg-white/85 hover:shadow-lg"
                     }`}
                   >
                     <button
@@ -85,15 +85,15 @@ export default function FAQ() {
                         <span
                           className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-bold transition-all duration-300 ${
                             isOpen
-                              ? "bg-gradient-to-br from-[#FF6B4A] to-[#e8532f] text-white shadow-md shadow-[#FF6B4A]/30"
-                              : "bg-slate-100 text-[#0B121C] group-hover:bg-[#FF6B4A]/10 group-hover:text-[#FF6B4A]"
+                              ? "bg-gradient-to-br from-[#0284C7] to-[#0052CC] text-white shadow-md shadow-[#0284C7]/30"
+                              : "bg-slate-100 text-[#0B121C] group-hover:bg-[#0284C7]/10 group-hover:text-[#0284C7]"
                           }`}
                         >
                           {String(i + 1).padStart(2, "0")}
                         </span>
                         <span
                           className={`font-display text-lg font-bold transition-colors duration-300 ${
-                            isOpen ? "text-[#FF6B4A]" : "text-[#0B121C] group-hover:text-[#FF6B4A]"
+                            isOpen ? "text-[#0284C7]" : "text-[#0B121C] group-hover:text-[#0284C7]"
                           }`}
                         >
                           {f.q}
@@ -105,8 +105,8 @@ export default function FAQ() {
                         transition={{ type: "spring", stiffness: 300, damping: 20 }}
                         className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors ${
                           isOpen
-                            ? "bg-gradient-to-br from-[#FF6B4A] to-[#e8532f] text-white shadow-sm"
-                            : "bg-slate-100 text-[#4A5568] group-hover:bg-[#FF6B4A]/10 group-hover:text-[#FF6B4A]"
+                            ? "bg-gradient-to-br from-[#0284C7] to-[#0052CC] text-white shadow-sm"
+                            : "bg-slate-100 text-[#4A5568] group-hover:bg-[#0284C7]/10 group-hover:text-[#0284C7]"
                         }`}
                       >
                         {isOpen ? <Minus size={18} /> : <Plus size={18} />}
@@ -139,11 +139,11 @@ export default function FAQ() {
         <Reveal delay={0.3}>
           <div className="relative mt-16 overflow-hidden rounded-3xl bg-gradient-to-br from-[#0B121C] via-[#0D1929] to-[#0B121C] p-8 text-center sm:p-12 border border-white/15 shadow-2xl">
             {/* Ambient Inner Glows */}
-            <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-[#FF6B4A]/25 blur-3xl" />
+            <div className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-[#0284C7]/25 blur-3xl" />
             <div className="pointer-events-none absolute -bottom-10 -left-10 h-48 w-48 rounded-full bg-[#0B4D95]/35 blur-3xl" />
 
             <div className="relative z-10 flex flex-col items-center">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1 font-mono text-xs font-medium text-[#FF6B4A] border border-white/15 backdrop-blur-md">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1 font-mono text-xs font-medium text-[#0284C7] border border-white/15 backdrop-blur-md">
                 <Sparkles size={13} /> Direct Support
               </span>
               <h3 className="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">Still have questions?</h3>
@@ -155,7 +155,7 @@ export default function FAQ() {
                 whileTap={{ scale: 0.96 }}
                 onClick={() => open("consultation")}
                 data-testid="faq-schedule-btn"
-                className="btn-gradient-coral mt-6 flex items-center gap-2 rounded-full px-8 py-4 font-display text-sm font-semibold text-white shadow-xl shadow-[#FF6B4A]/30"
+                className="btn-gradient-coral mt-6 flex items-center gap-2 rounded-full px-8 py-4 font-display text-sm font-semibold text-white shadow-xl shadow-[#0284C7]/30"
               >
                 <PhoneCall size={17} /> Schedule a Call
               </motion.button>

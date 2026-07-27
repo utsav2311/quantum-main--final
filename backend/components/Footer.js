@@ -78,7 +78,7 @@ export default function Footer() {
   return (
     <footer className="relative overflow-hidden bg-[#0B121C] text-white" data-testid="footer">
       <div className="absolute -left-24 top-10 h-72 w-72 rounded-full bg-[#0B4D95]/40 blur-[120px]" />
-      <div className="absolute right-0 top-1/2 h-64 w-64 rounded-full bg-[#FF6B4A]/20 blur-[120px]" />
+      <div className="absolute right-0 top-1/2 h-64 w-64 rounded-full bg-[#0284C7]/20 blur-[120px]" />
 
       <div className="relative mx-auto max-w-7xl px-5 py-20 lg:px-8">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
@@ -95,17 +95,17 @@ export default function Footer() {
 
             <div className="mt-8 space-y-3">
               <a href={`tel:${COMPANY.phoneRaw}`} data-testid="footer-phone" className="flex items-center gap-3 text-white/80 transition-colors hover:text-white">
-                <Phone size={18} className="text-[#FF6B4A]" /> {COMPANY.phone}
+                <Phone size={18} className="text-[#0284C7]" /> {COMPANY.phone}
               </a>
               <a href={`mailto:${COMPANY.email}`} data-testid="footer-email" className="flex items-center gap-3 text-white/80 transition-colors hover:text-white">
-                <Mail size={18} className="text-[#FF6B4A]" /> {COMPANY.email}
+                <Mail size={18} className="text-[#0284C7]" /> {COMPANY.email}
               </a>
             </div>
 
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {COMPANY.addresses.map((a) => (
-                <a key={a.label} href={a.maps} target="_blank" rel="noopener noreferrer" data-testid={`footer-address-${a.label}`} className="group rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-[#FF6B4A]/50">
-                  <div className="flex items-center gap-2 text-[#FF6B4A]"><MapPin size={15} /><span className="font-display text-xs font-semibold uppercase tracking-wide">{a.label}</span></div>
+                <a key={a.label} href={a.maps} target="_blank" rel="noopener noreferrer" data-testid={`footer-address-${a.label}`} className="group rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-[#0284C7]/50">
+                  <div className="flex items-center gap-2 text-[#0284C7]"><MapPin size={15} /><span className="font-display text-xs font-semibold uppercase tracking-wide">{a.label}</span></div>
                   <p className="mt-2 text-sm leading-relaxed text-white/70">{a.value}</p>
                 </a>
               ))}
@@ -115,7 +115,7 @@ export default function Footer() {
               {COMPANY.socials.map((s) => {
                 const Icon = socialIcon[s.icon] || Linkedin;
                 return (
-                  <a key={s.icon} href={s.url} data-testid={`footer-social-${s.icon}`} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-[#FF6B4A] hover:text-[#FF6B4A]">
+                  <a key={s.icon} href={s.url} data-testid={`footer-social-${s.icon}`} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-[#0284C7] hover:text-[#0284C7]">
                     <Icon size={17} />
                   </a>
                 );
@@ -123,7 +123,7 @@ export default function Footer() {
             </div>
 
 
-            <button onClick={() => open("franchise")} data-testid="footer-franchise-btn" className="mt-8 rounded-full border border-[#FF6B4A] px-6 py-3 font-display text-sm font-semibold text-[#FF6B4A] transition-colors hover:bg-[#FF6B4A] hover:text-white">
+            <button onClick={() => open("franchise")} data-testid="footer-franchise-btn" className="mt-8 rounded-full border border-[#0284C7] px-6 py-3 font-display text-sm font-semibold text-[#0284C7] transition-colors hover:bg-[#0284C7] hover:text-white">
               Apply for Franchise
             </button>
           </div>
@@ -133,13 +133,13 @@ export default function Footer() {
             <h3 className="font-display text-2xl font-bold">Send us a message</h3>
             <p className="mt-1 text-sm text-white/60">General inquiries — we typically reply within one business day.</p>
             <form onSubmit={submit} className="mt-6 space-y-4">
-              <Input data-testid="footer-name-input" placeholder="Your name" value={form.name} onChange={set("name")} className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#FF6B4A]" />
+              <Input data-testid="footer-name-input" placeholder="Your name" value={form.name} onChange={set("name")} className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]" />
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <Input data-testid="footer-phone-input" placeholder="Phone" value={form.phone} onChange={set("phone")} className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#FF6B4A]" />
-                <Input data-testid="footer-email-input" type="email" placeholder="Email" value={form.email} onChange={set("email")} className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#FF6B4A]" />
+                <Input data-testid="footer-phone-input" placeholder="Phone" value={form.phone} onChange={set("phone")} className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]" />
+                <Input data-testid="footer-email-input" type="email" placeholder="Email" value={form.email} onChange={set("email")} className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]" />
               </div>
-              <Textarea data-testid="footer-message-input" placeholder="Message" rows={4} value={form.message} onChange={set("message")} className="rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#FF6B4A]" />
-              <button type="submit" disabled={loading} data-testid="footer-submit-btn" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#FF6B4A] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#e8532f] disabled:opacity-60">
+              <Textarea data-testid="footer-message-input" placeholder="Message" rows={4} value={form.message} onChange={set("message")} className="rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]" />
+              <button type="submit" disabled={loading} data-testid="footer-submit-btn" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#0284C7] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] disabled:opacity-60">
                 {loading ? <Loader2 size={17} className="animate-spin" /> : <Send size={16} />}
                 {loading ? "Sending…" : "Submit"}
               </button>

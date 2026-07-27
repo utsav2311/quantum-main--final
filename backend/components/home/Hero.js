@@ -77,9 +77,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#FF6B4A] sm:mb-6 sm:text-xs sm:tracking-[0.3em]"
+          className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#0284C7] sm:mb-6 sm:text-xs sm:tracking-[0.3em]"
         >
-          <span className="h-px w-5 bg-[#FF6B4A] sm:w-8" /> Prosthetics &amp; Orthotics · B2B
+          <span className="h-px w-5 bg-[#0284C7] sm:w-8" /> Prosthetics &amp; Orthotics · B2B
         </motion.p>
 
         <h1 className="max-w-4xl font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl drop-shadow-sm">
@@ -89,7 +89,7 @@ export default function Hero() {
                 {line.hl ? (
                   <span>
                     {line.pre}
-                    <span className="text-[#FF6B4A]">{line.hl}</span>
+                    <span className="text-[#0284C7]">{line.hl}</span>
                   </span>
                 ) : (
                   line.text
@@ -117,7 +117,7 @@ export default function Hero() {
           <button
             onClick={() => router.push("/b2b-innovation-hub")}
             data-testid="hero-b2b-btn"
-            className="btn-gradient-coral group flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 font-display text-xs font-semibold text-white active:scale-[0.98] shadow-xl shadow-[#FF6B4A]/35 sm:w-auto sm:px-7 sm:py-4 sm:text-sm"
+            className="btn-gradient-coral group flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 font-display text-xs font-semibold text-white active:scale-[0.98] shadow-xl shadow-[#0284C7]/35 sm:w-auto sm:px-7 sm:py-4 sm:text-sm"
           >
             Discover B2B Innovation Hub
             <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
@@ -137,7 +137,7 @@ export default function Hero() {
             {HERO_CALLOUTS.map((_, i) => (
               <span
                 key={i}
-                className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-8 bg-[#FF6B4A] sm:w-10" : "w-4 bg-white/30 sm:w-5"}`}
+                className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-8 bg-[#0284C7] sm:w-10" : "w-4 bg-white/30 sm:w-5"}`}
               />
             ))}
           </div>
@@ -152,7 +152,7 @@ export default function Hero() {
                   animate={{ opacity: i === active ? 1 : 0, y: i === active ? 0 : -8 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-[#FF6B4A] backdrop-blur-md shadow-sm sm:h-10 sm:w-10">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/20 bg-white/10 text-[#0284C7] backdrop-blur-md shadow-sm sm:h-10 sm:w-10">
                     <Icon size={18} />
                   </span>
                   <span className="font-display text-xs font-semibold text-white/95 sm:text-sm">{c}</span>

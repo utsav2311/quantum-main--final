@@ -23,12 +23,12 @@ export default function VisionMission() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {blocks.map((b, i) => (
             <Reveal key={b.no} delay={i * 0.1}>
-              <div className="group flex flex-col relative h-full overflow-hidden rounded-3xl border border-white/80 bg-white/75 backdrop-blur-xl shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#FF6B4A]/40 hover:bg-white/90">
+              <div className="group flex flex-col relative h-full overflow-hidden rounded-3xl border border-white/80 bg-white/75 backdrop-blur-xl shadow-md transition-all duration-300 hover:shadow-xl hover:border-[#0284C7]/40 hover:bg-white/90">
                 {/* Content First on Mobile */}
                 <div className="p-6 sm:p-8 order-1 sm:order-2">
                   <div className="flex items-center gap-2 mb-3">
-                    <b.icon size={18} className="text-[#FF6B4A]" />
-                    <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[#FF6B4A]">{b.tag}</span>
+                    <b.icon size={18} className="text-[#0284C7]" />
+                    <span className="font-mono text-xs font-semibold uppercase tracking-widest text-[#0284C7]">{b.tag}</span>
                     <span className="ml-auto font-mono text-xs text-[#94A3B8]">{b.no}</span>
                   </div>
                   <h3 className="font-display text-xl font-bold leading-tight text-[#0B121C] sm:text-2xl">{b.title}</h3>

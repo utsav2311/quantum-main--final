@@ -65,7 +65,7 @@ export default function ProductsContent() {
               <div className="p-6">
                 <div className="flex items-start justify-between gap-3">
                   <h3 className="font-display text-lg font-bold leading-tight text-[#0B121C]">{d.title}</h3>
-                  <ArrowUpRight size={18} className="mt-1 shrink-0 text-[#94A3B8] transition-colors group-hover:text-[#FF6B4A]" />
+                  <ArrowUpRight size={18} className="mt-1 shrink-0 text-[#94A3B8] transition-colors group-hover:text-[#0284C7]" />
                 </div>
                 <p className="mt-2 text-sm leading-relaxed text-[#4A5568]">{d.tagline}</p>
               </div>

@@ -64,7 +64,7 @@ export default function Navbar() {
               <button
                 data-testid={`nav-${item.label.toLowerCase().replace(/[\s&]+/g, "-")}`}
                 onClick={() => handleNav(item.to)}
-                className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors hover:text-[#FF6B4A] ${scrolled ? "text-[#0B121C]" : "text-white/90"}`}
+                className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors hover:text-[#0284C7] ${scrolled ? "text-[#0B121C]" : "text-white/90"}`}
               >
                 {item.label}
                 {item.children && <ChevronDown size={14} className={scrolled ? "text-[#94A3B8]" : "text-white/60"} />}
@@ -101,7 +101,7 @@ export default function Navbar() {
           <button
             onClick={() => open("partner")}
             data-testid="nav-partner-btn"
-            className="hidden rounded-full bg-[#FF6B4A] px-5 py-2.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#e8532f] sm:block"
+            className="hidden rounded-full bg-[#0284C7] px-5 py-2.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] sm:block"
           >
             Partner With Us
           </button>
@@ -125,7 +125,7 @@ export default function Navbar() {
                 <button
                   onClick={() => { setMobileOpen(false); open("partner"); }}
                   data-testid="mobile-partner-btn"
-                  className="mt-4 w-full rounded-full bg-[#FF6B4A] py-3 font-display text-sm font-semibold text-white"
+                  className="mt-4 w-full rounded-full bg-[#0284C7] py-3 font-display text-sm font-semibold text-white"
                 >
                   Partner With Us
                 </button>

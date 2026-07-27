@@ -12,7 +12,7 @@ export default function EditorialMarquee({ dark = false }) {
         {ITEMS.map((t, i) => (
           <div key={i} className="flex items-center">
             <span className="px-8 font-display text-2xl font-extrabold tracking-tight sm:text-3xl">{t}</span>
-            <span className="h-2.5 w-2.5 rounded-full bg-[#FF6B4A] shadow-md shadow-[#FF6B4A]/40" />
+            <span className="h-2.5 w-2.5 rounded-full bg-[#0284C7] shadow-md shadow-[#0284C7]/40" />
           </div>
         ))}
       </Marquee>

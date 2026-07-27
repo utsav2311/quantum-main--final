@@ -23,7 +23,7 @@ export default function Studio3D() {
         
         {/* Text Content First on Mobile */}
         <Reveal className="order-1">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#FF6B4A] font-semibold">3D Studio</p>
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0284C7] font-semibold">3D Studio</p>
           <h2 className="mt-3 font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
             A digital manufacturing workspace.
           </h2>
@@ -33,7 +33,7 @@ export default function Studio3D() {
           <div className="mt-8 space-y-3 sm:space-y-4">
             {POINTS.map((p) => (
               <div key={p.t} className="flex items-start gap-3.5 rounded-2xl border border-white/15 bg-white/10 p-3.5 backdrop-blur-xl sm:p-4 shadow-md">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FF6B4A]/20"><p.icon size={19} className="text-[#FF6B4A]" /></span>
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#0284C7]/20"><p.icon size={19} className="text-[#0284C7]" /></span>
                 <div>
                   <p className="font-display text-sm font-semibold text-white sm:text-base">{p.t}</p>
                   <p className="mt-0.5 text-xs text-white/70 sm:text-sm">{p.d}</p>
@@ -56,7 +56,7 @@ export default function Studio3D() {
           </div>
 
           <div className="absolute -left-2 bottom-6 w-40 rounded-2xl border border-white/20 bg-[#0B121C]/80 p-3.5 backdrop-blur-xl shadow-xl sm:-left-5 sm:bottom-8 sm:w-44 sm:p-4">
-            <p className="font-mono text-[10px] text-[#FF6B4A] font-bold">SPEED · PRECISION</p>
+            <p className="font-mono text-[10px] text-[#0284C7] font-bold">SPEED · PRECISION</p>
             <p className="mt-0.5 font-display text-base font-bold text-white sm:text-lg">Craft, digitised.</p>
           </div>
         </motion.div>

@@ -120,18 +120,18 @@ export default function AdultsGrid() {
     <section className="relative overflow-hidden bg-gradient-to-b from-[#0B121C] via-[#0D1B2D] to-[#0B121C] py-24 text-white" data-testid="adults-section">
       {/* Background Glows */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(11,77,149,0.35),rgba(255,255,255,0))]" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#FF6B4A]/15 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#0284C7]/15 blur-3xl" />
       <div className="pointer-events-none absolute top-1/2 left-0 h-96 w-96 rounded-full bg-[#0B4D95]/20 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         {/* Section Header */}
         <Reveal>
           <div className="flex flex-col items-center text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#FF6B4A]/40 bg-[#FF6B4A]/15 px-3.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#FF6B4A] backdrop-blur-md">
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#0284C7]/40 bg-[#0284C7]/15 px-3.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#0284C7] backdrop-blur-md">
               <Activity size={13} /> Comprehensive Portfolio
             </span>
             <h2 className="mt-3 font-display text-3xl font-extrabold tracking-tight sm:text-5xl">
-              For <span className="text-[#FF6B4A]">Adults</span>
+              For <span className="text-[#0284C7]">Adults</span>
             </h2>
             <p className="mt-1 font-display text-xl font-light text-white/80 sm:text-2xl">
               Mobility Solutions
@@ -151,7 +151,7 @@ export default function AdultsGrid() {
                   onClick={() => setActiveFilter(tab.id)}
                   className={`rounded-full px-4.5 py-2 text-xs font-semibold transition-all duration-300 ${
                     activeFilter === tab.id
-                      ? "btn-gradient-coral text-white shadow-lg shadow-[#FF6B4A]/30 scale-105"
+                      ? "btn-gradient-coral text-white shadow-lg shadow-[#0284C7]/30 scale-105"
                       : "border border-white/15 bg-white/10 text-white/80 hover:bg-white/20 hover:text-white backdrop-blur-md"
                   }`}
                 >
@@ -181,7 +181,7 @@ export default function AdultsGrid() {
                   className="group block [perspective:1000px] relative h-64 w-full cursor-pointer"
                 >
                   <div
-                    className="relative h-full w-full rounded-2xl transition-transform duration-700 ease-in-out transform-3d group-hover:[transform:rotateY(180deg)] group-hover:[--webkit-transform:rotateY(180deg)] shadow-md group-hover:shadow-xl group-hover:shadow-[#FF6B4A]/20"
+                    className="relative h-full w-full rounded-2xl transition-transform duration-700 ease-in-out transform-3d group-hover:[transform:rotateY(180deg)] group-hover:[--webkit-transform:rotateY(180deg)] shadow-md group-hover:shadow-xl group-hover:shadow-[#0284C7]/20"
                     style={{ transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" }}
                   >
                     
@@ -208,13 +208,13 @@ export default function AdultsGrid() {
                           {item.category}
                         </span>
                         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-white/70 backdrop-blur-md">
-                          <Sparkles size={11} className="text-[#FF6B4A]" />
+                          <Sparkles size={11} className="text-[#0284C7]" />
                         </span>
                       </div>
 
                       {/* Bottom Title Overlay */}
                       <div className="relative z-10">
-                        <p className="font-mono text-[10px] uppercase tracking-widest text-[#FF6B4A]">
+                        <p className="font-mono text-[10px] uppercase tracking-widest text-[#0284C7]">
                           {item.subtitle}
                         </p>
                         <h3 className="font-display text-base font-bold tracking-tight text-white">
@@ -228,7 +228,7 @@ export default function AdultsGrid() {
 
                     {/* BACK SIDE (Flipped) */}
                     <div
-                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#FF6B4A]/50 bg-[#0B121C] p-4 backface-hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 shadow-xl shadow-[#FF6B4A]/10"
+                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#0284C7]/50 bg-[#0B121C] p-4 backface-hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 shadow-xl shadow-[#0284C7]/10"
                       style={{
                         WebkitBackfaceVisibility: "hidden",
                         backfaceVisibility: "hidden",
@@ -238,7 +238,7 @@ export default function AdultsGrid() {
                     >
                       <div>
                         <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                          <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-[#FF6B4A]">
+                          <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-[#0284C7]">
                             {item.category}
                           </span>
                           <span className="font-mono text-[9px] text-white/50">Clinical Spec</span>
@@ -254,7 +254,7 @@ export default function AdultsGrid() {
                         <div className="mt-2 space-y-1">
                           {item.highlights.map((h) => (
                             <div key={h} className="flex items-center gap-1.5 text-[10px] font-medium text-white/80">
-                              <ShieldCheck size={12} className="text-[#FF6B4A]" />
+                              <ShieldCheck size={12} className="text-[#0284C7]" />
                               <span>{h}</span>
                             </div>
                           ))}
@@ -262,7 +262,7 @@ export default function AdultsGrid() {
                       </div>
 
                       <div className="pt-2">
-                        <span className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#FF6B4A] py-2 font-display text-[11px] font-semibold text-white shadow-md transition-colors group-hover:bg-[#e8532f]">
+                        <span className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#0284C7] py-2 font-display text-[11px] font-semibold text-white shadow-md transition-colors group-hover:bg-[#0052CC]">
                           Explore Device <ArrowUpRight size={13} />
                         </span>
                       </div>

@@ -14,8 +14,8 @@ export default function PageHero({ label, title, subtitle, image, children }) {
       )}
       <div className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-28">
         {label && (
-          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-[#FF6B4A]">
-            <span className="h-px w-8 bg-[#FF6B4A]" /> {label}
+          <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-[#0284C7]">
+            <span className="h-px w-8 bg-[#0284C7]" /> {label}
           </motion.p>
         )}
         <motion.h1 initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="mt-5 max-w-3xl font-display text-4xl font-extrabold leading-[1.02] tracking-tight text-white sm:text-5xl lg:text-6xl">
