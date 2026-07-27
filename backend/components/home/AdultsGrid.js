@@ -110,12 +110,6 @@ const ADULT_SOLUTIONS = [
 ];
 
 export default function AdultsGrid() {
-  const [activeFilter, setActiveFilter] = useState("all");
-
-  const filteredSolutions = ADULT_SOLUTIONS.filter(
-    (s) => activeFilter === "all" || s.category.toLowerCase().includes(activeFilter.toLowerCase())
-  );
-
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#0B121C] via-[#0D1B2D] to-[#0B121C] py-24 text-white" data-testid="adults-section">
       {/* Background Glows */}
@@ -137,35 +131,13 @@ export default function AdultsGrid() {
               Mobility Solutions
             </p>
             <p className="mt-2 text-xs font-mono text-white/50">Hover over any card to flip — Click to view device details</p>
-
-            {/* Filter Tabs */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-              {[
-                { id: "all", label: "All Solutions" },
-                { id: "prosthetics", label: "Prosthetics" },
-                { id: "orthotics", label: "Orthotics" },
-                { id: "foot", label: "Footwear & Insoles" },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveFilter(tab.id)}
-                  className={`rounded-full px-4.5 py-2 text-xs font-semibold transition-all duration-300 ${
-                    activeFilter === tab.id
-                      ? "btn-gradient-coral text-white shadow-lg shadow-[#0284C7]/30 scale-105"
-                      : "border border-white/15 bg-white/10 text-white/80 hover:bg-white/20 hover:text-white backdrop-blur-md"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
           </div>
         </Reveal>
 
         {/* 3D Flip Card Grid */}
         <motion.div layout className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           <AnimatePresence>
-            {filteredSolutions.map((item, index) => (
+            {ADULT_SOLUTIONS.map((item, index) => (
               <motion.div
                 key={item.id}
                 layout

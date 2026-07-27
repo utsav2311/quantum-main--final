@@ -100,12 +100,6 @@ const KIDS_SOLUTIONS = [
 ];
 
 export default function KidsGrid() {
-  const [activeFilter, setActiveFilter] = useState("all");
-
-  const filteredSolutions = KIDS_SOLUTIONS.filter(
-    (s) => activeFilter === "all" || s.category.toLowerCase().includes(activeFilter.toLowerCase())
-  );
-
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-[#0B4D95] via-[#083A72] to-[#0B121C] py-24 text-white" data-testid="kids-section">
       {/* Background Glows */}
@@ -126,35 +120,13 @@ export default function KidsGrid() {
               Care That Grows With Every Child
             </p>
             <p className="mt-2 text-xs font-mono text-white/60">Hover over any card to flip — Click to view device details</p>
-
-            {/* Filter Tabs */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
-              {[
-                { id: "all", label: "All Pediatric" },
-                { id: "spinal", label: "Spinal & Cranial" },
-                { id: "limb", label: "Lower & Upper Limb" },
-                { id: "foot", label: "Foot Orthotics" },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveFilter(tab.id)}
-                  className={`rounded-full px-4.5 py-2 text-xs font-semibold transition-all duration-300 ${
-                    activeFilter === tab.id
-                      ? "btn-gradient-coral text-white shadow-lg shadow-[#0284C7]/40 scale-105"
-                      : "border border-white/20 bg-white/10 text-white/80 hover:bg-white/20 hover:text-white backdrop-blur-md"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
           </div>
         </Reveal>
 
         {/* 3D Flip Card Grid */}
         <motion.div layout className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
           <AnimatePresence>
-            {filteredSolutions.map((item, index) => (
+            {KIDS_SOLUTIONS.map((item, index) => (
               <motion.div
                 key={item.id}
                 layout
