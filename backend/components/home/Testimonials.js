@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight, Quote, ShieldCheck, Award, Building2, CheckCircle2, Sparkles } from "lucide-react";
-import { Reveal } from "@/components/Reveal";
+import { Reveal, TextReveal } from "@/components/Reveal";
 import { TESTIMONIALS } from "@/lib/site";
 
 const CLINICAL_STATS = [
@@ -16,7 +16,16 @@ const CLINICAL_STATS = [
 export default function Testimonials() {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
+  const containerRef = useRef(null);
   const count = TESTIMONIALS.length;
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const parallaxTop = useTransform(scrollYProgress, [0, 1], [-50, 50]);
+  const parallaxBottom = useTransform(scrollYProgress, [0, 1], [50, -50]);
 
   const navigate = useCallback((dir) => {
     setDirection(dir);
@@ -31,10 +40,10 @@ export default function Testimonials() {
   const current = TESTIMONIALS[index];
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#0B121C] via-[#0D1929] to-[#0B121C] py-20 sm:py-28" data-testid="testimonials">
-      {/* Background Ambient Glow Effects */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-[550px] w-[850px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#0B4D95]/35 via-[#FF6B4A]/15 to-transparent blur-3xl opacity-60" />
-      <div className="pointer-events-none absolute -bottom-40 right-10 h-[450px] w-[450px] rounded-full bg-[#FF6B4A]/20 blur-3xl" />
+    <section ref={containerRef} className="relative overflow-hidden bg-gradient-to-b from-[#0B121C] via-[#0D1929] to-[#0B121C] py-20 sm:py-28" data-testid="testimonials">
+      {/* Background Ambient Glow Effects with Parallax */}
+      <motion.div style={{ y: parallaxTop }} className="pointer-events-none absolute -top-40 left-1/2 h-[550px] w-[850px] -translate-x-1/2 rounded-full bg-gradient-to-b from-[#0B4D95]/35 via-[#FF6B4A]/15 to-transparent blur-3xl opacity-60" />
+      <motion.div style={{ y: parallaxBottom }} className="pointer-events-none absolute -bottom-40 right-10 h-[450px] w-[450px] rounded-full bg-[#FF6B4A]/20 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         

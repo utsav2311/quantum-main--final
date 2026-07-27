@@ -12,7 +12,7 @@ import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/s
 function Logo({ light }) {
   return (
     <Link href="/" data-testid="nav-logo" className="flex items-center gap-3">
-      <img src="/logo.webp" alt={COMPANY.name} loading="eager" className="h-10 w-10 object-contain drop-shadow" />
+      <img src="/logo.png" alt={COMPANY.name} loading="eager" className="h-10 w-10 object-contain drop-shadow" />
       <span className={`flex flex-col font-display leading-tight ${light ? "text-white" : "text-[#0B121C]"}`}>
         <span className="text-lg font-extrabold tracking-tight">{COMPANY.shortName}</span>
         <span className="font-mono text-[9px] font-normal uppercase tracking-[0.2em] text-[#FF6B4A]">Prosthetics &amp; Orthotics</span>

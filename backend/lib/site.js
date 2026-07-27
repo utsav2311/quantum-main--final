@@ -24,6 +24,7 @@ export const COMPANY = {
 };
 
 export const IMAGES = {
+  logo: "/logo.png",
   hero: "/hero-bg.webp",
   heroVideo: "/video.mp4",
   heroVideoMobile: "/video1.mp4",

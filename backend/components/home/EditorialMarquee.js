@@ -7,12 +7,12 @@ const ITEMS = ["Moves You Forward", "Clinical Precision", "Tailored P&O Solution
 
 export default function EditorialMarquee({ dark = false }) {
   return (
-    <div className={`overflow-hidden w-full max-w-full border-y ${dark ? "border-white/10 bg-[#0B121C] text-white" : "border-[#E2E8F0] bg-white text-[#0B121C]"} py-6`} data-testid="marquee">
+    <div className={`overflow-hidden w-full max-w-full border-y ${dark ? "border-white/15 bg-gradient-to-r from-[#0B121C] via-[#0D1929] to-[#0B121C] text-white" : "border-white/80 bg-gradient-to-r from-slate-50 via-blue-50/30 to-slate-50 text-[#0B121C] backdrop-blur-md"} py-6 shadow-xs`} data-testid="marquee">
       <Marquee speed={38} gradient={false} autoFill>
         {ITEMS.map((t, i) => (
           <div key={i} className="flex items-center">
-            <span className="px-8 font-display text-2xl font-bold tracking-tight sm:text-3xl">{t}</span>
-            <span className="h-2 w-2 rounded-full bg-[#FF6B4A]" />
+            <span className="px-8 font-display text-2xl font-extrabold tracking-tight sm:text-3xl">{t}</span>
+            <span className="h-2.5 w-2.5 rounded-full bg-[#FF6B4A] shadow-md shadow-[#FF6B4A]/40" />
           </div>
         ))}
       </Marquee>
