@@ -56,8 +56,6 @@ export default function Hero() {
             <img
               src={IMAGES.hero}
               alt="Prosthetics and Orthotics"
-              width={1920}
-              height={1080}
               className="h-full w-full object-cover object-[center_35%] sm:object-center brightness-90 contrast-[1.05]"
             />
           </video>
@@ -65,10 +63,8 @@ export default function Hero() {
           <img
             src={IMAGES.hero}
             alt="Prosthetics and Orthotics"
-            width={1920}
-            height={1080}
             decoding="async"
-            fetchPriority="high"
+            fetchpriority="high"
             className="h-full w-full object-cover object-center brightness-90 contrast-[1.05]"
           />
         )}

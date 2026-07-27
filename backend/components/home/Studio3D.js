@@ -49,8 +49,6 @@ export default function Studio3D() {
             <img
               src={IMAGES.printing}
               alt="3D printing manufacturing facility"
-              width={800}
-              height={1000}
               loading="lazy"
               decoding="async"
               className="aspect-[4/3] w-full object-cover sm:aspect-[4/5]"

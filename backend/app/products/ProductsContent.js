@@ -58,7 +58,7 @@ export default function ProductsContent() {
           <motion.div key={d.slug} variants={itemVariants}>
             <Link href={`/${d.slug}`} data-testid={`product-card-${d.slug}`} className="group block h-full overflow-hidden rounded-3xl border border-[#E2E8F0] bg-white transition-all hover:-translate-y-1 hover:shadow-xl">
               <div className="relative h-48 overflow-hidden">
-                <img src={IMAGES[d.img]} alt={d.title} width={600} height={400} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                <img src={IMAGES[d.img]} alt={d.title} loading="lazy" decoding="async" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
                 <span className="absolute left-4 top-4 rounded-full bg-white/90 px-3 py-1 font-mono text-[10px] font-semibold uppercase tracking-wider text-[#0B4D95] backdrop-blur">{d.category}</span>
               </div>
 

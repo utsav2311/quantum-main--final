@@ -85,7 +85,7 @@ export default function Footer() {
           {/* Left: brand + contact */}
           <div>
             <div className="flex items-center gap-3 mb-4 group">
-              <img src="/logo.png" alt={COMPANY.name} width={150} height={40} loading="lazy" className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+              <img src="/logo.png" alt={COMPANY.name} loading="lazy" className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
               <span className="font-display text-xl font-extrabold text-white">{COMPANY.name}</span>
             </div>
 
@@ -115,7 +115,7 @@ export default function Footer() {
               {COMPANY.socials.map((s) => {
                 const Icon = socialIcon[s.icon] || Linkedin;
                 return (
-                  <a key={s.icon} href={s.url} aria-label={`Follow ${COMPANY.name} on ${s.icon}`} data-testid={`footer-social-${s.icon}`} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-[#0284C7] hover:text-[#0284C7]">
+                  <a key={s.icon} href={s.url} data-testid={`footer-social-${s.icon}`} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-[#0284C7] hover:text-[#0284C7]">
                     <Icon size={17} />
                   </a>
                 );
