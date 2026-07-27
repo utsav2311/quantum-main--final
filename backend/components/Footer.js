@@ -84,8 +84,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
           {/* Left: brand + contact */}
           <div>
-            <div className="flex items-center gap-3 mb-4">
-              <img src="/logo.png" alt={COMPANY.name} loading="lazy" className="h-12 w-12 object-contain" />
+            <div className="flex items-center gap-3 mb-4 group">
+              <img src="/logo.png" alt={COMPANY.name} loading="lazy" className="h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
               <span className="font-display text-xl font-extrabold text-white">{COMPANY.name}</span>
             </div>
 
