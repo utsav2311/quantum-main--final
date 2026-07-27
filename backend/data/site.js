@@ -16,7 +16,7 @@ export const COMPANY = {
   ],
   socials: [
     { icon: "linkedin", url: "#" },
-    { icon: "instagram", url: "#" },
+    { icon: "instagram", url: "https://www.instagram.com/quantum_uae/" },
     { icon: "facebook", url: "#" },
     { icon: "youtube", url: "#" },
   ],
