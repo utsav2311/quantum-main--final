@@ -85,7 +85,7 @@ export default function Footer() {
           {/* Left: brand + contact */}
           <div>
             <div className="flex items-center gap-3 mb-4 group">
-              <img src="/logo.png" alt={COMPANY.name} loading="lazy" className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
+              <img src="/logo.webp" alt={COMPANY.name} loading="lazy" className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
               <span className="font-display text-xl font-extrabold text-white">{COMPANY.name}</span>
             </div>
 
