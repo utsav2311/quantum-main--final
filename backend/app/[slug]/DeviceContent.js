@@ -58,7 +58,7 @@ export default function DeviceContent({ device, img }) {
             <div className="group relative">
               <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-[#0284C7] to-[#0B4D95] opacity-20 blur-xl transition-all duration-500 group-hover:opacity-40" />
               <div className="relative overflow-hidden rounded-3xl border border-[#E2E8F0] bg-white shadow-xl">
-                <img src={img} alt={device.title} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <img src={img} alt={device.title} width={800} height={600} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div className="absolute bottom-4 right-4 rounded-full border border-white/20 bg-[#0B121C]/80 px-4 py-2 text-xs font-semibold text-white backdrop-blur-md">
                   Digitally Engineered
                 </div>

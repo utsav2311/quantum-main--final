@@ -34,6 +34,8 @@ export default function AboutContent() {
                 <img
                   src={IMAGES.pediatric}
                   alt="Patient care"
+                  width={800}
+                  height={1000}
                   loading="lazy"
                   decoding="async"
                   className="aspect-[4/3] w-full object-cover sm:aspect-[4/5]"

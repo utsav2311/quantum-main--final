@@ -167,6 +167,8 @@ export default function AdultsGrid() {
                         <img
                           src={item.img}
                           alt={item.title}
+                          width={500}
+                          height={400}
                           loading="lazy"
                           decoding="async"
                           className="h-full w-full object-cover transition-transform duration-500"

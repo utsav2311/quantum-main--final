@@ -61,6 +61,8 @@ export default function Welcome() {
               <img
                 src={IMAGES.team}
                 alt="Clinical team at work"
+                width={800}
+                height={600}
                 loading="lazy"
                 decoding="async"
                 className="aspect-[4/3] w-full object-cover sm:aspect-[5/4]"
