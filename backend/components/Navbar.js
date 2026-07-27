@@ -15,7 +15,7 @@ function Logo({ light }) {
       <img src="/logo.png" alt={COMPANY.name} loading="eager" className="h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
       <span className={`flex flex-col font-display leading-tight ${light ? "text-white" : "text-[#0B121C]"}`}>
         <span className="text-lg font-extrabold tracking-tight">{COMPANY.shortName}</span>
-        <span className="font-mono text-[9px] font-normal uppercase tracking-[0.2em] text-[#FF6B4A]">Prosthetics &amp; Orthotics</span>
+        <span className={`font-mono text-[9px] font-semibold uppercase tracking-[0.2em] ${light ? "text-cyan-400" : "text-[#0B4D95]"}`}>Prosthetics &amp; Orthotics</span>
       </span>
     </Link>
   );
