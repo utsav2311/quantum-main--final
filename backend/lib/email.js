@@ -1,3 +1,4 @@
+import { Resend } from "resend";
 import nodemailer from "nodemailer";
 
 const leadTypeTitles = {
@@ -8,35 +9,16 @@ const leadTypeTitles = {
 };
 
 /**
- * Sends Admin Notification & User Confirmation Emails on Lead Form Submission
+ * Sends Admin Notification & User Confirmation Emails via Resend (or SMTP fallback)
  * @param {Object} lead - The lead document created in database
  */
 export async function sendLeadEmails(lead) {
+  const resendApiKey = process.env.RESEND_API_KEY;
   const adminRecipient =
     process.env.NOTIFICATION_EMAIL ||
     process.env.ADMIN_EMAIL ||
     "utsavhoney123@gmail.com";
-
-  const host = process.env.SMTP_HOST;
-  const port = parseInt(process.env.SMTP_PORT || "587", 10);
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-
-  let transporter;
-  if (host && user && pass) {
-    transporter = nodemailer.createTransport({
-      host,
-      port,
-      secure: port === 465,
-      auth: { user, pass },
-      tls: { rejectUnauthorized: false },
-    });
-  } else {
-    console.log("[EMAIL NOTICE] SMTP_HOST and SMTP_USER not set in .env. Lead recorded in database. Add SMTP_HOST & SMTP_PASS to deliver real emails to inbox.");
-    transporter = nodemailer.createTransport({
-      jsonTransport: true,
-    });
-  }
+  const fromEmail = process.env.RESEND_FROM || "onboarding@resend.dev";
 
   const leadTitle = leadTypeTitles[lead.lead_type] || "New Lead Submission";
 
@@ -50,7 +32,7 @@ export async function sendLeadEmails(lead) {
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8fafc; color: #0f172a; margin: 0; padding: 20px; }
         .container { max-width: 600px; margin: 0 auto; background: #ffffff; border-radius: 16px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
         .header { background: linear-gradient(135deg, #0b121c 0%, #0b4d95 100%); padding: 30px; text-align: center; color: #ffffff; }
-        .header h2 { margin: 0; font-size: 22px; font-weight: 800; tracking-tight; }
+        .header h2 { margin: 0; font-size: 22px; font-weight: 800; }
         .header p { margin: 6px 0 0 0; color: #38bdf8; font-size: 13px; font-family: monospace; text-transform: uppercase; letter-spacing: 2px; }
         .body { padding: 30px; }
         .badge { display: inline-block; background: #e0f2fe; color: #0284c7; padding: 6px 14px; border-radius: 9999px; font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 20px; }
@@ -65,7 +47,7 @@ export async function sendLeadEmails(lead) {
     <body>
       <div class="container">
         <div class="header">
-          <h2>Quantum Medical Notification</h2>
+          <h2>Quantum Medical Lead System</h2>
           <p>${leadTitle}</p>
         </div>
         <div class="body">
@@ -189,24 +171,71 @@ export async function sendLeadEmails(lead) {
     </html>
   `;
 
+  // --- Dispatch via Resend API ---
+  if (resendApiKey) {
+    try {
+      const resend = new Resend(resendApiKey);
+
+      const adminResend = await resend.emails.send({
+        from: `Quantum Lead System <${fromEmail}>`,
+        to: [adminRecipient],
+        subject: `[NEW LEAD] ${leadTitle} - ${lead.name}`,
+        html: adminHtml,
+      });
+
+      console.log(`[RESEND DISPATCH SUCCESS] Admin notification sent to ${adminRecipient}:`, adminResend);
+
+      let userResend = null;
+      if (lead.email) {
+        userResend = await resend.emails.send({
+          from: `Quantum Medical & Prosthetics <${fromEmail}>`,
+          to: [lead.email],
+          subject: `We've received your submission — Quantum Medical`,
+          html: userHtml,
+        }).catch((e) => console.log(`[RESEND USER NOTICE] User confirmation send note: ${e.message}`));
+      }
+
+      return { success: true, adminResend, userResend };
+    } catch (resendErr) {
+      console.error("[RESEND API ERROR] Resend dispatch failed, attempting SMTP fallback:", resendErr.message);
+    }
+  }
+
+  // --- Fallback: Nodemailer SMTP ---
+  const host = process.env.SMTP_HOST;
+  const port = parseInt(process.env.SMTP_PORT || "587", 10);
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  let transporter;
+  if (host && user && pass) {
+    transporter = nodemailer.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: { user, pass },
+      tls: { rejectUnauthorized: false },
+    });
+  } else {
+    transporter = nodemailer.createTransport({ jsonTransport: true });
+  }
+
   try {
     const adminResult = await transporter.sendMail({
-      from: `"Quantum Lead System" <${process.env.SMTP_FROM || user || "noreply@quantummedicals.com"}>`,
+      from: `"Quantum Lead System" <${process.env.SMTP_FROM || user || fromEmail}>`,
       to: adminRecipient,
       subject: `[NEW LEAD] ${leadTitle} - ${lead.name}`,
       html: adminHtml,
     });
 
     const userResult = await transporter.sendMail({
-      from: `"Quantum Medical & Prosthetics" <${process.env.SMTP_FROM || user || "info@quantummedicals.com"}>`,
+      from: `"Quantum Medical & Prosthetics" <${process.env.SMTP_FROM || user || fromEmail}>`,
       to: lead.email,
       subject: `We've received your submission — Quantum Medical`,
       html: userHtml,
     });
 
-    console.log(`[EMAIL DISPATCH] Notification sent to admin: ${adminRecipient}`);
-    console.log(`[EMAIL DISPATCH] Confirmation sent to user: ${lead.email}`);
-
+    console.log(`[SMTP DISPATCH SUCCESS] Notification sent to admin: ${adminRecipient}`);
     return { success: true, adminResult, userResult };
   } catch (error) {
     console.error("[EMAIL ERROR] Failed to dispatch lead emails:", error);
