@@ -17,7 +17,7 @@ export default function AboutContent() {
   return (
     <>
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
+        <div className="grid grid-cols-1 gap-10 items-center lg:grid-cols-2 lg:gap-14">
           <Reveal className="order-1">
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0B4D95]">Our Story</p>
             <h2 className="mt-3 font-display text-3xl font-extrabold leading-tight text-[#0B121C] sm:text-4xl">Where clinical intent meets manufacturing precision.</h2>
@@ -36,7 +36,7 @@ export default function AboutContent() {
                   alt="Patient care"
                   loading="lazy"
                   decoding="async"
-                  className="aspect-[4/3] w-full object-cover sm:aspect-[4/5]"
+                  className="aspect-[4/3] w-full max-h-[420px] object-cover sm:aspect-[4/3] lg:max-h-[440px]"
                 />
               </div>
             </div>
