@@ -1,6 +1,7 @@
 import { getDb, docToLead } from '../../../lib/db.js';
 import { checkRateLimit } from '../../../lib/rateLimit.js';
 import { corsHeaders, handleOptions } from '../../../lib/cors.js';
+import { sendLeadEmails } from '../../../lib/email.js';
 
 export async function OPTIONS() {
   return handleOptions();
@@ -69,7 +70,11 @@ export async function POST(req) {
   doc._id = result.insertedId;
 
   const lead = docToLead(doc);
-  console.log(`[EMAIL] Confirmation -> ${lead.email} | Notification of '${lead.lead_type}' lead: ${lead.name}`);
+  
+  // Asynchronously dispatch admin notification & user confirmation email
+  sendLeadEmails(lead).catch((err) => {
+    console.error(`[EMAIL DISPATCH ERROR] Failed to send email for lead ${lead.id}:`, err);
+  });
 
   return Response.json(lead, { status: 201, headers: corsHeaders() });
 }
