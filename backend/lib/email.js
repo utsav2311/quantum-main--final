@@ -1,29 +1,5 @@
 import nodemailer from "nodemailer";
 
-function createTransporter() {
-  const host = process.env.SMTP_HOST;
-  const port = parseInt(process.env.SMTP_PORT || "587", 10);
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-
-  if (host && user && pass) {
-    return nodemailer.createTransport({
-      host,
-      port,
-      secure: port === 465,
-      auth: { user, pass },
-      tls: { rejectUnauthorized: false },
-    });
-  }
-
-  // Fallback dev transporter (logs email transmission to console)
-  return nodemailer.createTransport({
-    jsonTransport: true,
-  });
-}
-
-const transporter = createTransporter();
-
 const leadTypeTitles = {
   partner: "🏥 New Hospital / Clinic Partner Inquiry",
   general: "💬 New General Website Inquiry",
@@ -40,6 +16,27 @@ export async function sendLeadEmails(lead) {
     process.env.NOTIFICATION_EMAIL ||
     process.env.ADMIN_EMAIL ||
     "utsavhoney123@gmail.com";
+
+  const host = process.env.SMTP_HOST;
+  const port = parseInt(process.env.SMTP_PORT || "587", 10);
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  let transporter;
+  if (host && user && pass) {
+    transporter = nodemailer.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: { user, pass },
+      tls: { rejectUnauthorized: false },
+    });
+  } else {
+    console.log("[EMAIL NOTICE] SMTP_HOST and SMTP_USER not set in .env. Lead recorded in database. Add SMTP_HOST & SMTP_PASS to deliver real emails to inbox.");
+    transporter = nodemailer.createTransport({
+      jsonTransport: true,
+    });
+  }
 
   const leadTitle = leadTypeTitles[lead.lead_type] || "New Lead Submission";
 
@@ -184,7 +181,7 @@ export async function sendLeadEmails(lead) {
         </div>
         <div class="footer">
           Need immediate support? Contact our clinical team at<br>
-          <a href="mailto:info@quantumeme.com">info@quantumeme.com</a> | <a href="https://wa.me/971501234567">WhatsApp Support</a>
+          <a href="mailto:info@quantumeme.com">info@quantumeme.com</a>
           <p style="margin-top: 12px; font-size: 11px; color: #94a3b8;">© ${new Date().getFullYear()} Quantum Medical & Prosthetics. All rights reserved.</p>
         </div>
       </div>
@@ -193,24 +190,22 @@ export async function sendLeadEmails(lead) {
   `;
 
   try {
-    // 1. Send Admin Email Notification
     const adminResult = await transporter.sendMail({
-      from: `"Quantum Lead System" <${process.env.SMTP_FROM || "noreply@quantummedicals.com"}>`,
+      from: `"Quantum Lead System" <${process.env.SMTP_FROM || user || "noreply@quantummedicals.com"}>`,
       to: adminRecipient,
       subject: `[NEW LEAD] ${leadTitle} - ${lead.name}`,
       html: adminHtml,
     });
 
-    // 2. Send User Confirmation Email
     const userResult = await transporter.sendMail({
-      from: `"Quantum Medical & Prosthetics" <${process.env.SMTP_FROM || "info@quantummedicals.com"}>`,
+      from: `"Quantum Medical & Prosthetics" <${process.env.SMTP_FROM || user || "info@quantummedicals.com"}>`,
       to: lead.email,
       subject: `We've received your submission — Quantum Medical`,
       html: userHtml,
     });
 
-    console.log(`[EMAIL DISPATCH] Admin notification sent to ${adminRecipient}`);
-    console.log(`[EMAIL DISPATCH] Confirmation email sent to customer ${lead.email}`);
+    console.log(`[EMAIL DISPATCH] Notification sent to admin: ${adminRecipient}`);
+    console.log(`[EMAIL DISPATCH] Confirmation sent to user: ${lead.email}`);
 
     return { success: true, adminResult, userResult };
   } catch (error) {
