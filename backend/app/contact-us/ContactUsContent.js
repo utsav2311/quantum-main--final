@@ -123,11 +123,10 @@ export default function ContactUsContent() {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14519.865768270104!2d54.3644!3d24.4882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5e66160352a975%3A0x6b7df08b417e9154!2sAl%20Danah%20-%20Zone%201%20-%20Abu%20Dhabi%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2s!4v1710000000000!5m2!1sen!2s"
               width="100%"
               height="100%"
-              style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="absolute inset-0 h-full w-full filter contrast-[1.02]"
+              className="absolute inset-0 h-full w-full border-0 filter contrast-[1.02]"
             />
           </div>
         </div>

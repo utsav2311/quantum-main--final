@@ -152,16 +152,10 @@ export default function AdultsGrid() {
                   data-testid={`adult-card-${item.id}`}
                   className="group block [perspective:1000px] relative h-64 w-full cursor-pointer"
                 >
-                  <div
-                    className="relative h-full w-full rounded-2xl transition-transform duration-700 ease-in-out transform-3d group-hover:[transform:rotateY(180deg)] group-hover:[--webkit-transform:rotateY(180deg)] shadow-md group-hover:shadow-xl group-hover:shadow-[#0284C7]/20"
-                    style={{ transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" }}
-                  >
+                  <div className="relative h-full w-full rounded-2xl transition-transform duration-700 ease-in-out preserve-3d group-hover:[transform:rotateY(180deg)] shadow-md group-hover:shadow-xl group-hover:shadow-[#0284C7]/20">
                     
                     {/* FRONT SIDE */}
-                    <div
-                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121B28] p-4 backface-hidden transition-opacity duration-300 group-hover:opacity-0 group-hover:pointer-events-none"
-                      style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" }}
-                    >
+                    <div className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121B28] p-4 backface-hidden transition-opacity duration-300 group-hover:opacity-0 group-hover:pointer-events-none">
                       {/* Background Image */}
                       <div className="absolute inset-0 overflow-hidden">
                         <img
@@ -199,15 +193,7 @@ export default function AdultsGrid() {
                     </div>
 
                     {/* BACK SIDE (Flipped) */}
-                    <div
-                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#0284C7]/50 bg-[#0B121C] p-4 backface-hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 shadow-xl shadow-[#0284C7]/10"
-                      style={{
-                        WebkitBackfaceVisibility: "hidden",
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                        WebkitTransform: "rotateY(180deg)",
-                      }}
-                    >
+                    <div className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#0284C7]/50 bg-[#0B121C] p-4 card-back-flip opacity-0 transition-opacity duration-300 group-hover:opacity-100 shadow-xl shadow-[#0284C7]/10">
                       <div>
                         <div className="flex items-center justify-between border-b border-white/10 pb-2">
                           <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-[#0284C7]">

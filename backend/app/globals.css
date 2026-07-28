@@ -36,9 +36,20 @@ html, body {
   backface-visibility: hidden !important;
 }
 
-.transform-3d {
+.transform-3d, .preserve-3d {
   -webkit-transform-style: preserve-3d !important;
   transform-style: preserve-3d !important;
+}
+
+.card-back-flip {
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+  -webkit-transform: rotateY(180deg) !important;
+  transform: rotateY(180deg) !important;
+}
+
+.spring-transform {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Global Smooth Interactive Physics */
