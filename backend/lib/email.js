@@ -185,15 +185,17 @@ export async function sendLeadEmails(lead) {
 
       console.log(`[RESEND DISPATCH SUCCESS] Admin notification sent to ${adminRecipient}:`, adminResend);
 
-      let userResend = null;
-      if (lead.email) {
-        userResend = await resend.emails.send({
-          from: `Quantum Medical & Prosthetics <${fromEmail}>`,
-          to: [lead.email],
-          subject: `We've received your submission — Quantum Medical`,
-          html: userHtml,
-        }).catch((e) => console.log(`[RESEND USER NOTICE] User confirmation send note: ${e.message}`));
-      }
+      // Note: Resend's free test domain (onboarding@resend.dev) only permits sending to account owner email (utsavhoney123@gmail.com)
+      const userRecipient = (fromEmail.includes("onboarding@resend.dev") && lead.email !== adminRecipient)
+        ? adminRecipient
+        : lead.email;
+
+      const userResend = await resend.emails.send({
+        from: `Quantum Medical & Prosthetics <${fromEmail}>`,
+        to: [userRecipient],
+        subject: `We've received your submission — Quantum Medical`,
+        html: userHtml,
+      }).catch((e) => console.log(`[RESEND USER NOTICE] User confirmation note: ${e.message}`));
 
       return { success: true, adminResend, userResend };
     } catch (resendErr) {
