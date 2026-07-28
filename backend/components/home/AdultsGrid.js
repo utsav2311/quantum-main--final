@@ -14,7 +14,7 @@ const ADULT_SOLUTIONS = [
     category: "Orthotics",
     desc: "Precision spinal orthoses providing targeted stabilization, posture realignment, and post-operative protection.",
     highlights: ["3D Scan Alignment", "Radiolucent Shells"],
-    img: "/spine-back-braces.png",
+    img: "/spine-back-braces.webp",
     to: "/spine-back-braces",
   },
   {
@@ -34,7 +34,7 @@ const ADULT_SOLUTIONS = [
     category: "Prosthetics",
     desc: "Advanced microprocessor knees and energy-storing carbon fiber feet engineered for active adult gait.",
     highlights: ["Microprocessor Knee", "Carbon Energy Return"],
-    img: "/lower-limb-prosthetics.png",
+    img: "/lower-limb-prosthetics.webp",
     to: "/lower-limb-prosthetics",
   },
   {
@@ -44,7 +44,7 @@ const ADULT_SOLUTIONS = [
     category: "Orthotics",
     desc: "Bionic and mechanical arm orthoses restoring hand grip, wrist stability, and shoulder function.",
     highlights: ["Myoelectric Sensors", "Precision Grip Control"],
-    img: "/upper-limb-prosthetics.png",
+    img: "/upper-limb-prosthetics.webp",
     to: "/upper-limb-orthotics",
   },
   {
@@ -84,7 +84,7 @@ const ADULT_SOLUTIONS = [
     category: "Foot Orthotics",
     desc: "3D GAIT-scanned orthotic insoles designed for biomechanical foot correction and arch distribution.",
     highlights: ["3D Pressure Mapping", "Multi-Density Foam"],
-    img: "/custom-insoles.png",
+    img: "/custom-insoles.webp",
     to: "/custom-orthotic-insoles-footwear",
   },
   {
@@ -94,7 +94,7 @@ const ADULT_SOLUTIONS = [
     category: "Prosthetics",
     desc: "CAD/CAM customized vacuum sockets and medical-grade silicone liners for total contact comfort.",
     highlights: ["Vacuum Lock System", "Pressure Relief Zones"],
-    img: "/sockets-liners.png",
+    img: "/sockets-liners.webp",
     to: "/sockets-liners",
   },
   {

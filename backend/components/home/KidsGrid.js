@@ -44,7 +44,7 @@ const KIDS_SOLUTIONS = [
     category: "Lower Limb",
     desc: "Ankle-foot orthoses providing gentle alignment, drop-foot correction, and stability during play.",
     highlights: ["Custom Articulated", "Playful Graphics"],
-    img: "/lower-limb-prosthetics.png",
+    img: "/lower-limb-prosthetics.webp",
     to: "/lower-limb-orthotics#afo",
   },
   {
@@ -64,7 +64,7 @@ const KIDS_SOLUTIONS = [
     category: "Foot Orthotics",
     desc: "Dynamic arch & heel support insoles helping correct pediatric flatfoot and in-toeing gait patterns.",
     highlights: ["Flexible Arch Support", "Multi-Density Core"],
-    img: "/custom-insoles.png",
+    img: "/custom-insoles.webp",
     to: "/custom-orthotic-insoles-footwear",
   },
   {
@@ -84,7 +84,7 @@ const KIDS_SOLUTIONS = [
     category: "Foot Orthotics",
     desc: "Deep calcanean heel cup orthoses offering rigid triplanar control for severe flexible flatfoot.",
     highlights: ["Triplanar Control", "Rigid Calcanean Cup"],
-    img: "/sockets-liners.png",
+    img: "/sockets-liners.webp",
     to: "/lower-limb-orthotics#ucbl",
   },
   {
