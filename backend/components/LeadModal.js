@@ -45,7 +45,7 @@ export default function LeadModal() {
       setErrors({});
       close();
     } catch (err) {
-      toast.error(formatApiError(err.response?.data?.detail) || "Submission failed");
+      toast.error(formatApiError(err));
     } finally {
       setLoading(false);
     }

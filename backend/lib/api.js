@@ -35,12 +35,15 @@ export const api = {
   delete: (url, config = {}) => request(url, { method: "DELETE", ...config }),
 };
 
-export function formatApiError(detail) {
-  if (detail == null) return "Something went wrong. Please try again.";
+export function formatApiError(err) {
+  if (!err) return "Unable to process request. Please try again.";
+  if (typeof err === "string") return err;
+  const detail = err.response?.data?.detail || err.response?.data || err.detail || err.message;
+  if (!detail) return "An unexpected error occurred. Please try again.";
   if (typeof detail === "string") return detail;
   if (Array.isArray(detail))
     return detail
-      .map((e) => (e && typeof e.msg === "string" ? e.msg : JSON.stringify(e)))
+      .map((e) => (e && typeof e.msg === "string" ? e.msg : typeof e === "string" ? e : JSON.stringify(e)))
       .filter(Boolean)
       .join(" ");
   if (detail && typeof detail.msg === "string") return detail.msg;
