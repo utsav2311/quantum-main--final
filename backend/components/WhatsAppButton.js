@@ -4,7 +4,11 @@ import { motion } from "framer-motion";
 import { waLink } from "@/lib/site";
 
 
+import { usePathname } from "next/navigation";
+
 export default function WhatsAppButton() {
+  const pathname = usePathname();
+  if (pathname === "/admin") return null;
   return (
     <motion.a
       href={waLink()}

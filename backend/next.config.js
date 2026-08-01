@@ -39,6 +39,13 @@ const nextConfig = {
       },
     ];
   },
+  async redirects() {
+    return [
+      { source: "/repair-maintenance", destination: "/contact-us", permanent: true },
+      { source: "/custom-orthotics", destination: "/lower-limb-orthotics", permanent: true },
+      { source: "/advanced-prosthetics-orthotics", destination: "/products", permanent: true },
+    ];
+  },
 };
 
 module.exports = nextConfig;

@@ -24,7 +24,7 @@ const ADULT_SOLUTIONS = [
     category: "Prosthetics",
     desc: "Custom-molded aesthetic silicone prosthetics matching patient skin tone, texture, and individual anatomy.",
     highlights: ["Skin-Tone Matched", "Flexible Silicone"],
-    img: "https://images.pexels.com/photos/3845625/pexels-photo-3845625.jpeg?auto=format&fit=crop&w=800&q=80",
+    img: "/images/clinical_lab.webp",
     to: "/silicone-restoration",
   },
   {
@@ -54,7 +54,7 @@ const ADULT_SOLUTIONS = [
     category: "Orthotics",
     desc: "Dynamic hip joint stabilization reducing joint strain, supporting post-surgical recovery, and aiding OA management.",
     highlights: ["Range of Motion Lock", "Lightweight Frame"],
-    img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+    img: "/images/medical_care.webp",
     to: "/lower-limb-orthotics#hip-braces",
   },
   {
@@ -64,7 +64,7 @@ const ADULT_SOLUTIONS = [
     category: "Orthotics",
     desc: "Custom OA and ligament braces providing unweighting relief, tracking correction, and high stability.",
     highlights: ["OA Unloader Tech", "Custom Molded Fit"],
-    img: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80",
+    img: "/images/rehab_therapy.webp",
     to: "/lower-limb-orthotics#knee-braces",
   },
   {
@@ -74,7 +74,7 @@ const ADULT_SOLUTIONS = [
     category: "Orthotics",
     desc: "Thoracic correction braces engineered for chest wall deformities and post-trauma spinal support.",
     highlights: ["Pectus Correction", "Low-Profile Design"],
-    img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+    img: "/images/clinical_lab.webp",
     to: "/spine-back-braces#chest",
   },
   {
@@ -104,7 +104,7 @@ const ADULT_SOLUTIONS = [
     category: "Mobility",
     desc: "Ergonomic 3D-molded postural seating cushions preventing pressure sores and enhancing alignment.",
     highlights: ["Pressure Relief Matrix", "CAD/CAM Carved"],
-    img: "https://images.unsplash.com/photo-1772566022500-353de883e9e4?auto=format&fit=crop&w=800&q=80",
+    img: "/images/3d_printing.webp",
     to: "/custom-seating",
   },
 ];

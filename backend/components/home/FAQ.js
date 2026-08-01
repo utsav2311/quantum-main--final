@@ -67,26 +67,28 @@ export default function FAQ() {
                   <motion.div
                     initial={false}
                     animate={{
-                      borderColor: isOpen ? "#0284C7" : "rgba(255, 255, 255, 0.8)",
+                      borderColor: isOpen ? "#0284C7" : "rgba(226, 232, 240, 0.8)",
+                      backgroundColor: isOpen ? "rgba(255, 255, 255, 0.98)" : "rgba(255, 255, 255, 0.85)",
                     }}
-                    className={`group overflow-hidden rounded-2xl border bg-white/75 backdrop-blur-xl transition-all duration-300 ${
+                    transition={{ duration: 0.25 }}
+                    className={`group overflow-hidden rounded-2xl border backdrop-blur-md transition-all duration-300 ${
                       isOpen
-                        ? "shadow-xl shadow-[#0284C7]/10 border-l-4 border-l-[#0284C7] bg-white/90"
-                        : "hover:border-[#0284C7]/40 hover:bg-white/85 hover:shadow-lg"
+                        ? "shadow-xl shadow-[#0284C7]/10 border-l-4 border-l-[#0284C7]"
+                        : "hover:border-[#0284C7]/50 hover:bg-white hover:shadow-xl hover:shadow-[#0284C7]/10"
                     }`}
                   >
                     <button
                       type="button"
                       onClick={() => toggle(i)}
                       data-testid={`faq-trigger-${i}`}
-                      className="flex w-full items-center justify-between gap-4 p-6 text-left focus:outline-none"
+                      className="flex w-full items-center justify-between gap-4 p-6 text-left focus:outline-none cursor-pointer select-none"
                     >
                       <div className="flex items-center gap-4">
                         <span
                           className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-xl font-mono text-xs font-bold transition-all duration-300 ${
                             isOpen
-                              ? "bg-gradient-to-br from-[#0284C7] to-[#0052CC] text-white shadow-md shadow-[#0284C7]/30"
-                              : "bg-slate-100 text-[#0B121C] group-hover:bg-[#0284C7]/10 group-hover:text-[#0284C7]"
+                              ? "bg-gradient-to-br from-[#0284C7] to-[#0052CC] text-white shadow-md shadow-[#0284C7]/30 scale-105"
+                              : "bg-slate-100 text-[#0B121C] group-hover:bg-[#0284C7]/15 group-hover:text-[#0284C7] group-hover:scale-105"
                           }`}
                         >
                           {String(i + 1).padStart(2, "0")}
@@ -101,12 +103,12 @@ export default function FAQ() {
                       </div>
 
                       <motion.div
-                        animate={{ rotate: isOpen ? 180 : 0 }}
-                        transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors ${
+                        animate={{ rotate: isOpen ? 180 : 0, scale: isOpen ? 1.05 : 1 }}
+                        transition={{ type: "spring", stiffness: 350, damping: 22 }}
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
                           isOpen
                             ? "bg-gradient-to-br from-[#0284C7] to-[#0052CC] text-white shadow-sm"
-                            : "bg-slate-100 text-[#4A5568] group-hover:bg-[#0284C7]/10 group-hover:text-[#0284C7]"
+                            : "bg-slate-100 text-[#4A5568] group-hover:bg-[#0284C7]/15 group-hover:text-[#0284C7] group-hover:scale-105"
                         }`}
                       >
                         {isOpen ? <Minus size={18} /> : <Plus size={18} />}
@@ -117,12 +119,12 @@ export default function FAQ() {
                       {isOpen && (
                         <motion.div
                           key="content"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
+                          initial={{ height: 0, opacity: 0, y: -6 }}
+                          animate={{ height: "auto", opacity: 1, y: 0 }}
+                          exit={{ height: 0, opacity: 0, y: -6 }}
+                          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                         >
-                          <div className="border-t border-slate-100/80 px-6 pb-6 pt-4">
+                          <div className="border-t border-slate-100 px-6 pb-6 pt-4">
                             <p className="text-[15px] leading-relaxed text-slate-600">{f.a}</p>
                           </div>
                         </motion.div>

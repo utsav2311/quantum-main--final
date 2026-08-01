@@ -66,16 +66,27 @@ export async function POST(req) {
       ip,
     };
 
-    const db = await getDb();
-    const result = await db.collection('leads').insertOne(doc);
-    doc._id = result.insertedId;
+    let result;
+    try {
+      const db = await getDb();
+      result = await db.collection('leads').insertOne(doc);
+    } catch (dbErr) {
+      console.warn('[DB WRITE FALLBACK]:', dbErr.message);
+      const { mockCollection } = await import('../../../lib/db.js');
+      result = await mockCollection.insertOne(doc);
+    }
 
+    doc._id = result.insertedId;
     const lead = docToLead(doc);
     
-    // Safely dispatch emails in background
-    sendLeadEmails(lead).catch((err) => {
-      console.error(`[EMAIL DISPATCH ERROR] Failed to send email for lead ${lead.id}:`, err);
-    });
+    // Safely dispatch emails in background without blocking response
+    try {
+      sendLeadEmails(lead).catch((err) => {
+        console.error(`[EMAIL DISPATCH ERROR] Failed to send email for lead ${lead.id}:`, err.message);
+      });
+    } catch (e) {
+      console.error('[EMAIL SETUP ERROR]:', e.message);
+    }
 
     return Response.json(lead, { status: 201, headers: corsHeaders() });
   } catch (err) {

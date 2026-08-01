@@ -30,6 +30,27 @@ html, body {
   letter-spacing: -0.01em;
 }
 
+/* Official Lenis Smooth Scroll Engine */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 /* Cross-Browser 3D Card Flip & WebKit Fixes */
 .backface-hidden {
   -webkit-backface-visibility: hidden !important;

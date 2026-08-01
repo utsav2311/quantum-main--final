@@ -29,6 +29,10 @@ export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
 
+  if (pathname === "/admin") {
+    return null;
+  }
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     onScroll();
@@ -45,14 +49,19 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-[80] transition-all duration-300 ${
-        scrolled ? "border-b border-[#E2E8F0]/80 bg-white/80 backdrop-blur-xl" : "bg-transparent"
-      }`}
+      className="fixed inset-x-0 top-0 z-[80] transition-all duration-500 py-3 px-4 sm:px-6 lg:px-8 pointer-events-none"
       data-testid="navbar"
     >
-      <nav className="mx-auto flex h-[70px] max-w-7xl items-center justify-between px-5 lg:px-8">
+      <nav
+        className={`pointer-events-auto mx-auto flex h-[64px] max-w-7xl items-center justify-between px-6 rounded-full transition-all duration-500 ${
+          scrolled
+            ? "border border-white/60 bg-white/80 backdrop-blur-2xl shadow-xl shadow-[#0284C7]/10 ring-1 ring-slate-900/5 text-slate-900"
+            : "border border-white/20 bg-[#0B121C]/60 backdrop-blur-xl shadow-lg shadow-black/10 text-white"
+        }`}
+      >
         <Logo light={!scrolled} />
 
+        {/* Desktop Nav Links */}
         <div className="hidden items-center gap-1 xl:flex">
           {NAV.map((item) => (
             <div
@@ -64,29 +73,41 @@ export default function Navbar() {
               <button
                 data-testid={`nav-${item.label.toLowerCase().replace(/[\s&]+/g, "-")}`}
                 onClick={() => handleNav(item.to)}
-                className={`flex items-center gap-1 rounded-full px-3.5 py-2 text-sm font-medium transition-colors hover:text-[#0284C7] ${scrolled ? "text-[#0B121C]" : "text-white/90"}`}
+                className={`relative flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                  scrolled
+                    ? "text-slate-800 hover:text-[#0284C7] hover:bg-slate-100/70"
+                    : "text-white/90 hover:text-white hover:bg-white/10"
+                }`}
               >
-                {item.label}
-                {item.children && <ChevronDown size={14} className={scrolled ? "text-[#94A3B8]" : "text-white/60"} />}
+                <span>{item.label}</span>
+                {item.children && (
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform duration-300 ${
+                      openMenu === item.label ? "rotate-180 text-[#0284C7]" : scrolled ? "text-slate-400" : "text-white/60"
+                    }`}
+                  />
+                )}
               </button>
+
               <AnimatePresence>
                 {item.children && openMenu === item.label && (
                   <motion.div
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 8 }}
-                    transition={{ duration: 0.18 }}
-                    className="absolute left-0 top-full w-64 pt-2"
+                    initial={{ opacity: 0, y: 10, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="absolute left-0 top-full w-64 pt-3"
                   >
-                    <div className="overflow-hidden rounded-2xl border border-[#E2E8F0] bg-white p-1.5 shadow-xl shadow-[#0B121C]/5">
+                    <div className="overflow-hidden rounded-2xl border border-white/40 bg-white/90 p-2 shadow-2xl shadow-slate-900/15 backdrop-blur-2xl ring-1 ring-black/5">
                       {item.children.map((c) => (
                         <Link
                           key={c.to}
                           href={c.to}
                           data-testid={`nav-sub-${c.to.replace(/\//g, "")}`}
-                          className="block rounded-xl px-3.5 py-2.5 text-sm text-[#4A5568] transition-colors hover:bg-[#F8F9FA] hover:text-[#0B4D95]"
+                          className="flex items-center justify-between rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 transition-all duration-200 hover:bg-[#0284C7]/10 hover:text-[#0284C7]"
                         >
-                          {c.label}
+                          <span>{c.label}</span>
                         </Link>
                       ))}
                     </div>
@@ -97,25 +118,35 @@ export default function Navbar() {
           ))}
         </div>
 
+        {/* CTA Button & Mobile Trigger */}
         <div className="flex items-center gap-3">
-          <button
+          <motion.button
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
             onClick={() => open("partner")}
             data-testid="nav-partner-btn"
-            className="hidden rounded-full bg-[#0284C7] px-5 py-2.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] sm:block"
+            className="hidden rounded-full bg-gradient-to-r from-[#0284C7] via-[#0052CC] to-[#0284C7] bg-size-200 px-6 py-2.5 font-display text-sm font-semibold text-white shadow-lg shadow-[#0284C7]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[#0284C7]/40 sm:block cursor-pointer"
           >
             Partner With Us
-          </button>
+          </motion.button>
 
-          {/* Mobile */}
+          {/* Mobile Menu */}
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
-              <button data-testid="mobile-menu-btn" className={`rounded-full border p-2.5 xl:hidden ${scrolled ? "border-[#E2E8F0] bg-white" : "border-white/25 bg-white/10 backdrop-blur"}`}>
-                <Menu size={20} className={scrolled ? "text-[#0B121C]" : "text-white"} />
+              <button
+                data-testid="mobile-menu-btn"
+                className={`rounded-full border p-2.5 transition-all duration-300 xl:hidden ${
+                  scrolled
+                    ? "border-slate-200 bg-white/90 text-slate-900 shadow-sm"
+                    : "border-white/20 bg-white/10 text-white backdrop-blur-md"
+                }`}
+              >
+                <Menu size={20} />
               </button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-[88vw] max-w-sm overflow-y-auto p-0 z-[100]">
+            <SheetContent side="right" className="w-[88vw] max-w-sm border-l border-white/20 bg-white/95 backdrop-blur-2xl p-0 z-[100]">
               <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
-              <div className="flex items-center justify-between border-b border-[#E2E8F0] px-5 py-4 pr-14">
+              <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 pr-14">
                 <Logo light={false} />
               </div>
               <div className="px-4 py-4">
@@ -125,7 +156,7 @@ export default function Navbar() {
                 <button
                   onClick={() => { setMobileOpen(false); open("partner"); }}
                   data-testid="mobile-partner-btn"
-                  className="mt-4 w-full rounded-full bg-[#0284C7] py-3 font-display text-sm font-semibold text-white"
+                  className="mt-6 w-full rounded-full bg-gradient-to-r from-[#0284C7] to-[#0052CC] py-3.5 font-display text-sm font-semibold text-white shadow-lg shadow-[#0284C7]/30"
                 >
                   Partner With Us
                 </button>

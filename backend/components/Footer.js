@@ -51,7 +51,11 @@ const socialIcon = { linkedin: LinkedinIcon, instagram: InstagramIcon, facebook:
 
 
 
+import { usePathname } from "next/navigation";
+
 export default function Footer() {
+  const pathname = usePathname();
+  if (pathname === "/admin") return null;
   const { open } = useLeadModal();
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
@@ -152,6 +156,7 @@ export default function Footer() {
           <p>© {new Date().getFullYear()} {COMPANY.name}. All rights reserved.</p>
           <div className="flex items-center gap-5">
             <Link href="/terms" data-testid="footer-terms" className="transition-colors hover:text-white">Terms &amp; Conditions</Link>
+            <a href="/admin" target="_blank" rel="noopener noreferrer" data-testid="footer-admin" className="transition-colors hover:text-white">Admin Portal</a>
           </div>
 
         </div>

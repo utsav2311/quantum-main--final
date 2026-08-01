@@ -16,9 +16,30 @@ export const metadata = {
   description: "Tailored prosthetic & orthotic solutions for hospitals and clinics — engineered with GAIT analysis, CAD/CAM design and in-house 3D printing.",
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "MedicalBusiness",
+  "name": "Quantum Medical",
+  "image": "https://quantumuae.ae/logo.webp",
+  "@id": "https://quantumuae.ae",
+  "url": "https://quantumuae.ae",
+  "telephone": "+971501354607",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Al Danah, Zone 1",
+    "addressLocality": "Abu Dhabi",
+    "addressCountry": "AE"
+  },
+  "description": "Leading prosthetic & orthotic provider in Abu Dhabi, UAE — custom artificial limbs, 3D printed orthotics, GAIT analysis, and device repair."
+};
+
 export default function HomePage() {
   return (
     <div data-testid="home-page">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Hero />
       <EditorialMarquee />
       <VisionMission />

@@ -14,7 +14,7 @@ const KIDS_SOLUTIONS = [
     category: "Spinal Care",
     desc: "Ultra-lightweight 3D CAD/CAM scoliosis braces for progressive spinal curve correction in growing children.",
     highlights: ["Night & Day Wear", "3D Digital Scan"],
-    img: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80",
+    img: "/images/pediatric_orthotics.webp",
     to: "/scoliosis-bracing",
   },
   {
@@ -24,7 +24,7 @@ const KIDS_SOLUTIONS = [
     category: "Head & Skull",
     desc: "Gentle remolding cranial orthoses correcting infant plagiocephaly with continuous digital progress tracking.",
     highlights: ["Infant-Safe Polymer", "Digital Tracking"],
-    img: "https://images.pexels.com/photos/3845625/pexels-photo-3845625.jpeg?auto=format&fit=crop&w=800&q=80",
+    img: "/images/cranial_helmet.webp",
     to: "/cranial-orthoses",
   },
   {
@@ -34,7 +34,7 @@ const KIDS_SOLUTIONS = [
     category: "Prosthetics",
     desc: "Playful, durable bionic & lower-limb prosthetics designed for child activity and rapid growth adjustments.",
     highlights: ["Growth Expansion", "Ultra-Light Carbon"],
-    img: "https://images.unsplash.com/photo-1770219287080-9c73532fa878?auto=format&fit=crop&w=800&q=80",
+    img: "/images/pediatric_care.webp",
     to: "/pediatric-prosthetics",
   },
   {
@@ -54,7 +54,7 @@ const KIDS_SOLUTIONS = [
     category: "Spinal Care",
     desc: "Comfortable night-wear scoliosis braces providing high-rigidity corrective alignment during sleep.",
     highlights: ["Over-Corrective Alignment", "Breathable Foam"],
-    img: "https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80",
+    img: "/images/rehab_therapy.webp",
     to: "/scoliosis-bracing#nocturnal",
   },
   {
@@ -74,7 +74,7 @@ const KIDS_SOLUTIONS = [
     category: "Lower Limb",
     desc: "Flexible ankle control orthoses stabilizing pediatric foot pronation while preserving natural movement.",
     highlights: ["Medial Stabilizer", "Fits Standard Shoes"],
-    img: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80",
+    img: "/images/medical_care.webp",
     to: "/lower-limb-orthotics#supramalleolar-orthosis",
   },
   {
@@ -84,7 +84,7 @@ const KIDS_SOLUTIONS = [
     category: "Foot Orthotics",
     desc: "Deep calcanean heel cup orthoses offering rigid triplanar control for severe flexible flatfoot.",
     highlights: ["Triplanar Control", "Rigid Calcanean Cup"],
-    img: "/sockets-liners.webp",
+    img: "/custom-insoles.webp",
     to: "/lower-limb-orthotics#ucbl",
   },
   {
@@ -94,7 +94,7 @@ const KIDS_SOLUTIONS = [
     category: "Lower Limb",
     desc: "Ponseti method boots & abduction bars treating clubfoot correction in infants and toddlers.",
     highlights: ["Ponseti Protocol", "Adjustable Abduction"],
-    img: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=800&q=80",
+    img: "/images/clinical_lab.webp",
     to: "/lower-limb-orthotics#ctev",
   },
 ];
