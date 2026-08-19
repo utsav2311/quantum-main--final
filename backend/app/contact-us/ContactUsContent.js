@@ -72,22 +72,22 @@ export default function ContactUsContent() {
           <form onSubmit={submit} className="space-y-4 rounded-3xl border border-[#E2E8F0] bg-white p-7 sm:p-9 shadow-sm" data-testid="contact-form">
             <h3 className="font-display text-xl font-bold text-[#0B121C]">Send us a message</h3>
             <div className="space-y-1.5">
-              <Label className="text-xs font-medium text-[#4A5568]">Full Name *</Label>
-              <Input data-testid="contact-name" value={form.name} onChange={set("name")} placeholder="Your name" className="h-11 rounded-xl border-[#E2E8F0] focus-visible:ring-[#0B4D95]" />
+              <Label htmlFor="contact-full-name" className="text-xs font-medium text-[#4A5568]">Full Name *</Label>
+              <Input id="contact-full-name" data-testid="contact-name" value={form.name} onChange={set("name")} placeholder="Your name" className="h-11 rounded-xl border-[#E2E8F0] focus-visible:ring-[#0B4D95]" />
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-1.5">
-                <Label className="text-xs font-medium text-[#4A5568]">Email *</Label>
-                <Input data-testid="contact-email-input" type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" className="h-11 rounded-xl border-[#E2E8F0] focus-visible:ring-[#0B4D95]" />
+                <Label htmlFor="contact-email-field" className="text-xs font-medium text-[#4A5568]">Email *</Label>
+                <Input id="contact-email-field" data-testid="contact-email-input" type="email" value={form.email} onChange={set("email")} placeholder="you@example.com" className="h-11 rounded-xl border-[#E2E8F0] focus-visible:ring-[#0B4D95]" />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-xs font-medium text-[#4A5568]">Phone *</Label>
-                <Input data-testid="contact-phone-input" value={form.phone} onChange={set("phone")} placeholder="+1 234 567 890" className="h-11 rounded-xl border-[#E2E8F0] focus-visible:ring-[#0B4D95]" />
+                <Label htmlFor="contact-phone-field" className="text-xs font-medium text-[#4A5568]">Phone *</Label>
+                <Input id="contact-phone-field" data-testid="contact-phone-input" value={form.phone} onChange={set("phone")} placeholder="+1 234 567 890" className="h-11 rounded-xl border-[#E2E8F0] focus-visible:ring-[#0B4D95]" />
               </div>
             </div>
             <div className="space-y-1.5">
-              <Label className="text-xs font-medium text-[#4A5568]">Message</Label>
-              <Textarea data-testid="contact-message" value={form.message} onChange={set("message")} rows={4} placeholder="How can we assist you?" className="rounded-xl border-[#E2E8F0] focus-visible:ring-[#0B4D95]" />
+              <Label htmlFor="contact-message-field" className="text-xs font-medium text-[#4A5568]">Message</Label>
+              <Textarea id="contact-message-field" data-testid="contact-message" value={form.message} onChange={set("message")} rows={4} placeholder="How can we assist you?" className="rounded-xl border-[#E2E8F0] focus-visible:ring-[#0B4D95]" />
             </div>
             <button type="submit" disabled={loading} data-testid="contact-submit" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#0284C7] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] disabled:opacity-60">
               {loading ? <Loader2 size={17} className="animate-spin" /> : <Send size={16} />}

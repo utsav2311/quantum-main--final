@@ -62,7 +62,7 @@ export default function Navbar() {
         <Logo light={!scrolled} />
 
         {/* Desktop Nav Links */}
-        <div className="hidden items-center gap-1 xl:flex">
+        <div className="hidden items-center gap-0.5 lg:flex xl:gap-1">
           {NAV.map((item) => (
             <div
               key={item.label}
@@ -73,7 +73,7 @@ export default function Navbar() {
               <button
                 data-testid={`nav-${item.label.toLowerCase().replace(/[\s&]+/g, "-")}`}
                 onClick={() => handleNav(item.to)}
-                className={`relative flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 ${
+                className={`relative flex items-center gap-1 rounded-full px-3 py-2 text-xs font-medium transition-all duration-300 xl:px-4 xl:text-sm ${
                   scrolled
                     ? "text-slate-800 hover:text-[#0284C7] hover:bg-slate-100/70"
                     : "text-white/90 hover:text-white hover:bg-white/10"
@@ -82,7 +82,7 @@ export default function Navbar() {
                 <span>{item.label}</span>
                 {item.children && (
                   <ChevronDown
-                    size={14}
+                    size={13}
                     className={`transition-transform duration-300 ${
                       openMenu === item.label ? "rotate-180 text-[#0284C7]" : scrolled ? "text-slate-400" : "text-white/60"
                     }`}
@@ -119,13 +119,13 @@ export default function Navbar() {
         </div>
 
         {/* CTA Button & Mobile Trigger */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             onClick={() => open("partner")}
             data-testid="nav-partner-btn"
-            className="hidden rounded-full bg-gradient-to-r from-[#0284C7] via-[#0052CC] to-[#0284C7] bg-size-200 px-6 py-2.5 font-display text-sm font-semibold text-white shadow-lg shadow-[#0284C7]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[#0284C7]/40 sm:block cursor-pointer"
+            className="hidden rounded-full bg-gradient-to-r from-[#0284C7] via-[#0052CC] to-[#0284C7] bg-size-200 px-4 py-2 text-xs font-semibold text-white shadow-lg shadow-[#0284C7]/30 transition-all duration-300 hover:shadow-xl hover:shadow-[#0284C7]/40 md:inline-flex xl:px-6 xl:py-2.5 xl:text-sm cursor-pointer"
           >
             Partner With Us
           </motion.button>
@@ -135,7 +135,8 @@ export default function Navbar() {
             <SheetTrigger asChild>
               <button
                 data-testid="mobile-menu-btn"
-                className={`rounded-full border p-2.5 transition-all duration-300 xl:hidden ${
+                aria-label="Toggle navigation menu"
+                className={`rounded-full border p-2.5 transition-all duration-300 lg:hidden ${
                   scrolled
                     ? "border-slate-200 bg-white/90 text-slate-900 shadow-sm"
                     : "border-white/20 bg-white/10 text-white backdrop-blur-md"
@@ -149,7 +150,7 @@ export default function Navbar() {
               <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 pr-14">
                 <Logo light={false} />
               </div>
-              <div className="px-4 py-4">
+              <div className="px-4 py-4 overflow-y-auto max-h-[calc(100vh-80px)]">
                 {NAV.map((item) => (
                   <MobileItem key={item.label} item={item} onNav={handleNav} />
                 ))}

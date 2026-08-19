@@ -60,16 +60,16 @@ export default function Welcome() {
             <div className="relative overflow-hidden rounded-3xl shadow-xl">
               <img
                 src={IMAGES.team}
-                alt="Clinical team at work"
+                alt="Quantum Medical Clinical Team & Health Professionals in Abu Dhabi UAE"
                 loading="lazy"
                 decoding="async"
                 className="aspect-[4/3] w-full object-cover sm:aspect-[5/4]"
               />
             </div>
 
-            <FloatingElement distance={8} className="absolute -bottom-4 -right-2 rounded-2xl border border-white/90 bg-white/85 p-4 backdrop-blur-xl shadow-2xl sm:-bottom-6 sm:-right-4 sm:p-5">
+            <FloatingElement distance={8} className="absolute bottom-2 right-2 rounded-2xl border border-white/90 bg-white/85 p-3.5 backdrop-blur-xl shadow-2xl sm:bottom-4 sm:right-4 sm:p-5">
               <p className="font-mono text-[10px] uppercase tracking-widest text-[#0284C7] sm:text-xs font-bold">Since day one</p>
-              <p className="mt-0.5 font-display text-lg font-extrabold text-[#0B121C] sm:text-2xl">Precision, in-house.</p>
+              <p className="mt-0.5 font-display text-base font-extrabold text-[#0B121C] sm:text-2xl">Precision, in-house.</p>
             </FloatingElement>
           </TiltCard>
         </Reveal>

@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/Reveal";
-import { ArrowUpRight, Sparkles, Activity, ShieldCheck } from "lucide-react";
+import { Activity } from "lucide-react";
+import { FeatureCarousel } from "@/components/ui/feature-carousel";
 
 const ADULT_SOLUTIONS = [
   {
@@ -24,7 +22,7 @@ const ADULT_SOLUTIONS = [
     category: "Prosthetics",
     desc: "Custom-molded aesthetic silicone prosthetics matching patient skin tone, texture, and individual anatomy.",
     highlights: ["Skin-Tone Matched", "Flexible Silicone"],
-    img: "/images/clinical_lab.webp",
+    img: "/silicone-restoration.webp",
     to: "/silicone-restoration",
   },
   {
@@ -54,7 +52,7 @@ const ADULT_SOLUTIONS = [
     category: "Orthotics",
     desc: "Dynamic hip joint stabilization reducing joint strain, supporting post-surgical recovery, and aiding OA management.",
     highlights: ["Range of Motion Lock", "Lightweight Frame"],
-    img: "/images/medical_care.webp",
+    img: "/hip-braces.webp",
     to: "/lower-limb-orthotics#hip-braces",
   },
   {
@@ -64,7 +62,7 @@ const ADULT_SOLUTIONS = [
     category: "Orthotics",
     desc: "Custom OA and ligament braces providing unweighting relief, tracking correction, and high stability.",
     highlights: ["OA Unloader Tech", "Custom Molded Fit"],
-    img: "/images/rehab_therapy.webp",
+    img: "/knee-braces.webp",
     to: "/lower-limb-orthotics#knee-braces",
   },
   {
@@ -74,7 +72,7 @@ const ADULT_SOLUTIONS = [
     category: "Orthotics",
     desc: "Thoracic correction braces engineered for chest wall deformities and post-trauma spinal support.",
     highlights: ["Pectus Correction", "Low-Profile Design"],
-    img: "/images/clinical_lab.webp",
+    img: "/chest-braces.webp",
     to: "/spine-back-braces#chest",
   },
   {
@@ -111,7 +109,10 @@ const ADULT_SOLUTIONS = [
 
 export default function AdultsGrid() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#0B121C] via-[#0D1B2D] to-[#0B121C] py-24 text-white" data-testid="adults-section">
+    <section
+      className="relative overflow-hidden bg-gradient-to-b from-[#0B121C] via-[#0D1B2D] to-[#0B121C] py-24 text-white"
+      data-testid="adults-section"
+    >
       {/* Background Glows */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(11,77,149,0.35),rgba(255,255,255,0))]" />
       <div className="pointer-events-none absolute bottom-0 right-0 h-96 w-96 rounded-full bg-[#0284C7]/15 blur-3xl" />
@@ -120,7 +121,7 @@ export default function AdultsGrid() {
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         {/* Section Header */}
         <Reveal>
-          <div className="flex flex-col items-center text-center">
+          <div className="flex flex-col items-center text-center mb-12">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#0284C7]/40 bg-[#0284C7]/15 px-3.5 py-1 font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-[#0284C7] backdrop-blur-md">
               <Activity size={13} /> Comprehensive Portfolio
             </span>
@@ -130,123 +131,13 @@ export default function AdultsGrid() {
             <p className="mt-1 font-display text-xl font-light text-white/80 sm:text-2xl">
               Mobility Solutions
             </p>
-            <p className="mt-2 text-xs font-mono text-white/50">Hover over any card to flip — Click to view device details</p>
           </div>
         </Reveal>
 
-        {/* 3D Flip Card Grid */}
-        <motion.div layout className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
-          <AnimatePresence>
-            {ADULT_SOLUTIONS.map((item, index) => (
-              <motion.div
-                key={item.id}
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.35, delay: index * 0.02 }}
-                className="w-full"
-              >
-                <Link
-                  href={item.to}
-                  data-testid={`adult-card-${item.id}`}
-                  className="group block [perspective:1000px] relative h-64 w-full cursor-pointer"
-                >
-                  <div
-                    className="relative h-full w-full rounded-2xl transition-transform duration-700 ease-in-out transform-3d group-hover:[transform:rotateY(180deg)] group-hover:[--webkit-transform:rotateY(180deg)] shadow-md group-hover:shadow-xl group-hover:shadow-[#0284C7]/20"
-                    style={{ transformStyle: "preserve-3d", WebkitTransformStyle: "preserve-3d" }}
-                  >
-                    
-                    {/* FRONT SIDE */}
-                    <div
-                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-white/10 bg-[#121B28] p-4 backface-hidden transition-opacity duration-300 group-hover:opacity-0 group-hover:pointer-events-none"
-                      style={{ WebkitBackfaceVisibility: "hidden", backfaceVisibility: "hidden" }}
-                    >
-                      {/* Background Image */}
-                      <div className="absolute inset-0 overflow-hidden">
-                        <img
-                          src={item.img}
-                          alt={item.title}
-                          loading="lazy"
-                          decoding="async"
-                          className="h-full w-full object-cover transition-transform duration-500"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0B121C] via-[#0B121C]/50 to-transparent" />
-                      </div>
-
-                      {/* Top Badge & Hint */}
-                      <div className="relative z-10 flex items-center justify-between">
-                        <span className="rounded-full border border-white/15 bg-[#0B121C]/80 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-wider text-white/90 backdrop-blur-md">
-                          {item.category}
-                        </span>
-                        <span className="flex h-6 w-6 items-center justify-center rounded-full bg-white/10 text-white/70 backdrop-blur-md">
-                          <Sparkles size={11} className="text-[#0284C7]" />
-                        </span>
-                      </div>
-
-                      {/* Bottom Title Overlay */}
-                      <div className="relative z-10">
-                        <p className="font-mono text-[10px] uppercase tracking-widest text-[#0284C7]">
-                          {item.subtitle}
-                        </p>
-                        <h3 className="font-display text-base font-bold tracking-tight text-white">
-                          {item.title}
-                        </h3>
-                        <p className="mt-1 flex items-center gap-1 text-[10px] font-mono text-white/60">
-                          <span>Hover to flip</span> →
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* BACK SIDE (Flipped) */}
-                    <div
-                      className="absolute inset-0 flex flex-col justify-between overflow-hidden rounded-2xl border border-[#0284C7]/50 bg-[#0B121C] p-4 backface-hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100 shadow-xl shadow-[#0284C7]/10"
-                      style={{
-                        WebkitBackfaceVisibility: "hidden",
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                        WebkitTransform: "rotateY(180deg)",
-                      }}
-                    >
-                      <div>
-                        <div className="flex items-center justify-between border-b border-white/10 pb-2">
-                          <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-[#0284C7]">
-                            {item.category}
-                          </span>
-                          <span className="font-mono text-[9px] text-white/50">Clinical Spec</span>
-                        </div>
-
-                        <h4 className="mt-2 font-display text-sm font-bold text-white">
-                          {item.title}
-                        </h4>
-                        <p className="mt-1 text-[11px] leading-relaxed text-white/75">
-                          {item.desc}
-                        </p>
-
-                        <div className="mt-2 space-y-1">
-                          {item.highlights.map((h) => (
-                            <div key={h} className="flex items-center gap-1.5 text-[10px] font-medium text-white/80">
-                              <ShieldCheck size={12} className="text-[#0284C7]" />
-                              <span>{h}</span>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-
-                      <div className="pt-2">
-                        <span className="flex w-full items-center justify-center gap-1.5 rounded-xl bg-[#0284C7] py-2 font-display text-[11px] font-semibold text-white shadow-md transition-colors group-hover:bg-[#0052CC]">
-                          Explore Device <ArrowUpRight size={13} />
-                        </span>
-                      </div>
-                    </div>
-
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
+        {/* Feature Carousel */}
+        <Reveal delay={0.1}>
+          <FeatureCarousel features={ADULT_SOLUTIONS} />
+        </Reveal>
       </div>
     </section>
   );

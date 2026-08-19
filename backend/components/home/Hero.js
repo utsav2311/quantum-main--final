@@ -44,7 +44,6 @@ export default function Hero() {
             loop
             muted
             playsInline
-            webkit-playsinline="true"
             poster={IMAGES.hero}
             className="h-full w-full object-cover object-[center_35%] sm:object-center brightness-90 contrast-[1.05] pointer-events-none select-none"
           >
@@ -55,14 +54,14 @@ export default function Hero() {
             <source src={IMAGES.heroVideo} type="video/mp4" />
             <img
               src={IMAGES.hero}
-              alt="Prosthetics and Orthotics"
+              alt="Quantum Medical — Advanced Prosthetics and Orthotics Engineering in Abu Dhabi UAE"
               className="h-full w-full object-cover object-[center_35%] sm:object-center brightness-90 contrast-[1.05]"
             />
           </video>
         ) : (
           <img
             src={IMAGES.hero}
-            alt="Prosthetics and Orthotics"
+            alt="Quantum Medical — Advanced Prosthetics and Orthotics Engineering in Abu Dhabi UAE"
             decoding="async"
             fetchpriority="high"
             className="h-full w-full object-cover object-center brightness-90 contrast-[1.05]"

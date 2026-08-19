@@ -38,6 +38,10 @@ export const IMAGES = {
   lowerLimbProsthetics: "/lower-limb-prosthetics.webp",
   upperLimbProsthetics: "/upper-limb-prosthetics.webp",
   socketsLiners: "/sockets-liners.webp",
+  siliconeRestoration: "/silicone-restoration.webp",
+  hipBraces: "/hip-braces.webp",
+  kneeBraces: "/knee-braces.webp",
+  chestBraces: "/chest-braces.webp",
 };
 
 export const waLink = (text = "Hello, I'd like to know more about your P&O solutions.") =>
@@ -940,7 +944,7 @@ export const DEVICES = [
         summary: "By focusing on precision engineering and coordinated communication, we help facilities standardise prosthetic outcomes while maintaining individualised care."
       }
     }),
-  mk("silicone-restoration", "Silicone Restoration", "Prosthetics", "team",
+  mk("silicone-restoration", "Silicone Restoration", "Prosthetics", "siliconeRestoration",
     "Life-like silicone prostheses for fingers, hands, ears, nose and more.",
     "Silicone restoration is a specialised area of prosthetic care focused on recreating the natural appearance and protective function of missing fingers, toes, or partial limbs. For clinical teams managing trauma, diabetic complications, congenital limb differences, or post-surgical limb loss, access to precision-fabricated silicone prostheses supports both functional recovery and psychosocial rehabilitation.",
     ["Hand-matched skin tones", "Realistic detail & texture", "Comfortable daily wear", "Durable medical silicone"],

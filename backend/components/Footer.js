@@ -119,15 +119,20 @@ export default function Footer() {
               {COMPANY.socials.map((s) => {
                 const Icon = socialIcon[s.icon] || Linkedin;
                 return (
-                  <a key={s.icon} href={s.url} data-testid={`footer-social-${s.icon}`} className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-[#0284C7] hover:text-[#0284C7]">
+                  <a
+                    key={s.icon}
+                    href={s.url}
+                    data-testid={`footer-social-${s.icon}`}
+                    aria-label={`Quantum Medical on ${s.icon}`}
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-[#0284C7] hover:text-[#0284C7]"
+                  >
                     <Icon size={17} />
                   </a>
                 );
               })}
             </div>
 
-
-            <button onClick={() => open("franchise")} data-testid="footer-franchise-btn" className="mt-8 rounded-full border border-[#0284C7] px-6 py-3 font-display text-sm font-semibold text-[#0284C7] transition-colors hover:bg-[#0284C7] hover:text-white">
+            <button onClick={() => open("franchise")} data-testid="footer-franchise-btn" className="mt-8 rounded-full border border-[#0284C7] px-6 py-3 font-display text-sm font-semibold text-[#0284C7] transition-colors hover:bg-[#0284C7] hover:text-white cursor-pointer">
               Apply for Franchise
             </button>
           </div>
@@ -137,13 +142,43 @@ export default function Footer() {
             <h3 className="font-display text-2xl font-bold">Send us a message</h3>
             <p className="mt-1 text-sm text-white/60">General inquiries — we typically reply within one business day.</p>
             <form onSubmit={submit} className="mt-6 space-y-4">
-              <Input data-testid="footer-name-input" placeholder="Your name" value={form.name} onChange={set("name")} className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]" />
+              <Input
+                data-testid="footer-name-input"
+                aria-label="Your full name"
+                placeholder="Your name"
+                value={form.name}
+                onChange={set("name")}
+                className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]"
+              />
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <Input data-testid="footer-phone-input" placeholder="Phone" value={form.phone} onChange={set("phone")} className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]" />
-                <Input data-testid="footer-email-input" type="email" placeholder="Email" value={form.email} onChange={set("email")} className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]" />
+                <Input
+                  data-testid="footer-phone-input"
+                  aria-label="Your phone number"
+                  placeholder="Phone"
+                  value={form.phone}
+                  onChange={set("phone")}
+                  className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]"
+                />
+                <Input
+                  data-testid="footer-email-input"
+                  aria-label="Your email address"
+                  type="email"
+                  placeholder="Email"
+                  value={form.email}
+                  onChange={set("email")}
+                  className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]"
+                />
               </div>
-              <Textarea data-testid="footer-message-input" placeholder="Message" rows={4} value={form.message} onChange={set("message")} className="rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]" />
-              <button type="submit" disabled={loading} data-testid="footer-submit-btn" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#0284C7] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] disabled:opacity-60">
+              <Textarea
+                data-testid="footer-message-input"
+                aria-label="Your message or inquiry"
+                placeholder="Message"
+                rows={4}
+                value={form.message}
+                onChange={set("message")}
+                className="rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]"
+              />
+              <button type="submit" disabled={loading} data-testid="footer-submit-btn" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#0284C7] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] disabled:opacity-60 cursor-pointer">
                 {loading ? <Loader2 size={17} className="animate-spin" /> : <Send size={16} />}
                 {loading ? "Sending…" : "Submit"}
               </button>

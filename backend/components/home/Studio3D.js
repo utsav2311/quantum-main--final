@@ -48,16 +48,16 @@ export default function Studio3D() {
           <div className="overflow-hidden rounded-3xl border border-white/20 shadow-2xl">
             <img
               src={IMAGES.printing}
-              alt="3D printing manufacturing facility"
+              alt="Quantum Medical — In-house 3D Printing & CAD/CAM Prosthetic Fabrication Lab in Abu Dhabi"
               loading="lazy"
               decoding="async"
               className="aspect-[4/3] w-full object-cover sm:aspect-[4/5]"
             />
           </div>
 
-          <div className="absolute -left-2 bottom-6 w-40 rounded-2xl border border-white/20 bg-[#0B121C]/80 p-3.5 backdrop-blur-xl shadow-xl sm:-left-5 sm:bottom-8 sm:w-44 sm:p-4">
-            <p className="font-mono text-[10px] text-[#0284C7] font-bold">SPEED · PRECISION</p>
-            <p className="mt-0.5 font-display text-base font-bold text-white sm:text-lg">Craft, digitised.</p>
+          <div className="absolute left-2 bottom-4 w-36 rounded-2xl border border-white/20 bg-[#0B121C]/80 p-3 backdrop-blur-xl shadow-xl sm:left-4 sm:bottom-8 sm:w-44 sm:p-4">
+            <p className="font-mono text-[9px] sm:text-[10px] text-[#0284C7] font-bold">SPEED · PRECISION</p>
+            <p className="mt-0.5 font-display text-sm font-bold text-white sm:text-lg">Craft, digitised.</p>
           </div>
         </motion.div>
 

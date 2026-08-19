@@ -61,7 +61,7 @@ export default function AboutContent() {
               <div className="overflow-hidden rounded-3xl border border-[#E2E8F0] shadow-sm">
                 <img
                   src={IMAGES.pediatric}
-                  alt="Patient care"
+                  alt="Quantum Medical Pediatric Care and Clinical Orthotic Solutions in Abu Dhabi UAE"
                   loading="lazy"
                   decoding="async"
                   className="aspect-[4/3] w-full max-h-[480px] object-cover sm:aspect-[4/3] lg:max-h-[520px]"

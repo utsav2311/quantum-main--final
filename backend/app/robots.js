@@ -1,12 +1,12 @@
 export default function robots() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://quantummedicals.com";
+  const baseUrl = "https://quantumuae.ae";
 
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/"],
+        disallow: ["/api/", "/admin", "/admin/"],
       },
     ],
     sitemap: `${baseUrl}/sitemap.xml`,

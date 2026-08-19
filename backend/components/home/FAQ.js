@@ -46,7 +46,7 @@ export default function FAQ() {
         <Reveal>
           <div className="flex flex-col items-center text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#0284C7]/30 bg-[#0284C7]/10 px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[#0284C7] backdrop-blur-md">
-              <HelpCircle size={14} className="text-[#0284C7]" /> Questions & Answers
+              <HelpCircle size={14} className="text-[#0284C7]" /> Questions &amp; Answers
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold text-[#0B121C] sm:text-5xl lg:text-6xl tracking-tight">
               <TextReveal text="Questions, answered." />
@@ -81,7 +81,9 @@ export default function FAQ() {
                       type="button"
                       onClick={() => toggle(i)}
                       data-testid={`faq-trigger-${i}`}
-                      className="flex w-full items-center justify-between gap-4 p-6 text-left focus:outline-none cursor-pointer select-none"
+                      aria-expanded={isOpen}
+                      aria-controls={`faq-panel-${i}`}
+                      className="flex w-full items-center justify-between gap-4 p-5 sm:p-6 text-left focus:outline-none cursor-pointer select-none"
                     >
                       <div className="flex items-center gap-4">
                         <span

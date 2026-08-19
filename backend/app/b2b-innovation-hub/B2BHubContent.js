@@ -69,26 +69,26 @@ export default function B2BHubContent() {
           <Reveal delay={0.1}>
             <form onSubmit={submit} className="space-y-4 rounded-3xl border border-[#E2E8F0] bg-[#F8F9FA] p-7 sm:p-9" data-testid="b2b-form">
               <div className="space-y-1.5">
-                <Label className="text-xs font-medium text-[#4A5568]">Full Name *</Label>
-                <Input data-testid="b2b-name" value={form.name} onChange={set("name")} placeholder="Jane Doe" className="h-11 rounded-xl border-[#E2E8F0] bg-white focus-visible:ring-[#0B4D95]" />
+                <Label htmlFor="b2b-full-name" className="text-xs font-medium text-[#4A5568]">Full Name *</Label>
+                <Input id="b2b-full-name" data-testid="b2b-name" value={form.name} onChange={set("name")} placeholder="Jane Doe" className="h-11 rounded-xl border-[#E2E8F0] bg-white focus-visible:ring-[#0B4D95]" />
               </div>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="space-y-1.5">
-                  <Label className="text-xs font-medium text-[#4A5568]">Email *</Label>
-                  <Input data-testid="b2b-email" type="email" value={form.email} onChange={set("email")} placeholder="you@org.com" className="h-11 rounded-xl border-[#E2E8F0] bg-white focus-visible:ring-[#0B4D95]" />
+                  <Label htmlFor="b2b-email-field" className="text-xs font-medium text-[#4A5568]">Email *</Label>
+                  <Input id="b2b-email-field" data-testid="b2b-email" type="email" value={form.email} onChange={set("email")} placeholder="you@org.com" className="h-11 rounded-xl border-[#E2E8F0] bg-white focus-visible:ring-[#0B4D95]" />
                 </div>
                 <div className="space-y-1.5">
-                  <Label className="text-xs font-medium text-[#4A5568]">Phone *</Label>
-                  <Input data-testid="b2b-phone" value={form.phone} onChange={set("phone")} placeholder="+1 234 567 890" className="h-11 rounded-xl border-[#E2E8F0] bg-white focus-visible:ring-[#0B4D95]" />
+                  <Label htmlFor="b2b-phone-field" className="text-xs font-medium text-[#4A5568]">Phone *</Label>
+                  <Input id="b2b-phone-field" data-testid="b2b-phone" value={form.phone} onChange={set("phone")} placeholder="+1 234 567 890" className="h-11 rounded-xl border-[#E2E8F0] bg-white focus-visible:ring-[#0B4D95]" />
                 </div>
               </div>
               <div className="space-y-1.5">
-                <Label className="text-xs font-medium text-[#4A5568]">Organization</Label>
-                <Input data-testid="b2b-org" value={form.organization} onChange={set("organization")} placeholder="Hospital / Clinic" className="h-11 rounded-xl border-[#E2E8F0] bg-white focus-visible:ring-[#0B4D95]" />
+                <Label htmlFor="b2b-org-field" className="text-xs font-medium text-[#4A5568]">Organization</Label>
+                <Input id="b2b-org-field" data-testid="b2b-org" value={form.organization} onChange={set("organization")} placeholder="Hospital / Clinic" className="h-11 rounded-xl border-[#E2E8F0] bg-white focus-visible:ring-[#0B4D95]" />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-xs font-medium text-[#4A5568]">How can we help?</Label>
-                <Textarea data-testid="b2b-message" value={form.message} onChange={set("message")} rows={4} placeholder="Volumes, device types, timelines…" className="rounded-xl border-[#E2E8F0] bg-white focus-visible:ring-[#0B4D95]" />
+                <Label htmlFor="b2b-message-field" className="text-xs font-medium text-[#4A5568]">How can we help?</Label>
+                <Textarea id="b2b-message-field" data-testid="b2b-message" value={form.message} onChange={set("message")} rows={4} placeholder="Volumes, device types, timelines…" className="rounded-xl border-[#E2E8F0] bg-white focus-visible:ring-[#0B4D95]" />
               </div>
               <button type="submit" disabled={loading} data-testid="b2b-submit" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#0B4D95] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#083a72] disabled:opacity-60">
                 {loading ? <Loader2 size={17} className="animate-spin" /> : <Send size={16} />}

@@ -1,24 +1,29 @@
-export default function sitemap() {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://quantumuae.ae";
+import { DEVICES } from "@/lib/site";
 
-  const routes = [
-    "",
-    "/about",
-    "/b2b-innovation-hub",
-    "/contact-us",
-    "/products",
-    "/spine-back-braces",
-    "/custom-orthotic-insoles-footwear",
-    "/lower-limb-prosthetics",
-    "/upper-limb-prosthetics",
-    "/sockets-liners",
-    "/terms",
+export default function sitemap() {
+  const baseUrl = "https://quantumuae.ae";
+
+  const staticRoutes = [
+    { route: "", priority: 1.0, changeFrequency: "daily" },
+    { route: "/products", priority: 0.9, changeFrequency: "daily" },
+    { route: "/about", priority: 0.8, changeFrequency: "weekly" },
+    { route: "/contact-us", priority: 0.8, changeFrequency: "weekly" },
+    { route: "/b2b-innovation-hub", priority: 0.8, changeFrequency: "weekly" },
+    { route: "/terms", priority: 0.5, changeFrequency: "monthly" },
   ];
 
-  return routes.map((route) => ({
+  const deviceRoutes = DEVICES.map((d) => ({
+    route: `/${d.slug}`,
+    priority: 0.85,
+    changeFrequency: "weekly",
+  }));
+
+  const allRoutes = [...staticRoutes, ...deviceRoutes];
+
+  return allRoutes.map(({ route, priority, changeFrequency }) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString(),
-    changeFrequency: "weekly",
-    priority: route === "" ? 1.0 : 0.8,
+    changeFrequency,
+    priority,
   }));
 }

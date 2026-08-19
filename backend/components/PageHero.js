@@ -5,10 +5,10 @@ import { motion } from "framer-motion";
 
 export default function PageHero({ label, title, subtitle, image, children }) {
   return (
-    <section className="relative overflow-hidden bg-[#0B121C] pt-[70px]" data-testid="page-hero">
+    <section className="relative overflow-hidden bg-[#0B121C] pt-[92px] sm:pt-[104px]" data-testid="page-hero">
       {image && (
         <div className="absolute inset-0">
-          <img src={image} alt={title} decoding="async" fetchpriority="high" className="h-full w-full object-cover opacity-40" />
+          <img src={image} alt={`${title} — Quantum Medical Prosthetics & Orthotics UAE`} decoding="async" fetchpriority="high" className="h-full w-full object-cover opacity-35" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B121C] via-[#0B121C]/85 to-[#0B121C]/40" />
         </div>
       )}
