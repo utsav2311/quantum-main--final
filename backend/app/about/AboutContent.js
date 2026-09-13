@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import PageHero from "@/components/PageHero";
 import { Reveal } from "@/components/Reveal";
 import { IMAGES } from "@/lib/site";
 import { useLeadModal } from "@/context/LeadModalContext";
@@ -9,7 +10,7 @@ import { Award, Microscope, HeartPulse, ShieldCheck, CheckCircle2, ArrowRight } 
 
 export default function AboutContent() {
   const { open } = useLeadModal();
-  const { language, isRTL } = useLanguage();
+  const { language, isRTL, t } = useLanguage();
 
   const creds = language === "ar" ? [
     { icon: Award, t: "منشأة معتمدة", d: "أخصائيون مرخصون ومعتمدون يعملون وفق أعلى المعايير الدولية." },
@@ -35,6 +36,13 @@ export default function AboutContent() {
 
   return (
     <>
+      <PageHero
+        label={t("aboutPage.heroLabel")}
+        title={t("aboutPage.heroTitle")}
+        subtitle={t("aboutPage.heroSubtitle")}
+        image={IMAGES.team}
+      />
+
       <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20 text-start">
         <div className="grid grid-cols-1 gap-10 items-center lg:grid-cols-2 lg:gap-14">
           <Reveal className="order-1">

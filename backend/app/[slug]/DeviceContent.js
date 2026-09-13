@@ -5,12 +5,17 @@ import { motion } from "framer-motion";
 import PageHero from "@/components/PageHero";
 import { Reveal, Stagger, itemVariants } from "@/components/Reveal";
 import { useLeadModal } from "@/context/LeadModalContext";
-import { Check, ScanLine, PenTool, Printer, BadgeCheck, ArrowLeft, CalendarCheck, ShieldCheck, Activity, Zap, Sparkles, HeartPulse, ChevronRight } from "lucide-react";
+import { useLanguage } from "@/context/LanguageContext";
+import { getLocalizedDevice } from "@/lib/deviceTranslations";
+import { Check, ScanLine, PenTool, Printer, BadgeCheck, ArrowLeft, ArrowRight, CalendarCheck, ShieldCheck, Activity, Zap, Sparkles, HeartPulse, ChevronRight } from "lucide-react";
 
 const WF_ICONS = { scan: ScanLine, "pen-tool": PenTool, printer: Printer, "badge-check": BadgeCheck };
 
-export default function DeviceContent({ device, img }) {
+export default function DeviceContent({ device: initialDevice, img }) {
   const { open } = useLeadModal();
+  const { language, isRTL, t } = useLanguage();
+
+  const device = getLocalizedDevice(initialDevice, language) || initialDevice;
 
   return (
     <div data-testid="device-page">
@@ -20,28 +25,28 @@ export default function DeviceContent({ device, img }) {
           whileTap={{ scale: 0.96 }}
           onClick={() => open("consultation")}
           data-testid="device-consult-hero-btn"
-          className="flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#0284C7] to-[#38BDF8] px-8 py-4 font-display text-sm font-semibold text-white shadow-lg shadow-[#0284C7]/25 transition-all hover:shadow-xl hover:shadow-[#0284C7]/35"
+          className="flex items-center gap-2.5 rounded-full bg-gradient-to-r from-[#0284C7] to-[#38BDF8] px-8 py-4 font-display text-sm font-semibold text-white shadow-lg shadow-[#0284C7]/25 transition-all hover:shadow-xl hover:shadow-[#0284C7]/35 cursor-pointer"
         >
-          <CalendarCheck size={18} /> Book a Consultation
+          <CalendarCheck size={18} /> {t("deviceDetail.bookConsultation")}
         </motion.button>
       </PageHero>
 
-      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+      <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8 text-start">
         <div className="grid grid-cols-1 gap-14 lg:grid-cols-2">
           <Reveal>
             <div className="relative">
               <span className="inline-flex items-center gap-2 rounded-full border border-[#0B4D95]/20 bg-[#0B4D95]/5 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.25em] text-[#0B4D95]">
-                <Activity size={14} className="animate-pulse text-[#0284C7]" /> The Need
+                <Activity size={14} className="animate-pulse text-[#0284C7]" /> {t("deviceDetail.theNeed")}
               </span>
-              <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight text-[#0B121C] sm:text-4xl">What it addresses</h2>
+              <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight text-[#0B121C] sm:text-4xl">{t("deviceDetail.whatItAddresses")}</h2>
               <p className="mt-5 leading-relaxed text-[#4A5568]">{device.condition}</p>
 
-              <h3 className="mt-10 font-display text-xl font-bold text-[#0B121C]">Key Benefits</h3>
+              <h3 className="mt-10 font-display text-xl font-bold text-[#0B121C]">{t("deviceDetail.keyBenefits")}</h3>
               <ul className="mt-4 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                 {device.benefits.map((b) => (
                   <motion.li
                     key={b}
-                    whileHover={{ scale: 1.02, x: 3 }}
+                    whileHover={{ scale: 1.02, x: isRTL ? -3 : 3 }}
                     className="flex items-start gap-3 rounded-2xl border border-[#E2E8F0] bg-white p-4 text-sm font-medium text-[#0B121C] shadow-sm transition-all hover:border-[#0284C7]/40 hover:shadow-md"
                   >
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0284C7]/10 text-[#0284C7]">
@@ -59,8 +64,8 @@ export default function DeviceContent({ device, img }) {
               <div className="absolute -inset-1.5 rounded-3xl bg-gradient-to-r from-[#0284C7] to-[#0B4D95] opacity-20 blur-xl transition-all duration-500 group-hover:opacity-40" />
               <div className="relative overflow-hidden rounded-3xl border border-[#E2E8F0] bg-white shadow-xl">
                 <img src={img} alt={device.title} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105" />
-                <div className="absolute bottom-4 right-4 rounded-full border border-white/20 bg-[#0B121C]/80 px-4 py-2 text-xs font-semibold text-white backdrop-blur-md">
-                  Digitally Engineered
+                <div className={`absolute bottom-4 ${isRTL ? "left-4" : "right-4"} rounded-full border border-white/20 bg-[#0B121C]/80 px-4 py-2 text-xs font-semibold text-white backdrop-blur-md`}>
+                  {t("deviceDetail.digitallyEngineered")}
                 </div>
               </div>
             </div>
@@ -71,9 +76,9 @@ export default function DeviceContent({ device, img }) {
         <div className="mt-24">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[#0B4D95]/20 bg-[#0B4D95]/5 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.25em] text-[#0B4D95]">
-              <Zap size={14} className="text-[#0284C7]" /> Digital Workflow
+              <Zap size={14} className="text-[#0284C7]" /> {t("deviceDetail.digitalWorkflow")}
             </span>
-            <h2 className="mt-3 font-display text-3xl font-extrabold text-[#0B121C]">How it's made</h2>
+            <h2 className="mt-3 font-display text-3xl font-extrabold text-[#0B121C]">{t("deviceDetail.howItsMade")}</h2>
           </Reveal>
           <Stagger className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {device.workflow.map((w, i) => {
@@ -83,9 +88,9 @@ export default function DeviceContent({ device, img }) {
                   key={w.t}
                   variants={itemVariants}
                   whileHover={{ y: -6, scale: 1.02 }}
-                  className="group relative overflow-hidden rounded-3xl border border-[#E2E8F0] bg-white p-7 shadow-sm transition-all duration-300 hover:border-[#0B4D95]/40 hover:shadow-xl"
+                  className="group relative overflow-hidden rounded-3xl border border-[#E2E8F0] bg-white p-7 shadow-sm transition-all duration-300 hover:border-[#0B4D95]/40 hover:shadow-xl text-start"
                 >
-                  <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-[#0B4D95]/5 transition-transform group-hover:scale-150" />
+                  <div className={`absolute ${isRTL ? "-left-8" : "-right-8"} -top-8 h-24 w-24 rounded-full bg-[#0B4D95]/5 transition-transform group-hover:scale-150`} />
                   <div className="flex items-center justify-between">
                     <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0B4D95] to-[#083a72] text-white shadow-md shadow-[#0B4D95]/20 transition-transform group-hover:scale-110">
                       <Icon size={22} />
@@ -105,11 +110,11 @@ export default function DeviceContent({ device, img }) {
           <div className="mt-24 space-y-24 border-t border-[#E2E8F0] pt-20">
             {/* Overview & Core Focus */}
             <Reveal>
-              <div className="relative overflow-hidden rounded-3xl border border-[#E2E8F0] bg-gradient-to-b from-white to-[#F8FAFC] p-8 shadow-lg sm:p-12">
-                <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-[#0284C7]/5 blur-3xl" />
+              <div className="relative overflow-hidden rounded-3xl border border-[#E2E8F0] bg-gradient-to-b from-white to-[#F8FAFC] p-8 shadow-lg sm:p-12 text-start">
+                <div className={`absolute ${isRTL ? "-left-16" : "-right-16"} -top-16 h-64 w-64 rounded-full bg-[#0284C7]/5 blur-3xl`} />
                 <div className="h-1.5 w-24 rounded-full bg-gradient-to-r from-[#0284C7] via-[#0B4D95] to-[#0284C7]" />
-                <p className="mt-6 font-mono text-xs uppercase tracking-[0.3em] text-[#0B4D95]">Clinical Foundations</p>
-                <h2 className="mt-3 font-display text-3xl font-extrabold text-[#0B121C] sm:text-4xl">Institutional Scope &amp; Biomechanics</h2>
+                <p className="mt-6 font-mono text-xs uppercase tracking-[0.3em] text-[#0B4D95] font-semibold">{t("deviceDetail.clinicalFoundations")}</p>
+                <h2 className="mt-3 font-display text-3xl font-extrabold text-[#0B121C] sm:text-4xl">{t("deviceDetail.institutionalScope")}</h2>
                 <div className="mt-6 space-y-4 leading-relaxed text-[#4A5568] text-base">
                   {device.richContent.introParagraphs.map((p, idx) => (
                     <p key={idx}>{p}</p>
@@ -119,7 +124,7 @@ export default function DeviceContent({ device, img }) {
                 <div className="mt-10 rounded-3xl bg-gradient-to-br from-[#0B121C] via-[#0F1B2D] to-[#083a72] p-8 text-white shadow-2xl">
                   <div className="flex items-center gap-2 text-[#0284C7]">
                     <Sparkles size={18} />
-                    <p className="font-mono text-xs uppercase tracking-widest">Core Engineering Focus</p>
+                    <p className="font-mono text-xs uppercase tracking-widest">{t("deviceDetail.coreFocus")}</p>
                   </div>
                   <div className="mt-5 grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
                     {device.richContent.focusPillars.map((fp) => (
@@ -141,10 +146,10 @@ export default function DeviceContent({ device, img }) {
             {/* Role in Modern Rehabilitation */}
             {device.richContent.rehabilitationRole && (
               <Reveal>
-                <div className="space-y-10">
+                <div className="space-y-10 text-start">
                   <div>
                     <span className="inline-flex items-center gap-2 rounded-full border border-[#0B4D95]/20 bg-[#0B4D95]/5 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.25em] text-[#0B4D95]">
-                      <HeartPulse size={14} className="text-[#0284C7]" /> Rehabilitation Strategy
+                      <HeartPulse size={14} className="text-[#0284C7]" /> {t("deviceDetail.rehabStrategy")}
                     </span>
                     <h2 className="mt-3 font-display text-3xl font-extrabold text-[#0B121C] sm:text-4xl">{device.richContent.rehabilitationRole.title}</h2>
                     <p className="mt-4 max-w-3xl leading-relaxed text-[#4A5568]">{device.richContent.rehabilitationRole.description}</p>
@@ -154,11 +159,11 @@ export default function DeviceContent({ device, img }) {
                     <div className="rounded-3xl border border-[#BAE6FD] bg-gradient-to-br from-[#F0F9FF] to-[#E0F2FE] p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                       <div className="flex items-center gap-3 text-[#0369A1]">
                         <ShieldCheck size={24} />
-                        <h3 className="font-display text-xl font-bold text-[#0C4A6E]">Clinically Supports Recovery By</h3>
+                        <h3 className="font-display text-xl font-bold text-[#0C4A6E]">{t("deviceDetail.supportsRecoveryBy")}</h3>
                       </div>
                       <ul className="mt-6 space-y-4">
                         {device.richContent.rehabilitationRole.supportsRecovery.map((sr) => (
-                          <li key={sr} className="flex items-start gap-3.5 text-sm font-medium text-[#0C4A6E] transition-transform duration-200 hover:translate-x-1">
+                          <li key={sr} className={`flex items-start gap-3.5 text-sm font-medium text-[#0C4A6E] transition-transform duration-200 ${isRTL ? "hover:-translate-x-1" : "hover:translate-x-1"}`}>
                             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#0284C7] text-white shadow-sm"><Check size={14} /></span>
                             <span>{sr}</span>
                           </li>
@@ -169,11 +174,11 @@ export default function DeviceContent({ device, img }) {
                     <div className="rounded-3xl border border-[#FED7AA] bg-gradient-to-br from-[#FFF7ED] to-[#FFEDD5] p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                       <div className="flex items-center gap-3 text-[#C2410C]">
                         <Zap size={24} />
-                        <h3 className="font-display text-xl font-bold text-[#7C2D12]">Protocol Benefits</h3>
+                        <h3 className="font-display text-xl font-bold text-[#7C2D12]">{t("deviceDetail.protocolBenefits")}</h3>
                       </div>
                       <ul className="mt-6 space-y-4">
                         {device.richContent.rehabilitationRole.protocolBenefits.map((pb) => (
-                          <li key={pb} className="flex items-start gap-3.5 text-sm font-medium text-[#7C2D12] transition-transform duration-200 hover:translate-x-1">
+                          <li key={pb} className={`flex items-start gap-3.5 text-sm font-medium text-[#7C2D12] transition-transform duration-200 ${isRTL ? "hover:-translate-x-1" : "hover:translate-x-1"}`}>
                             <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#EA580C] text-white shadow-sm"><Check size={14} /></span>
                             <span>{pb}</span>
                           </li>
@@ -188,27 +193,27 @@ export default function DeviceContent({ device, img }) {
             {/* Clinical Orthotic Systems */}
             {device.richContent.systems?.length > 0 && (
               <Reveal>
-                <div className="space-y-10">
+                <div className="space-y-10 text-start">
                   <div>
                     <span className="inline-flex items-center gap-2 rounded-full border border-[#0B4D95]/20 bg-[#0B4D95]/5 px-4 py-1.5 font-mono text-xs uppercase tracking-[0.25em] text-[#0B4D95]">
-                      Clinical Portfolio
+                      {t("deviceDetail.clinicalPortfolio")}
                     </span>
-                    <h2 className="mt-3 font-display text-3xl font-extrabold text-[#0B121C] sm:text-4xl">Spinal Orthotic Systems for Clinical Practice</h2>
+                    <h2 className="mt-3 font-display text-3xl font-extrabold text-[#0B121C] sm:text-4xl">{t("deviceDetail.spinalOrthoticSystems")}</h2>
                   </div>
 
                   <div className="grid grid-cols-1 gap-8">
                     {device.richContent.systems.map((sys, idx) => (
                       <div
                         key={sys.title}
-                        className="group overflow-hidden rounded-3xl border border-[#E2E8F0] bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#0B4D95]/30 hover:shadow-xl sm:p-10"
+                        className="group overflow-hidden rounded-3xl border border-[#E2E8F0] bg-white p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#0B4D95]/30 hover:shadow-xl sm:p-10 text-start"
                       >
                         <div className="flex flex-col justify-between gap-3 border-b border-[#E2E8F0] pb-6 sm:flex-row sm:items-center">
                           <div>
-                            <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#0284C7]">System 0{idx + 1}</span>
+                            <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#0284C7]">{t("deviceDetail.system")} 0{idx + 1}</span>
                             <h3 className="mt-1 font-display text-2xl font-bold text-[#0B121C]">{sys.title}</h3>
                             {sys.subtitle && <p className="mt-1 text-sm font-semibold text-[#0B4D95]">{sys.subtitle}</p>}
                           </div>
-                          <span className="self-start rounded-full bg-[#0B4D95]/10 px-4 py-1.5 font-mono text-xs font-semibold text-[#0B4D95]">Institutional Grade</span>
+                          <span className="self-start rounded-full bg-[#0B4D95]/10 px-4 py-1.5 font-mono text-xs font-semibold text-[#0B4D95]">{t("deviceDetail.institutionalGrade")}</span>
                         </div>
 
                         {sys.description && <p className="mt-5 leading-relaxed text-[#4A5568]">{sys.description}</p>}
@@ -216,7 +221,7 @@ export default function DeviceContent({ device, img }) {
                         {/* Indications */}
                         {sys.indications?.length > 0 && (
                           <div className="mt-6">
-                            <p className="font-display text-sm font-bold text-[#0B121C]">Common Indications:</p>
+                            <p className="font-display text-sm font-bold text-[#0B121C]">{t("deviceDetail.commonIndications")}</p>
                             <div className="mt-3 flex flex-wrap gap-2.5">
                               {sys.indications.map((ind) => (
                                 <span
@@ -233,14 +238,14 @@ export default function DeviceContent({ device, img }) {
                         {/* Examples & Benefits */}
                         {sys.examples?.length > 0 && (
                           <div className="mt-6 rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-5">
-                            <p className="font-display text-xs font-bold uppercase tracking-wider text-[#0B4D95]">System Formats:</p>
+                            <p className="font-display text-xs font-bold uppercase tracking-wider text-[#0B4D95]">{t("deviceDetail.systemFormats")}</p>
                             <p className="mt-1.5 text-sm font-medium text-[#0B121C]">{sys.examples.join(" · ")}</p>
                           </div>
                         )}
 
                         {sys.benefits?.length > 0 && (
                           <div className="mt-6 rounded-2xl border border-[#BAE6FD] bg-gradient-to-r from-[#F0F9FF] to-[#E0F2FE] p-6">
-                            <p className="font-display text-xs font-bold uppercase tracking-wider text-[#0284C7]">Clinical Benefits</p>
+                            <p className="font-display text-xs font-bold uppercase tracking-wider text-[#0284C7]">{t("deviceDetail.clinicalBenefits")}</p>
                             <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                               {sys.benefits.map((b) => (
                                 <div key={b} className="flex items-center gap-2.5 text-xs font-semibold text-[#0C4A6E]">
@@ -255,13 +260,13 @@ export default function DeviceContent({ device, img }) {
                         {sys.subsections?.length > 0 && (
                           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
                             {sys.subsections.map((sub) => (
-                              <div key={sub.title} className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0F172A] to-[#1E293B] p-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-1">
+                              <div key={sub.title} className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#0F172A] to-[#1E293B] p-6 text-white shadow-lg transition-all duration-300 hover:-translate-y-1 text-start">
                                 <h4 className="font-display text-lg font-bold text-[#0284C7]">{sub.title}</h4>
                                 <p className="mt-2 text-xs leading-relaxed text-white/70">{sub.description}</p>
                                 <div className="mt-4 space-y-2">
                                   {sub.indications.map((ind) => (
                                     <div key={ind} className="flex items-center gap-2 text-xs font-medium text-white/90">
-                                      <ChevronRight size={14} className="text-[#0284C7]" /> {ind}
+                                      <ChevronRight size={14} className={`text-[#0284C7] ${isRTL ? "rotate-180" : ""}`} /> {ind}
                                     </div>
                                   ))}
                                 </div>
@@ -274,7 +279,7 @@ export default function DeviceContent({ device, img }) {
                         {sys.devices?.length > 0 && (
                           <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2">
                             {sys.devices.map((dev) => (
-                              <div key={dev.name} className="rounded-2xl border border-[#FED7AA] bg-gradient-to-br from-[#FFF7ED] to-[#FFEDD5] p-6 shadow-sm transition-all duration-300 hover:-translate-y-1">
+                              <div key={dev.name} className="rounded-2xl border border-[#FED7AA] bg-gradient-to-br from-[#FFF7ED] to-[#FFEDD5] p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 text-start">
                                 <h4 className="font-display text-lg font-bold text-[#9A3412]">{dev.name}</h4>
                                 <p className="mt-2 text-sm leading-relaxed text-[#7C2D12]">{dev.description}</p>
                               </div>
@@ -293,19 +298,19 @@ export default function DeviceContent({ device, img }) {
             {/* Clinical Precision & Institutional Alignment */}
             {device.richContent.clinicalPrecision && (
               <Reveal>
-                <div className="relative overflow-hidden rounded-3xl border border-[#0B4D95]/30 bg-gradient-to-br from-[#0B121C] via-[#0F1B2D] to-[#0B4D95] p-8 text-white shadow-2xl sm:p-12">
-                  <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-[#0284C7]/10 blur-3xl" />
-                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0284C7]">Institutional Care</p>
+                <div className="relative overflow-hidden rounded-3xl border border-[#0B4D95]/30 bg-gradient-to-br from-[#0B121C] via-[#0F1B2D] to-[#0B4D95] p-8 text-white shadow-2xl sm:p-12 text-start">
+                  <div className={`absolute ${isRTL ? "left-0" : "right-0"} top-0 h-96 w-96 rounded-full bg-[#0284C7]/10 blur-3xl`} />
+                  <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0284C7]">{t("deviceDetail.institutionalCare")}</p>
                   <h2 className="mt-3 font-display text-3xl font-extrabold sm:text-4xl">{device.richContent.clinicalPrecision.title}</h2>
                   <p className="mt-4 max-w-3xl leading-relaxed text-white/80">{device.richContent.clinicalPrecision.description}</p>
 
                   <div className="mt-10 space-y-4">
-                    <p className="font-display text-sm font-bold text-white">Quantum Medical Supports Institutional Teams Through:</p>
+                    <p className="font-display text-sm font-bold text-white">{t("deviceDetail.quantumSupports")}</p>
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       {device.richContent.clinicalPrecision.supportPillars.map((sp, idx) => (
                         <div
                           key={sp}
-                          className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/10 p-5 font-semibold backdrop-blur-md transition-all duration-300 hover:border-[#0284C7]/50 hover:bg-white/15 hover:translate-x-1"
+                          className="flex items-center gap-4 rounded-2xl border border-white/10 bg-white/10 p-5 font-semibold backdrop-blur-md transition-all duration-300 hover:border-[#0284C7]/50 hover:bg-white/15"
                         >
                           <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-r from-[#0284C7] to-[#38BDF8] text-sm font-extrabold text-white shadow-md">
                             0{idx + 1}
@@ -327,41 +332,49 @@ export default function DeviceContent({ device, img }) {
 
         {/* Anchors */}
         {device.anchors?.length > 0 && (
-          <div className="mt-20 space-y-6">
+          <div className="mt-20 space-y-6 text-start">
             <Reveal>
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0B4D95]">Within this category</p>
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0B4D95] font-semibold">{t("deviceDetail.withinCategory")}</p>
             </Reveal>
             {device.anchors.map((a) => (
               <Reveal key={a.id}>
                 <div id={a.id} className="scroll-mt-24 rounded-2xl border border-[#E2E8F0] bg-white p-7 shadow-sm">
                   <h3 className="font-display text-xl font-bold text-[#0B121C]">{a.label}</h3>
                   <p className="mt-2 max-w-3xl leading-relaxed text-[#4A5568]">
-                    Custom {a.label.toLowerCase()} designed from a 3D scan and fabricated in-house — engineered to the individual's anatomy, activity level and clinical goals.
+                    {language === "ar"
+                      ? `${a.label} مخصصة ومصممة من مسح ثلاثي الأبعاد ومصنعة داخلياً — هندسياً وفق تشريح المريض ومستوى نشاطه وأهدافه الإكلينيكية.`
+                      : `Custom ${a.label.toLowerCase()} designed from a 3D scan and fabricated in-house — engineered to the individual's anatomy, activity level and clinical goals.`}
                   </p>
-                  <button onClick={() => open("consultation")} className="mt-4 font-display text-sm font-semibold text-[#0284C7] hover:underline" data-testid={`anchor-consult-${a.id}`}>Book a consultation →</button>
+                  <button onClick={() => open("consultation")} className="mt-4 inline-flex items-center gap-1 font-display text-sm font-semibold text-[#0284C7] hover:underline cursor-pointer" data-testid={`anchor-consult-${a.id}`}>
+                    {t("deviceDetail.bookConsultation")} <ArrowRight size={14} className={isRTL ? "rotate-180" : ""} />
+                  </button>
                 </div>
               </Reveal>
             ))}
           </div>
         )}
 
-        <div className="mt-24 flex flex-col items-start justify-between gap-6 rounded-3xl bg-gradient-to-r from-[#0B4D95] to-[#083a72] p-10 shadow-xl sm:flex-row sm:items-center">
+        <div className="mt-24 flex flex-col items-start justify-between gap-6 rounded-3xl bg-gradient-to-r from-[#0B4D95] to-[#083a72] p-10 shadow-xl sm:flex-row sm:items-center text-start">
           <div>
-            <h3 className="font-display text-2xl font-bold text-white">Ready to prescribe {device.title.toLowerCase()}?</h3>
-            <p className="mt-2 text-white/70">Book a consultation and we'll design the right device for your patient.</p>
+            <h3 className="font-display text-2xl font-bold text-white">
+              {t("deviceDetail.readyToPrescribe")} {device.title}؟
+            </h3>
+            <p className="mt-2 text-white/70">{t("deviceDetail.readyToPrescribeDesc")}</p>
           </div>
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => open("consultation")}
             data-testid="device-consult-btn"
-            className="shrink-0 rounded-full bg-gradient-to-r from-[#0284C7] to-[#38BDF8] px-8 py-4 font-display text-sm font-semibold text-white shadow-lg transition-colors hover:shadow-xl"
+            className="shrink-0 rounded-full bg-gradient-to-r from-[#0284C7] to-[#38BDF8] px-8 py-4 font-display text-sm font-semibold text-white shadow-lg transition-colors hover:shadow-xl cursor-pointer"
           >
-            Book a Consultation
+            {t("deviceDetail.bookConsultation")}
           </motion.button>
         </div>
 
-        <Link href="/products" className="mt-10 inline-flex items-center gap-2 font-display text-sm font-semibold text-[#0B4D95] hover:underline"><ArrowLeft size={16} /> All products</Link>
+        <Link href="/products" className="mt-10 inline-flex items-center gap-2 font-display text-sm font-semibold text-[#0B4D95] hover:underline">
+          <ArrowLeft size={16} className={isRTL ? "rotate-180" : ""} /> {t("deviceDetail.allProducts")}
+        </Link>
       </section>
     </div>
   );

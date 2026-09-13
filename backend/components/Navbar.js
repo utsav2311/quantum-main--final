@@ -73,6 +73,23 @@ export default function Navbar() {
     router.push(to);
   };
 
+  const NAV_CHILDREN_AR = {
+    "Products": "جميع المنتجات والأجهزة",
+    "Spine & Back Braces": "دعامات الظهر والعمود الفقري",
+    "Upper Limb Orthotics": "أجهزة تقويم الأطراف العلوية",
+    "Lower Limb Orthotics": "أجهزة تقويم الأطراف السفلية",
+    "Custom Insoles & Footwear": "فرشات وأحذية طبية مخصصة",
+    "Lower Limb Prosthetics": "أطراف اصطناعية للأطراف السفلية",
+    "Upper Limb Prosthetics": "أطراف اصطناعية للأطراف العلوية",
+    "Sockets & Liners": "تجاويف وبطانات الأطراف الاصطناعية",
+    "Silicone Restoration": "الترميم السيليكوني التجميلي",
+    "Pediatric Prosthetics": "أطراف اصطناعية للأطفال",
+    "Cranial Orthoses": "خوذات تصحيح شكل الرأس",
+    "Scoliosis Bracing": "دعامات الجنف واعوجاج العمود الفقري",
+    "Walker, Canes & Crutches": "المشايات والعصي والعكازات",
+    "Custom Seating": "أنظمة المقاعد والوسائد الطبية",
+  };
+
   const localizedNav = NAV.map((item) => {
     let label = item.label;
     if (item.to === "/") label = t("nav.home");
@@ -87,7 +104,12 @@ export default function Navbar() {
     return {
       ...item,
       displayLabel: label,
-      children: item.children ? item.children.map(c => ({ ...c, displayLabel: c.label })) : null,
+      children: item.children
+        ? item.children.map((c) => ({
+            ...c,
+            displayLabel: language === "ar" && NAV_CHILDREN_AR[c.label] ? NAV_CHILDREN_AR[c.label] : c.label,
+          }))
+        : null,
     };
   });
 
