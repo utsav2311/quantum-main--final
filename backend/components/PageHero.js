@@ -12,7 +12,7 @@ export default function PageHero({ label, title, subtitle, image, children }) {
           <div className="absolute inset-0 bg-gradient-to-r from-[#0B121C] via-[#0B121C]/85 to-[#0B121C]/40" />
         </div>
       )}
-      <div className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-28">
+      <div className="relative mx-auto max-w-7xl px-5 py-24 lg:px-8 lg:py-28 text-start">
         {label && (
           <motion.p initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-[#0284C7]">
             <span className="h-px w-8 bg-[#0284C7]" /> {label}
