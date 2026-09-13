@@ -18,7 +18,7 @@ export function Reveal({ children, delay = 0, y = 18, className = "", once = tru
 }
 
 export function TextReveal({ text, className = "", delay = 0 }) {
-  const words = text.split(" ");
+  const words = (text || "").split(" ");
 
   return (
     <motion.span
@@ -32,7 +32,7 @@ export function TextReveal({ text, className = "", delay = 0 }) {
       }}
     >
       {words.map((word, i) => (
-        <span key={i} className="inline-block overflow-hidden whitespace-pre mr-[0.25em]">
+        <span key={i} className="inline-block overflow-hidden whitespace-pre mx-[0.12em]">
           <motion.span
             className="inline-block"
             variants={{
