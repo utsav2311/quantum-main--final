@@ -7,8 +7,10 @@ import { toast } from "sonner";
 import { COMPANY, waLink } from "@/lib/site";
 import { api, formatApiError } from "@/lib/api";
 import { useLeadModal } from "@/context/LeadModalContext";
+import { useLanguage } from "@/context/LanguageContext";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { usePathname } from "next/navigation";
 
 function LinkedinIcon(props) {
   return (
@@ -49,14 +51,11 @@ function YoutubeIcon(props) {
 
 const socialIcon = { linkedin: LinkedinIcon, instagram: InstagramIcon, facebook: FacebookIcon, youtube: YoutubeIcon };
 
-
-
-import { usePathname } from "next/navigation";
-
 export default function Footer() {
   const pathname = usePathname();
   if (pathname === "/admin") return null;
   const { open } = useLeadModal();
+  const { language, t, isRTL } = useLanguage();
   const [form, setForm] = useState({ name: "", phone: "", email: "", message: "" });
   const [loading, setLoading] = useState(false);
   const set = (k) => (e) => setForm((f) => ({ ...f, [k]: e.target.value }));
@@ -64,13 +63,13 @@ export default function Footer() {
   const submit = async (e) => {
     e.preventDefault();
     if (form.name.trim().length < 2 || !/^\S+@\S+\.\S+$/.test(form.email) || form.phone.trim().length < 5) {
-      toast.error("Please fill in your name, a valid email and phone.");
+      toast.error(language === "ar" ? "يرجى تعبئة الاسم والبريد الإلكتروني ورقم الهاتف بشكل صحيح" : "Please fill in your name, a valid email and phone.");
       return;
     }
     setLoading(true);
     try {
       await api.post("/leads", { ...form, lead_type: "general" });
-      toast.success("Message sent — we'll be in touch soon!");
+      toast.success(language === "ar" ? "تم إرسال رسالتك — سنتواصل معك قريباً!" : "Message sent — we'll be in touch soon!");
       setForm({ name: "", phone: "", email: "", message: "" });
     } catch (err) {
       toast.error(formatApiError(err.response?.data?.detail) || "Failed to send");
@@ -90,12 +89,17 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4 group">
               <img src="/logo.webp" alt={COMPANY.name} loading="lazy" className="h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
-              <span className="font-display text-xl font-extrabold text-white">{COMPANY.name}</span>
+              <span className="font-display text-xl font-extrabold text-white">
+                {language === "ar" ? "كوانتوم ميديكال" : COMPANY.name}
+              </span>
             </div>
 
-            <h2 className="mt-3 max-w-md font-display text-4xl font-extrabold leading-[1.05] sm:text-5xl">
-              {COMPANY.tagline}
+            <h2 className="mt-3 max-w-md font-display text-3xl sm:text-4xl font-extrabold leading-[1.1]">
+              {language === "ar" ? "هندسة متقدمة للأطراف الاصطناعية وتقويم العظام" : COMPANY.tagline}
             </h2>
+            <p className="mt-4 max-w-md text-sm leading-relaxed text-white/70">
+              {t("footer.aboutText")}
+            </p>
 
             <div className="mt-8 space-y-3">
               <a href={`tel:${COMPANY.phoneRaw}`} data-testid="footer-phone" className="flex items-center gap-3 text-white/80 transition-colors hover:text-white">
@@ -108,8 +112,13 @@ export default function Footer() {
 
             <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
               {COMPANY.addresses.map((a) => (
-                <a key={a.label} href={a.maps} target="_blank" rel="noopener noreferrer" data-testid={`footer-address-${a.label}`} className="group rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-[#0284C7]/50">
-                  <div className="flex items-center gap-2 text-[#0284C7]"><MapPin size={15} /><span className="font-display text-xs font-semibold uppercase tracking-wide">{a.label}</span></div>
+                <a key={a.label} href={a.maps} target="_blank" rel="noopener noreferrer" data-testid={`footer-address-${a.label}`} className="group rounded-2xl border border-white/10 bg-white/5 p-4 transition-colors hover:border-[#0284C7]/50 text-start">
+                  <div className="flex items-center gap-2 text-[#0284C7]">
+                    <MapPin size={15} />
+                    <span className="font-display text-xs font-semibold uppercase tracking-wide">
+                      {language === "ar" ? (a.label.includes("Abu Dhabi") ? "الفرع الرئيسي" : "مكتب دبي") : a.label}
+                    </span>
+                  </div>
                   <p className="mt-2 text-sm leading-relaxed text-white/70">{a.value}</p>
                 </a>
               ))}
@@ -117,7 +126,7 @@ export default function Footer() {
 
             <div className="mt-8 flex items-center gap-3">
               {COMPANY.socials.map((s) => {
-                const Icon = socialIcon[s.icon] || Linkedin;
+                const Icon = socialIcon[s.icon] || LinkedinIcon;
                 return (
                   <a
                     key={s.icon}
@@ -133,72 +142,78 @@ export default function Footer() {
             </div>
 
             <button onClick={() => open("franchise")} data-testid="footer-franchise-btn" className="mt-8 rounded-full border border-[#0284C7] px-6 py-3 font-display text-sm font-semibold text-[#0284C7] transition-colors hover:bg-[#0284C7] hover:text-white cursor-pointer">
-              Apply for Franchise
+              {language === "ar" ? "تقديم طلب شراكة / امتياز" : "Apply for Franchise"}
             </button>
           </div>
 
           {/* Right: contact form */}
-          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm sm:p-9">
-            <h3 className="font-display text-2xl font-bold">Send us a message</h3>
-            <p className="mt-1 text-sm text-white/60">General inquiries — we typically reply within one business day.</p>
+          <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm sm:p-9 text-start">
+            <h3 className="font-display text-2xl font-bold">
+              {language === "ar" ? "أرسل لنا رسالة" : "Send us a message"}
+            </h3>
+            <p className="mt-1 text-sm text-white/60">
+              {language === "ar" ? "استفسارات عامة — نرد عادةً خلال يوم عمل واحد." : "General inquiries — we typically reply within one business day."}
+            </p>
             <form onSubmit={submit} className="mt-6 space-y-4">
               <Input
                 data-testid="footer-name-input"
                 aria-label="Your full name"
-                placeholder="Your name"
+                placeholder={language === "ar" ? "الاسم الكامل" : "Your name"}
                 value={form.name}
                 onChange={set("name")}
-                className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]"
+                className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7] text-start"
               />
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <Input
                   data-testid="footer-phone-input"
                   aria-label="Your phone number"
-                  placeholder="Phone"
+                  placeholder={language === "ar" ? "رقم الهاتف" : "Phone"}
                   value={form.phone}
                   onChange={set("phone")}
-                  className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]"
+                  className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7] text-start"
                 />
                 <Input
                   data-testid="footer-email-input"
                   aria-label="Your email address"
                   type="email"
-                  placeholder="Email"
+                  placeholder={language === "ar" ? "البريد الإلكتروني" : "Email"}
                   value={form.email}
                   onChange={set("email")}
-                  className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]"
+                  className="h-12 rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7] text-start"
                 />
               </div>
               <Textarea
                 data-testid="footer-message-input"
                 aria-label="Your message or inquiry"
-                placeholder="Message"
+                placeholder={language === "ar" ? "رسالتك أو استفسارك..." : "Message"}
                 rows={4}
                 value={form.message}
                 onChange={set("message")}
-                className="rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7]"
+                className="rounded-xl border-white/15 bg-white/5 text-white placeholder:text-white/40 focus-visible:ring-[#0284C7] text-start"
               />
-              <button type="submit" disabled={loading} data-testid="footer-submit-btn" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#0284C7] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] disabled:opacity-60 cursor-pointer">
-                {loading ? <Loader2 size={17} className="animate-spin" /> : <Send size={16} />}
-                {loading ? "Sending…" : "Submit"}
+              <button type="submit" disabled={loading} data-testid="footer-submit-btn" className="flex w-full items-center justify-center gap-2 rounded-full bg-[#0284C7] py-3.5 font-display text-sm font-semibold text-white transition-colors hover:bg-[#0052CC] disabled:opacity-60 cursor-pointer shadow-lg shadow-[#0284C7]/20">
+                {loading ? <Loader2 size={17} className="animate-spin" /> : <Send size={16} className={isRTL ? "rotate-180" : ""} />}
+                {loading ? (language === "ar" ? "جاري الإرسال…" : "Sending…") : (language === "ar" ? "إرسال الرسالة" : "Submit")}
               </button>
             </form>
-            <a href={waLink()} target="_blank" rel="noopener noreferrer" className="mt-4 block text-center text-sm text-white/50 transition-colors hover:text-[#25D366]">or chat with us on WhatsApp →</a>
+            <a href={waLink()} target="_blank" rel="noopener noreferrer" className="mt-4 block text-center text-sm text-white/50 transition-colors hover:text-[#25D366]">
+              {language === "ar" ? "أو تحدث معنا مباشرة عبر واتساب ←" : "or chat with us on WhatsApp →"}
+            </a>
           </div>
         </div>
 
         <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-sm text-white/50 sm:flex-row sm:items-center">
-          <p>© {new Date().getFullYear()} {COMPANY.name}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} {COMPANY.name}. {t("footer.copyright", "All rights reserved.")}</p>
           <div className="flex items-center gap-5">
-            <Link href="/terms" data-testid="footer-terms" className="transition-colors hover:text-white">Terms &amp; Conditions</Link>
-            <a href="/admin" target="_blank" rel="noopener noreferrer" data-testid="footer-admin" className="transition-colors hover:text-white">Admin Portal</a>
+            <Link href="/terms" data-testid="footer-terms" className="transition-colors hover:text-white">
+              {language === "ar" ? "الشروط والأحكام" : "Terms & Conditions"}
+            </Link>
+            <a href="/admin" target="_blank" rel="noopener noreferrer" data-testid="footer-admin" className="transition-colors hover:text-white">
+              {t("nav.admin", "Admin Portal")}
+            </a>
           </div>
-
         </div>
       </div>
     </footer>
   );
 }
-
-
-

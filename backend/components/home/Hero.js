@@ -4,8 +4,9 @@ import { useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowUpRight, Cpu, Box, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { IMAGES, HERO_CALLOUTS } from "@/lib/site";
+import { IMAGES } from "@/lib/site";
 import { useLeadModal } from "@/context/LeadModalContext";
+import { useLanguage } from "@/context/LanguageContext";
 
 const lineReveal = {
   hidden: { y: "110%" },
@@ -17,21 +18,27 @@ const calloutIcons = [Cpu, Box, Users];
 export default function Hero() {
   const router = useRouter();
   const { open } = useLeadModal();
+  const { language, t, isRTL } = useLanguage();
   const [active, setActive] = useState(0);
   const { scrollY } = useScroll();
   const imgY = useTransform(scrollY, [0, 600], [0, 120]);
   const imgScale = useTransform(scrollY, [0, 600], [1, 1.12]);
 
+  const callouts = [
+    t("hero.callouts.0", "In-House 3D Scan to Fabrication Studio"),
+    t("hero.callouts.1", "Clinical Partnerships with Top Hospitals"),
+    t("hero.callouts.2", "Custom Pediatric & Adult Orthotics"),
+  ];
+
   useEffect(() => {
-    const t = setInterval(() => setActive((a) => (a + 1) % HERO_CALLOUTS.length), 3200);
-    return () => clearInterval(t);
-  }, []);
+    const tTimer = setInterval(() => setActive((a) => (a + 1) % callouts.length), 3200);
+    return () => clearInterval(tTimer);
+  }, [callouts.length]);
 
   const lines = [
-    { text: "Transforming" },
-    { text: "Healthcare —" },
-    { pre: "Join the ", hl: "B2B" },
-    { text: "Revolution." },
+    { text: t("hero.line1", "Transforming") },
+    { text: t("hero.line2", "Healthcare —") },
+    { pre: t("hero.preB2B", "Join the "), hl: t("hero.hlB2B", "B2B"), post: t("hero.postB2B", " Revolution.") },
   ];
 
   return (
@@ -67,7 +74,7 @@ export default function Hero() {
             className="h-full w-full object-cover object-center brightness-90 contrast-[1.05]"
           />
         )}
-        {/* Mobile & Desktop Responsive Gradients for optimal visibility and readability */}
+        {/* Mobile & Desktop Responsive Gradients */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#0B121C]/90 via-[#0B121C]/70 to-[#0B121C]/30 sm:from-[#0B121C]/85 sm:via-[#0B121C]/60 sm:to-[#0B121C]/20" />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0B121C]/80 via-transparent to-[#0B121C]/75 sm:to-[#0B121C]/50" />
       </motion.div>
@@ -80,7 +87,7 @@ export default function Hero() {
           transition={{ delay: 0.1 }}
           className="mb-3 flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-[#0284C7] sm:mb-6 sm:text-xs sm:tracking-[0.3em]"
         >
-          <span className="h-px w-5 bg-[#0284C7] sm:w-8" /> Prosthetics &amp; Orthotics · B2B
+          <span className="h-px w-5 bg-[#0284C7] sm:w-8" /> {t("hero.tag", "Prosthetics & Orthotics · B2B")}
         </motion.p>
 
         <h1 className="max-w-4xl font-display text-3xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl drop-shadow-sm">
@@ -91,6 +98,7 @@ export default function Hero() {
                   <span>
                     {line.pre}
                     <span className="text-[#0284C7]">{line.hl}</span>
+                    {line.post || ""}
                   </span>
                 ) : (
                   line.text
@@ -106,7 +114,7 @@ export default function Hero() {
           transition={{ delay: 0.8 }}
           className="mt-4 max-w-xl text-sm leading-relaxed text-white/85 sm:mt-7 sm:text-lg"
         >
-          Tailored prosthetic &amp; orthotic solutions for hospitals and clinics — engineered with GAIT analysis, CAD/CAM design and in-house 3D printing.
+          {t("hero.desc")}
         </motion.p>
 
         <motion.div
@@ -118,24 +126,24 @@ export default function Hero() {
           <button
             onClick={() => open("partner")}
             data-testid="hero-partner-btn"
-            className="btn-gradient-coral group flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 font-display text-xs font-semibold text-white active:scale-[0.98] shadow-xl shadow-[#0284C7]/35 sm:w-auto sm:px-7 sm:py-4 sm:text-sm"
+            className="btn-gradient-coral group flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 font-display text-xs font-semibold text-white active:scale-[0.98] shadow-xl shadow-[#0284C7]/35 sm:w-auto sm:px-7 sm:py-4 sm:text-sm cursor-pointer"
           >
-            Partner With Us
-            <ArrowUpRight size={17} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            {t("hero.partnerBtn", "Partner With Us")}
+            <ArrowUpRight size={17} className={`transition-transform ${isRTL ? "group-hover:-translate-x-0.5 group-hover:-translate-y-0.5 rotate-270" : "group-hover:translate-x-0.5 group-hover:-translate-y-0.5"}`} />
           </button>
           <button
             onClick={() => router.push("/products")}
             data-testid="hero-products-btn"
-            className="flex w-full items-center justify-center rounded-full border border-white/30 bg-white/10 px-6 py-3.5 font-display text-xs font-semibold text-white transition-all hover:bg-white/20 active:scale-[0.98] backdrop-blur-xl sm:w-auto sm:px-7 sm:py-4 sm:text-sm shadow-md"
+            className="flex w-full items-center justify-center rounded-full border border-white/30 bg-white/10 px-6 py-3.5 font-display text-xs font-semibold text-white transition-all hover:bg-white/20 active:scale-[0.98] backdrop-blur-xl sm:w-auto sm:px-7 sm:py-4 sm:text-sm shadow-md cursor-pointer"
           >
-            Explore Devices
+            {t("hero.exploreBtn", "Explore Devices")}
           </button>
         </motion.div>
 
         {/* Rotating callouts */}
         <div className="mt-8 max-w-2xl sm:mt-14">
           <div className="flex gap-2">
-            {HERO_CALLOUTS.map((_, i) => (
+            {callouts.map((_, i) => (
               <span
                 key={i}
                 className={`h-1 rounded-full transition-all duration-500 ${i === active ? "w-8 bg-[#0284C7] sm:w-10" : "w-4 bg-white/30 sm:w-5"}`}
@@ -143,7 +151,7 @@ export default function Hero() {
             ))}
           </div>
           <div className="relative mt-3 h-14 sm:mt-4 sm:h-14">
-            {HERO_CALLOUTS.map((c, i) => {
+            {callouts.map((c, i) => {
               const Icon = calloutIcons[i];
               return (
                 <motion.div

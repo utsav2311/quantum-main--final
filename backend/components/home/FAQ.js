@@ -3,14 +3,18 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { Reveal, TextReveal, TiltCard } from "@/components/Reveal";
-import { FAQS } from "@/lib/site";
 import { useLeadModal } from "@/context/LeadModalContext";
+import { useLanguage } from "@/context/LanguageContext";
+import { TRANSLATIONS } from "@/lib/translations";
 import { Plus, Minus, PhoneCall, HelpCircle, Sparkles } from "lucide-react";
 
 export default function FAQ() {
   const { open } = useLeadModal();
+  const { language, t, isRTL } = useLanguage();
   const [openIndex, setOpenIndex] = useState(null);
   const containerRef = useRef(null);
+
+  const faqItems = TRANSLATIONS[language]?.faq?.items || TRANSLATIONS.en.faq.items;
 
   // Parallax Scroll Effect on Ambient Background Layers
   const { scrollYProgress } = useScroll({
@@ -46,20 +50,20 @@ export default function FAQ() {
         <Reveal>
           <div className="flex flex-col items-center text-center">
             <span className="inline-flex items-center gap-2 rounded-full border border-[#0284C7]/30 bg-[#0284C7]/10 px-4 py-1.5 font-mono text-xs font-semibold uppercase tracking-[0.25em] text-[#0284C7] backdrop-blur-md">
-              <HelpCircle size={14} className="text-[#0284C7]" /> Questions &amp; Answers
+              <HelpCircle size={14} className="text-[#0284C7]" /> {t("faq.badge", "Questions & Answers")}
             </span>
             <h2 className="mt-4 font-display text-4xl font-extrabold text-[#0B121C] sm:text-5xl lg:text-6xl tracking-tight">
-              <TextReveal text="Questions, answered." />
+              <TextReveal text={t("faq.title", "Questions, answered.")} />
             </h2>
             <p className="mt-3 max-w-lg text-base text-slate-600 leading-relaxed">
-              Everything you need to know about our clinical assessments, custom fabrication, and hospital partnership models.
+              {t("faq.subtitle", "Everything you need to know about our clinical assessments, custom fabrication, and hospital partnership models.")}
             </p>
           </div>
         </Reveal>
 
         {/* Interactive Glassmorphism Accordion List */}
         <div className="mt-14 space-y-4" data-testid="faq-accordion">
-          {FAQS.map((f, i) => {
+          {faqItems.map((f, i) => {
             const isOpen = openIndex === i;
             return (
               <Reveal key={i} delay={i * 0.04}>
@@ -73,7 +77,7 @@ export default function FAQ() {
                     transition={{ duration: 0.25 }}
                     className={`group overflow-hidden rounded-2xl border backdrop-blur-md transition-all duration-300 ${
                       isOpen
-                        ? "shadow-xl shadow-[#0284C7]/10 border-l-4 border-l-[#0284C7]"
+                        ? `shadow-xl shadow-[#0284C7]/10 ${isRTL ? "border-r-4 border-r-[#0284C7]" : "border-l-4 border-l-[#0284C7]"}`
                         : "hover:border-[#0284C7]/50 hover:bg-white hover:shadow-xl hover:shadow-[#0284C7]/10"
                     }`}
                   >
@@ -83,7 +87,7 @@ export default function FAQ() {
                       data-testid={`faq-trigger-${i}`}
                       aria-expanded={isOpen}
                       aria-controls={`faq-panel-${i}`}
-                      className="flex w-full items-center justify-between gap-4 p-5 sm:p-6 text-left focus:outline-none cursor-pointer select-none"
+                      className="flex w-full items-center justify-between gap-4 p-5 sm:p-6 text-start focus:outline-none cursor-pointer select-none"
                     >
                       <div className="flex items-center gap-4">
                         <span
@@ -126,7 +130,7 @@ export default function FAQ() {
                           exit={{ height: 0, opacity: 0, y: -6 }}
                           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
                         >
-                          <div className="border-t border-slate-100 px-6 pb-6 pt-4">
+                          <div className="border-t border-slate-100 px-6 pb-6 pt-4 text-start">
                             <p className="text-[15px] leading-relaxed text-slate-600">{f.a}</p>
                           </div>
                         </motion.div>
@@ -148,20 +152,22 @@ export default function FAQ() {
 
             <div className="relative z-10 flex flex-col items-center">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1 font-mono text-xs font-medium text-[#0284C7] border border-white/15 backdrop-blur-md">
-                <Sparkles size={13} /> Direct Support
+                <Sparkles size={13} /> {t("faq.ctaBadge", "Direct Support")}
               </span>
-              <h3 className="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">Still have questions?</h3>
+              <h3 className="mt-3 font-display text-2xl font-bold text-white sm:text-3xl">
+                {t("faq.ctaTitle", "Still have questions?")}
+              </h3>
               <p className="mt-2 max-w-md text-sm text-white/80 sm:text-base">
-                Book a consultation call with our clinical team and we'll guide you through custom specifications.
+                {t("faq.ctaDesc", "Book a consultation call with our clinical team and we'll guide you through custom specifications.")}
               </p>
               <motion.button
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
                 onClick={() => open("consultation")}
                 data-testid="faq-schedule-btn"
-                className="btn-gradient-coral mt-6 flex items-center gap-2 rounded-full px-8 py-4 font-display text-sm font-semibold text-white shadow-xl shadow-[#0284C7]/30"
+                className="btn-gradient-coral mt-6 flex items-center gap-2 rounded-full px-8 py-4 font-display text-sm font-semibold text-white shadow-xl shadow-[#0284C7]/30 cursor-pointer"
               >
-                <PhoneCall size={17} /> Schedule a Call
+                <PhoneCall size={17} /> {t("faq.ctaBtn", "Schedule a Call")}
               </motion.button>
             </div>
           </div>

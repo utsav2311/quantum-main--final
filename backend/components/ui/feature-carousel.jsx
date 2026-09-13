@@ -4,6 +4,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 
 const AUTO_PLAY_INTERVAL = 3200;
 const ITEM_HEIGHT = 65;
@@ -16,6 +17,7 @@ const wrap = (min, max, v) => {
 export function FeatureCarousel({ features }) {
   const [step, setStep] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const { isRTL } = useLanguage();
 
   const currentIndex = ((step % features.length) + features.length) % features.length;
 
@@ -34,14 +36,12 @@ export function FeatureCarousel({ features }) {
     return () => clearInterval(interval);
   }, [nextStep, isPaused]);
 
-  const current = features[currentIndex];
-
   return (
     <div className="w-full mx-auto">
       <div className="relative overflow-hidden rounded-3xl flex flex-col lg:flex-row min-h-[560px] border border-white/10 bg-[#0B121C]">
 
         {/* LEFT — Scrolling Label List */}
-        <div className="w-full lg:w-[38%] relative z-30 flex flex-col items-start justify-center overflow-hidden px-6 md:px-10 lg:px-12 py-10 lg:py-0 bg-[#0B4D95]/20 border-b lg:border-b-0 lg:border-r border-white/10 min-h-[260px] lg:min-h-full">
+        <div className={`w-full lg:w-[38%] relative z-30 flex flex-col items-start justify-center overflow-hidden px-6 md:px-10 lg:px-12 py-10 lg:py-0 bg-[#0B4D95]/20 border-b lg:border-b-0 ${isRTL ? "lg:border-l" : "lg:border-r"} border-white/10 min-h-[260px] lg:min-h-full`}>
           {/* top fade */}
           <div className="absolute inset-x-0 top-0 h-16 bg-gradient-to-b from-[#0B121C] to-transparent z-40 pointer-events-none" />
           {/* bottom fade */}
@@ -66,16 +66,16 @@ export function FeatureCarousel({ features }) {
                     opacity: 1 - Math.abs(wrappedDistance) * 0.22,
                   }}
                   transition={{ type: "spring", stiffness: 90, damping: 22, mass: 1 }}
-                  className="absolute flex items-center justify-start"
+                  className="absolute flex items-center justify-start w-full"
                 >
                   <button
                     onClick={() => handleChipClick(index)}
                     onMouseEnter={() => setIsPaused(true)}
                     onMouseLeave={() => setIsPaused(false)}
                     className={cn(
-                      "relative flex items-center gap-3 px-5 py-3 rounded-full transition-all duration-500 text-left border w-full max-w-xs",
+                      "relative flex items-center gap-3 px-5 py-3 rounded-full transition-all duration-500 text-start border w-full max-w-xs cursor-pointer",
                       isActive
-                        ? "bg-[#0284C7] text-white border-[#0284C7] shadow-lg shadow-[#0284C7]/30"
+                        ? "bg-[#0284C7] text-white border-[#0284C7] shadow-lg shadow-[#0284C7]/30 font-bold"
                         : "bg-transparent text-white/50 border-white/15 hover:border-white/30 hover:text-white/80"
                     )}
                   >
@@ -84,11 +84,11 @@ export function FeatureCarousel({ features }) {
                       "h-2 w-2 rounded-full shrink-0 transition-colors duration-300",
                       isActive ? "bg-white" : "bg-white/30"
                     )} />
-                    <span className="font-mono text-xs uppercase tracking-widest whitespace-nowrap truncate">
+                    <span className="font-display text-xs uppercase tracking-wider whitespace-nowrap truncate">
                       {feature.title}
                     </span>
                     {isActive && (
-                      <span className="ml-auto font-mono text-[9px] text-white/70 uppercase tracking-wider shrink-0">
+                      <span className="ms-auto font-mono text-[9px] text-white/70 uppercase tracking-wider shrink-0">
                         {feature.category}
                       </span>
                     )}
@@ -148,7 +148,7 @@ export function FeatureCarousel({ features }) {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.3 }}
-                        className="absolute inset-x-0 bottom-0 px-6 py-5 bg-gradient-to-t from-black/80 via-black/40 to-transparent"
+                        className="absolute inset-x-0 bottom-0 px-6 py-5 bg-gradient-to-t from-black/85 via-black/45 to-transparent text-start"
                       >
                         <h3 className="font-display text-2xl font-bold text-white drop-shadow-lg leading-tight">
                           {feature.title}
@@ -159,7 +159,7 @@ export function FeatureCarousel({ features }) {
 
                   {/* Counter dot */}
                   {isActive && (
-                    <div className="absolute top-5 left-5 flex items-center gap-2">
+                    <div className={`absolute top-5 ${isRTL ? "right-5" : "left-5"} flex items-center gap-2`}>
                       <span className="h-2 w-2 rounded-full bg-[#0284C7] shadow-[0_0_8px_#0284C7]" />
                       <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/70">
                         {currentIndex + 1} / {features.length}
@@ -177,4 +177,3 @@ export function FeatureCarousel({ features }) {
 }
 
 export default FeatureCarousel;
-
