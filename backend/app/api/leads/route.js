@@ -35,9 +35,8 @@ export async function POST(req) {
     const city = body.city || null;
     const investment_capacity = body.investment_capacity || null;
     const message = body.message || '';
-    const lead_type = body.lead_type || 'general';
-
-    const allowedTypes = new Set(['partner', 'general', 'franchise', 'consultation']);
+    const validTypes = new Set(['partner', 'general', 'franchise', 'consultation', 'inquiry', 'appointment', 'b2b', 'device']);
+    const lead_type = validTypes.has(body.lead_type) ? body.lead_type : 'general';
 
     if (!name || name.length < 2 || name.length > 120) {
       return Response.json({ detail: 'Please enter a valid name (at least 2 characters).' }, { status: 422, headers: corsHeaders() });
@@ -47,9 +46,6 @@ export async function POST(req) {
     }
     if (!phone || phone.length < 5 || phone.length > 30) {
       return Response.json({ detail: 'Please enter a valid phone number.' }, { status: 422, headers: corsHeaders() });
-    }
-    if (!allowedTypes.has(lead_type)) {
-      return Response.json({ detail: 'Invalid lead submission type.' }, { status: 422, headers: corsHeaders() });
     }
 
     const doc = {

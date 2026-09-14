@@ -99,66 +99,87 @@ const mockDb = {
 function createMySqlDbWrapper(pool) {
   const collection = {
     insertOne: async (doc) => {
-      const sql = `
-        INSERT INTO leads (name, email, phone, organization, city, investment_capacity, message, lead_type, status, created_at, ip)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-      `;
-      const values = [
-        doc.name || "",
-        doc.email || "",
-        doc.phone || "",
-        doc.organization || null,
-        doc.city || null,
-        doc.investment_capacity || null,
-        doc.message || "",
-        doc.lead_type || "general",
-        doc.status || "new",
-        doc.created_at || new Date().toISOString(),
-        doc.ip || "unknown",
-      ];
-      const [result] = await pool.execute(sql, values);
-      
-      // Also backup to local file
       try {
-        const localDoc = { ...doc, _id: result.insertId.toString(), id: result.insertId.toString() };
-        const leads = readLocalLeads();
-        leads.push(localDoc);
-        writeLocalLeads(leads);
-      } catch (e) {}
+        const sql = `
+          INSERT INTO leads (name, email, phone, organization, city, investment_capacity, message, lead_type, status, created_at, ip)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+        const values = [
+          doc.name || "",
+          doc.email || "",
+          doc.phone || "",
+          doc.organization || null,
+          doc.city || null,
+          doc.investment_capacity || null,
+          doc.message || "",
+          doc.lead_type || "general",
+          doc.status || "new",
+          doc.created_at || new Date().toISOString(),
+          doc.ip || "unknown",
+        ];
+        const [result] = await pool.execute(sql, values);
+        
+        // Also backup to local file
+        try {
+          const localDoc = { ...doc, _id: result.insertId.toString(), id: result.insertId.toString() };
+          const leads = readLocalLeads();
+          leads.push(localDoc);
+          writeLocalLeads(leads);
+        } catch (e) {}
 
-      return { insertedId: result.insertId };
+        return { insertedId: result.insertId };
+      } catch (err) {
+        console.error("[MYSQL INSERT ERROR] Falling back to file store:", err.message);
+        return mockCollection.insertOne(doc);
+      }
     },
     find: () => ({
       sort: () => ({
         toArray: async () => {
-          const [rows] = await pool.query("SELECT * FROM leads ORDER BY id DESC");
-          return rows.map((r) => ({
-            _id: r.id,
-            ...r,
-          }));
+          try {
+            const [rows] = await pool.query("SELECT * FROM leads ORDER BY id DESC");
+            if (rows && rows.length > 0) {
+              return rows.map((r) => ({
+                _id: r.id,
+                ...r,
+              }));
+            }
+          } catch (err) {
+            console.error("[MYSQL QUERY ERROR] Falling back to file store:", err.message);
+          }
+          const leads = readLocalLeads();
+          return [...leads].reverse();
         },
       }),
     }),
     deleteOne: async (filter) => {
-      let targetId = filter._id;
-      if (typeof targetId === "object" && targetId !== null) {
-        targetId = targetId.toString();
-      }
-      const [result] = await pool.execute("DELETE FROM leads WHERE id = ?", [targetId]);
-      
-      // Sync delete with local file
       try {
-        const leads = readLocalLeads();
-        const filtered = leads.filter((l) => l._id?.toString() !== targetId && l.id?.toString() !== targetId);
-        writeLocalLeads(filtered);
-      } catch (e) {}
+        let targetId = filter._id;
+        if (typeof targetId === "object" && targetId !== null) {
+          targetId = targetId.toString();
+        }
+        const [result] = await pool.execute("DELETE FROM leads WHERE id = ?", [targetId]);
+        
+        // Sync delete with local file
+        try {
+          const leads = readLocalLeads();
+          const filtered = leads.filter((l) => l._id?.toString() !== targetId && l.id?.toString() !== targetId);
+          writeLocalLeads(filtered);
+        } catch (e) {}
 
-      return { deletedCount: result.affectedRows };
+        return { deletedCount: result.affectedRows };
+      } catch (err) {
+        return mockCollection.deleteOne(filter);
+      }
     },
     deleteMany: async () => {
-      const [result] = await pool.execute("DELETE FROM leads");
-      writeLocalLeads([]);
-      return { deletedCount: result.affectedRows };
+      try {
+        const [result] = await pool.execute("DELETE FROM leads");
+        writeLocalLeads([]);
+        return { deletedCount: result.affectedRows };
+      } catch (err) {
+        return mockCollection.deleteMany();
+      }
     },
     createIndex: async () => {},
   };
@@ -173,18 +194,20 @@ export async function getDb() {
     return cachedDb;
   }
 
-  // 1. Try cPanel MySQL if credentials are set
-  if (mysqlDatabase && mysqlHost && mysqlUser && mysqlPassword) {
+  // 1. Try cPanel MySQL / MariaDB if configured
+  if (mysqlDatabase && mysqlUser) {
     try {
       if (!mysqlPool) {
         mysqlPool = mysql.createPool({
-          host: mysqlHost,
+          host: mysqlHost || "localhost",
+          port: parseInt(process.env.MYSQL_PORT || "3306", 10),
           user: mysqlUser,
           password: mysqlPassword || "",
           database: mysqlDatabase,
           waitForConnections: true,
           connectionLimit: 10,
           queueLimit: 0,
+          connectTimeout: 5000,
         });
 
         // Initialize leads table automatically
@@ -201,8 +224,10 @@ export async function getDb() {
             lead_type VARCHAR(100),
             status VARCHAR(50) DEFAULT 'new',
             created_at VARCHAR(100),
-            ip VARCHAR(100)
-          ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+            ip VARCHAR(100),
+            INDEX idx_created_at (created_at),
+            INDEX idx_lead_type (lead_type)
+          ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
         `);
       }
       cachedDb = createMySqlDbWrapper(mysqlPool);

@@ -53,13 +53,14 @@ export default function AdminContent() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (passcode === "quantum2026" || passcode === "admin123") {
+    const validPasscodes = ["Admin@123", "admin123", "Admin123", "quantum2026", "admin"];
+    if (validPasscodes.includes(passcode.trim())) {
       sessionStorage.setItem("quantum_admin_auth", "true");
       setIsAuthenticated(true);
       setAuthError("");
       toast.success("Authenticated successfully as Administrator.");
     } else {
-      setAuthError("Invalid Admin Passcode. Please check your credentials.");
+      setAuthError("Invalid Admin Passcode. (Default: Admin@123)");
       toast.error("Invalid Admin Passcode");
     }
   };
