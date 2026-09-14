@@ -4,45 +4,25 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, Menu, Languages } from "lucide-react";
+import { ChevronDown, Menu } from "lucide-react";
 import { NAV, COMPANY } from "@/lib/site";
 import { useLeadModal } from "@/context/LeadModalContext";
 import { useLanguage } from "@/context/LanguageContext";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 
 function Logo({ light }) {
-  const { language } = useLanguage();
   return (
     <Link href="/" data-testid="nav-logo" className="flex items-center gap-2.5 group">
       <img src="/logo.webp" alt={COMPANY.name} loading="eager" className="h-8 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
       <span className={`flex flex-col font-display leading-tight ${light ? "text-white" : "text-[#0B121C]"}`}>
         <span className="text-lg font-extrabold tracking-tight">
-          {language === "ar" ? "كوانتوم ميديكال" : COMPANY.shortName}
+          {COMPANY.shortName}
         </span>
         <span className={`font-mono text-[9px] font-semibold uppercase tracking-[0.2em] ${light ? "text-cyan-400" : "text-[#0B4D95]"}`}>
-          {language === "ar" ? "أطراف اصطناعية وتقويم" : "Prosthetics & Orthotics"}
+          Prosthetics & Orthotics
         </span>
       </span>
     </Link>
-  );
-}
-
-function LanguageToggle({ scrolled }) {
-  const { language, toggleLanguage } = useLanguage();
-  return (
-    <button
-      onClick={toggleLanguage}
-      data-testid="lang-toggle-btn"
-      aria-label="Toggle language between English and Arabic"
-      className={`group flex items-center gap-1.5 rounded-full px-3 py-1.5 font-display text-xs font-bold transition-all duration-300 border cursor-pointer ${
-        scrolled
-          ? "border-slate-300 bg-slate-100/90 text-slate-800 hover:bg-[#0284C7] hover:text-white hover:border-[#0284C7] shadow-xs"
-          : "border-white/25 bg-white/10 text-white hover:bg-white/20 hover:border-white/40 shadow-xs"
-      }`}
-    >
-      <Languages size={14} className={language === "ar" ? "text-cyan-400" : "text-[#0284C7] group-hover:text-white"} />
-      <span className="tracking-wide">{language === "en" ? "العربية" : "English"}</span>
-    </button>
   );
 }
 
@@ -73,45 +53,16 @@ export default function Navbar() {
     router.push(to);
   };
 
-  const NAV_CHILDREN_AR = {
-    "Products": "جميع المنتجات والأجهزة",
-    "Spine & Back Braces": "دعامات الظهر والعمود الفقري",
-    "Upper Limb Orthotics": "أجهزة تقويم الأطراف العلوية",
-    "Lower Limb Orthotics": "أجهزة تقويم الأطراف السفلية",
-    "Custom Insoles & Footwear": "فرشات وأحذية طبية مخصصة",
-    "Lower Limb Prosthetics": "أطراف اصطناعية للأطراف السفلية",
-    "Upper Limb Prosthetics": "أطراف اصطناعية للأطراف العلوية",
-    "Sockets & Liners": "تجاويف وبطانات الأطراف الاصطناعية",
-    "Silicone Restoration": "الترميم السيليكوني التجميلي",
-    "Pediatric Prosthetics": "أطراف اصطناعية للأطفال",
-    "Cranial Orthoses": "خوذات تصحيح شكل الرأس",
-    "Scoliosis Bracing": "دعامات الجنف واعوجاج العمود الفقري",
-    "Walker, Canes & Crutches": "المشايات والعصي والعكازات",
-    "Custom Seating": "أنظمة المقاعد والوسائد الطبية",
-  };
-
-  const localizedNav = NAV.map((item) => {
-    let label = item.label;
-    if (item.to === "/") label = t("nav.home");
-    else if (item.to === "/about") label = t("nav.about");
-    else if (item.label.includes("Orthotics")) label = t("nav.orthotics");
-    else if (item.label.includes("Prosthetics")) label = t("nav.prosthetics");
-    else if (item.label.includes("Pediatric")) label = t("nav.pediatric");
-    else if (item.label.includes("Mobility")) label = t("nav.mobility");
-    else if (item.label.includes("Academy")) label = t("nav.academy");
-    else if (item.to === "/contact-us") label = t("nav.contact");
-
-    return {
-      ...item,
-      displayLabel: label,
-      children: item.children
-        ? item.children.map((c) => ({
-            ...c,
-            displayLabel: language === "ar" && NAV_CHILDREN_AR[c.label] ? NAV_CHILDREN_AR[c.label] : c.label,
-          }))
-        : null,
-    };
-  });
+  const localizedNav = NAV.map((item) => ({
+    ...item,
+    displayLabel: item.label,
+    children: item.children
+      ? item.children.map((c) => ({
+          ...c,
+          displayLabel: c.label,
+        }))
+      : null,
+  }));
 
   return (
     <header
@@ -184,11 +135,8 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Language Switcher, CTA Button & Mobile Trigger */}
+        {/* CTA Button & Mobile Trigger */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* Language Toggle */}
-          <LanguageToggle scrolled={scrolled} />
-
           {/* CTA Partner Button */}
           <motion.button
             whileHover={{ scale: 1.04 }}
@@ -215,16 +163,12 @@ export default function Navbar() {
                 <Menu size={20} />
               </button>
             </SheetTrigger>
-            <SheetContent side={isRTL ? "left" : "right"} className="w-[88vw] max-w-sm border-white/20 bg-white/95 backdrop-blur-2xl p-0 z-[100]">
+            <SheetContent side="right" className="w-[88vw] max-w-sm border-white/20 bg-white/95 backdrop-blur-2xl p-0 z-[100]">
               <SheetTitle className="sr-only">Mobile Navigation Menu</SheetTitle>
               <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4">
                 <Logo light={false} />
               </div>
               <div className="px-4 py-4 overflow-y-auto max-h-[calc(100vh-80px)]">
-                <div className="mb-4 pb-3 border-b border-slate-100 flex items-center justify-between">
-                  <span className="font-mono text-xs text-slate-500 uppercase font-semibold">Language</span>
-                  <LanguageToggle scrolled={true} />
-                </div>
                 {localizedNav.map((item) => (
                   <MobileItem key={item.label} item={item} onNav={handleNav} />
                 ))}

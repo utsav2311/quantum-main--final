@@ -24,8 +24,7 @@ const ITEMS_AR = [
 ];
 
 export default function EditorialMarquee({ dark = false }) {
-  const { language, isRTL } = useLanguage();
-  const items = language === "ar" ? ITEMS_AR : ITEMS_EN;
+  const items = ITEMS_EN;
 
   return (
     <div
@@ -36,7 +35,7 @@ export default function EditorialMarquee({ dark = false }) {
       } py-6 shadow-xs`}
       data-testid="marquee"
     >
-      <Marquee speed={38} gradient={false} autoFill direction={isRTL ? "right" : "left"}>
+      <Marquee speed={38} gradient={false} autoFill direction="left">
         {items.map((t, i) => (
           <div key={i} className="flex items-center">
             <span className="px-8 font-display text-2xl font-extrabold tracking-tight sm:text-3xl">{t}</span>
