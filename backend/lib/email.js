@@ -17,8 +17,8 @@ export async function sendLeadEmails(lead) {
   const adminRecipient =
     process.env.NOTIFICATION_EMAIL ||
     process.env.ADMIN_EMAIL ||
-    "utsavhoney123@gmail.com";
-  const fromEmail = process.env.RESEND_FROM || "onboarding@resend.dev";
+    "info@quantumuae.ae";
+  const fromEmail = process.env.RESEND_FROM || "Quantum Medical <info@quantumuae.ae>";
 
   const leadTitle = leadTypeTitles[lead.lead_type] || "New Lead Submission";
 
@@ -163,7 +163,7 @@ export async function sendLeadEmails(lead) {
         </div>
         <div class="footer">
           Need immediate support? Contact our clinical team at<br>
-          <a href="mailto:info@quantumeme.com">info@quantumeme.com</a>
+          <a href="mailto:info@quantumuae.ae">info@quantumuae.ae</a>
           <p style="margin-top: 12px; font-size: 11px; color: #94a3b8;">© ${new Date().getFullYear()} Quantum Medical & Prosthetics. All rights reserved.</p>
         </div>
       </div>
@@ -175,9 +175,10 @@ export async function sendLeadEmails(lead) {
   if (resendApiKey) {
     try {
       const resend = new Resend(resendApiKey);
+      const rawFromEmail = fromEmail.includes("<") ? (fromEmail.match(/<([^>]+)>/)?.[1] || fromEmail) : fromEmail;
 
       const adminResend = await resend.emails.send({
-        from: `Quantum Lead System <${fromEmail}>`,
+        from: `Quantum Lead System <${rawFromEmail}>`,
         to: [adminRecipient],
         subject: `[NEW LEAD] ${leadTitle} - ${lead.name}`,
         html: adminHtml,
@@ -185,13 +186,13 @@ export async function sendLeadEmails(lead) {
 
       console.log(`[RESEND DISPATCH SUCCESS] Admin notification sent to ${adminRecipient}:`, adminResend);
 
-      // Note: Resend's free test domain (onboarding@resend.dev) only permits sending to account owner email (utsavhoney123@gmail.com)
-      const userRecipient = (fromEmail.includes("onboarding@resend.dev") && lead.email !== adminRecipient)
+      // Note: Resend's free test domain (onboarding@resend.dev) only permits sending to account owner email
+      const userRecipient = (rawFromEmail.includes("onboarding@resend.dev") && lead.email !== adminRecipient)
         ? adminRecipient
         : lead.email;
 
       const userResend = await resend.emails.send({
-        from: `Quantum Medical & Prosthetics <${fromEmail}>`,
+        from: `Quantum Medical & Prosthetics <${rawFromEmail}>`,
         to: [userRecipient],
         subject: `We've received your submission — Quantum Medical`,
         html: userHtml,
